@@ -48,7 +48,7 @@
         <script src="data/CRASIndivduoscadastrados_6.js"></script>
         <script src="data/CRASFamliascadastradas_7.js"></script>
         <script src="data/CRASreadeabrangencia_8.js"></script>
-        <script src="data/CRASBairros_9.js"></script>
+        <script src="data/Bairros_9.js"></script>
         <script src="data/RedeSUAS_10.js"></script>
         <script>
         var highlightLayer;
@@ -903,7 +903,7 @@
                         <td>' + (feature.properties['CRAS'] !== null ? autolinker.link(feature.properties['CRAS'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Famílias cadastrdas:</th>\
+                        <th scope="row">Famílias cadastradas:</th>\
                         <td>' + (feature.properties['Famílias'] !== null ? autolinker.link(feature.properties['Famílias'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -1132,7 +1132,7 @@
         });
         bounds_group.addLayer(layer_CRASreadeabrangencia_8);
         map.addLayer(layer_CRASreadeabrangencia_8);
-        function pop_CRASBairros_9(feature, layer) {
+        function pop_Bairros_9(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -1146,7 +1146,7 @@
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">CRAS:</th>\
-                        <td>' + (feature.properties['NOME_CRAS'] !== null ? autolinker.link(feature.properties['NOME_CRAS'].toLocaleString()) : '') + '</td>\
+                        <td>' + (feature.properties['CRAS de referência'] !== null ? autolinker.link(feature.properties['CRAS de referência'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Bairro:</th>\
@@ -1157,24 +1157,32 @@
                         <td>' + (feature.properties['ZONA'] !== null ? autolinker.link(feature.properties['ZONA'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Famílias cadastradas:</th>\
-                        <td>' + (feature.properties['familias'] !== null ? autolinker.link(feature.properties['familias'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Famílias cadastradas</th>\
+                        <td>' + (feature.properties['Famílias cadastradas'] !== null ? autolinker.link(feature.properties['Famílias cadastradas'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Indivíduos cadastrados:</th>\
-                        <td>' + (feature.properties['NUMPOINTS'] !== null ? autolinker.link(feature.properties['NUMPOINTS'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Indivíduos cadastrados</th>\
+                        <td>' + (feature.properties['Indivíduos cadastrados'] !== null ? autolinker.link(feature.properties['Indivíduos cadastrados'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Famílias PBF cadastradas:</th>\
-                        <td>' + (feature.properties['pbf'] !== null ? autolinker.link(feature.properties['pbf'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Famílias PBF cadastradas</th>\
+                        <td>' + (feature.properties['Famílias PBF cadastradas'] !== null ? autolinker.link(feature.properties['Famílias PBF cadastradas'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">BPC - PCD - cadastrados:</th>\
-                        <td>' + (feature.properties['BPC_PCD'] !== null ? autolinker.link(feature.properties['BPC_PCD'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">BPC - PCD - cadastrados</th>\
+                        <td>' + (feature.properties['BPC - PCD - cadastrados'] !== null ? autolinker.link(feature.properties['BPC - PCD - cadastrados'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">BPC - Idoso - cadastrados:</th>\
-                        <td>' + (feature.properties['BPC_IDOSO'] !== null ? autolinker.link(feature.properties['BPC_IDOSO'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">BPC - IDOSOS - cadastrados</th>\
+                        <td>' + (feature.properties['BPC - IDOSOS - cadastrados'] !== null ? autolinker.link(feature.properties['BPC - IDOSOS - cadastrados'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Famílias cadastradas na faixa de renda per capita de R$218,00 a R$706,00</th>\
+                        <td>' + (feature.properties['Famílias cadastradas na faixa de renda per capita de R$218,00 a R$706,00'] !== null ? autolinker.link(feature.properties['Famílias cadastradas na faixa de renda per capita de R$218,00 a R$706,00'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Famílias cadastradas na faixa de renda per capita de R$0 a R$218,00</th>\
+                        <td>' + (feature.properties['Famílias cadastradas na faixa de renda per capita de R$0 a R$218,00'] !== null ? autolinker.link(feature.properties['Famílias cadastradas na faixa de renda per capita de R$0 a R$218,00'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -1184,204 +1192,33 @@
             popup.setContent(updatedContent);
         }
 
-        function style_CRASBairros_9_0(feature) {
-            switch(String(feature.properties['q2wHide_CRAS'])) {
-                case 'Alvorada':
-                    return {
-                pane: 'pane_CRASBairros_9',
+        function style_Bairros_9_0() {
+            return {
+                pane: 'pane_Bairros_9',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.8549019607843137)',
+                color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(237,241,113,1.0)',
+                fillOpacity: 0,
                 interactive: true,
-            }
-                    break;
-                case 'Branca Vieira':
-                    return {
-                pane: 'pane_CRASBairros_9',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.8549019607843137)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(53,240,206,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Floriano':
-                    return {
-                pane: 'pane_CRASBairros_9',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.8549019607843137)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(237,107,51,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Iguatemi':
-                    return {
-                pane: 'pane_CRASBairros_9',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.8549019607843137)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(120,70,227,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Itaipu':
-                    return {
-                pane: 'pane_CRASBairros_9',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.8549019607843137)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(124,201,236,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Mandacaru':
-                    return {
-                pane: 'pane_CRASBairros_9',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.8549019607843137)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(146,201,28,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Morangueira':
-                    return {
-                pane: 'pane_CRASBairros_9',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.8549019607843137)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(204,182,82,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Ney Braga':
-                    return {
-                pane: 'pane_CRASBairros_9',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.8549019607843137)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(202,102,170,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Requião':
-                    return {
-                pane: 'pane_CRASBairros_9',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.8549019607843137)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(211,75,102,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Santa Clara':
-                    return {
-                pane: 'pane_CRASBairros_9',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.8549019607843137)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(119,139,228,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Santa Felicidade':
-                    return {
-                pane: 'pane_CRASBairros_9',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.8549019607843137)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(230,234,160,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'São Judas Tadeu':
-                    return {
-                pane: 'pane_CRASBairros_9',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.8549019607843137)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(107,229,146,1.0)',
-                interactive: true,
-            }
-                    break;
             }
         }
-        map.createPane('pane_CRASBairros_9');
-        map.getPane('pane_CRASBairros_9').style.zIndex = 409;
-        map.getPane('pane_CRASBairros_9').style['mix-blend-mode'] = 'normal';
-        var layer_CRASBairros_9 = new L.geoJson(json_CRASBairros_9, {
+        map.createPane('pane_Bairros_9');
+        map.getPane('pane_Bairros_9').style.zIndex = 409;
+        map.getPane('pane_Bairros_9').style['mix-blend-mode'] = 'normal';
+        var layer_Bairros_9 = new L.geoJson(json_Bairros_9, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_CRASBairros_9',
-            layerName: 'layer_CRASBairros_9',
-            pane: 'pane_CRASBairros_9',
-            onEachFeature: pop_CRASBairros_9,
-            style: style_CRASBairros_9_0,
+            dataVar: 'json_Bairros_9',
+            layerName: 'layer_Bairros_9',
+            pane: 'pane_Bairros_9',
+            onEachFeature: pop_Bairros_9,
+            style: style_Bairros_9_0,
         });
-        bounds_group.addLayer(layer_CRASBairros_9);
-        map.addLayer(layer_CRASBairros_9);
+        bounds_group.addLayer(layer_Bairros_9);
+        map.addLayer(layer_Bairros_9);
         function pop_RedeSUAS_10(feature, layer) {
             layer.on({
                 mouseout: function(e) {
@@ -1395,24 +1232,32 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <th scope="row">Nome da unidade:</th>\
-                        <td>' + (feature.properties['Nome da Un'] !== null ? autolinker.link(feature.properties['Nome da Un'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Nome:</th>\
+                        <td>' + (feature.properties['Nome_'] !== null ? autolinker.link(feature.properties['Nome_'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Endereço:</th>\
-                        <td>' + (feature.properties['Endereço'] !== null ? autolinker.link(feature.properties['Endereço'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Endereços:</th>\
+                        <td>' + (feature.properties['Endereço_'] !== null ? autolinker.link(feature.properties['Endereço_'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Natureza da unidade:</th>\
-                        <td>' + (feature.properties['Natureza d'] !== null ? autolinker.link(feature.properties['Natureza d'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Natureza:</th>\
+                        <td>' + (feature.properties['Natureza_'] !== null ? autolinker.link(feature.properties['Natureza_'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Nível de proteção social:</th>\
-                        <td>' + (feature.properties['Nível de'] !== null ? autolinker.link(feature.properties['Nível de'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Nível:</th>\
+                        <td>' + (feature.properties['Nível_'] !== null ? autolinker.link(feature.properties['Nível_'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Serviço:</th>\
+                        <th scope="row">Serviços:</th>\
                         <td>' + (feature.properties['Serviços'] !== null ? autolinker.link(feature.properties['Serviços'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Latitude</th>\
+                        <td>' + (feature.properties['Latitude'] !== null ? autolinker.link(feature.properties['Latitude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Longitude</th>\
+                        <td>' + (feature.properties['Longitude'] !== null ? autolinker.link(feature.properties['Longitude'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -1427,7 +1272,7 @@
                 case 'Acolhimento Institucional':
                     return {
                 pane: 'pane_RedeSUAS_10',
-                radius: 3.2,
+                radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -1436,14 +1281,46 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(218,24,121,1.0)',
+                fillColor: 'rgba(21,102,201,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Centro Dia':
+                    return {
+                pane: 'pane_RedeSUAS_10',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(89,226,201,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Centro POP':
+                    return {
+                pane: 'pane_RedeSUAS_10',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(236,35,75,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Conselhos Tutelares':
                     return {
                 pane: 'pane_RedeSUAS_10',
-                radius: 3.2,
+                radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -1452,14 +1329,14 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(142,113,208,1.0)',
+                fillColor: 'rgba(235,239,154,1.0)',
                 interactive: true,
             }
                     break;
-                case 'Convivência e Fortalecimento de Vínculos':
+                case 'Entidades de Assessoramento, Defesa e Garantia de Direitos':
                     return {
                 pane: 'pane_RedeSUAS_10',
-                radius: 3.2,
+                radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -1468,14 +1345,14 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(120,206,163,1.0)',
+                fillColor: 'rgba(50,189,220,1.0)',
                 interactive: true,
             }
                     break;
-                case 'Especializado para  pessoas em Situação de Rua':
+                case 'Entidades do CMDCA':
                     return {
                 pane: 'pane_RedeSUAS_10',
-                radius: 3.2,
+                radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -1484,14 +1361,78 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(61,206,222,1.0)',
+                fillColor: 'rgba(178,205,116,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Entidades do CMDI':
+                    return {
+                pane: 'pane_RedeSUAS_10',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(226,144,43,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Entidades do COMAD':
+                    return {
+                pane: 'pane_RedeSUAS_10',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(239,19,144,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Habilitação e Reabilitação à Pessoa com Deficiência':
+                    return {
+                pane: 'pane_RedeSUAS_10',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(97,201,142,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Inclusão Produtiva':
+                    return {
+                pane: 'pane_RedeSUAS_10',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(125,125,125,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Outros Serviços':
                     return {
                 pane: 'pane_RedeSUAS_10',
-                radius: 3.2,
+                radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -1500,14 +1441,14 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(202,35,220,1.0)',
+                fillColor: 'rgba(125,82,226,1.0)',
                 interactive: true,
             }
                     break;
-                case 'Proteção e Atendimento Especializado a Famílias e Individuos':
+                case 'PAEFI':
                     return {
                 pane: 'pane_RedeSUAS_10',
-                radius: 3.2,
+                radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -1516,14 +1457,14 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(208,240,128,1.0)',
+                fillColor: 'rgba(243,236,19,1.0)',
                 interactive: true,
             }
                     break;
-                case 'Proteção e Atendimento Integral a Famílias':
+                case 'PAIF':
                     return {
                 pane: 'pane_RedeSUAS_10',
-                radius: 3.2,
+                radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -1532,30 +1473,14 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(225,88,73,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Proteção Social Especial para Pessoas com Deficiência e suas Famílias':
-                    return {
-                pane: 'pane_RedeSUAS_10',
-                radius: 3.2,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(217,162,33,1.0)',
+                fillColor: 'rgba(87,211,26,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Restaurante Popular':
                     return {
                 pane: 'pane_RedeSUAS_10',
-                radius: 3.2,
+                radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -1564,14 +1489,14 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(40,95,224,1.0)',
+                fillColor: 'rgba(211,123,105,1.0)',
                 interactive: true,
             }
                     break;
-                default:
+                case 'SCFV':
                     return {
                 pane: 'pane_RedeSUAS_10',
-                radius: 3.2,
+                radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -1580,7 +1505,7 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(113,218,99,1.0)',
+                fillColor: 'rgba(88,219,96,1.0)',
                 interactive: true,
             }
                     break;
@@ -1646,8 +1571,8 @@
         var baseMaps = {};
         var overlaysTree = [
             {label: "Transparência", layer: layer_Transparncia_11},
-            {label: 'Rede - SUAS<br /><table><tr><td style="text-align: center;"><img src="legend/RedeSUAS_10_AcolhimentoInstitucional0.png" /></td><td>Acolhimento Institucional</td></tr><tr><td style="text-align: center;"><img src="legend/RedeSUAS_10_ConselhosTutelares1.png" /></td><td>Conselhos Tutelares</td></tr><tr><td style="text-align: center;"><img src="legend/RedeSUAS_10_ConvivênciaeFortalecimentodeVínculos2.png" /></td><td>Convivência e Fortalecimento de Vínculos</td></tr><tr><td style="text-align: center;"><img src="legend/RedeSUAS_10_EspecializadoparapessoasemSituaçãodeRua3.png" /></td><td>Especializado para  pessoas em Situação de Rua</td></tr><tr><td style="text-align: center;"><img src="legend/RedeSUAS_10_OutrosServiços4.png" /></td><td>Outros Serviços</td></tr><tr><td style="text-align: center;"><img src="legend/RedeSUAS_10_ProteçãoeAtendimentoEspecializadoaFamíliaseIndividuos5.png" /></td><td>Proteção e Atendimento Especializado a Famílias e Individuos</td></tr><tr><td style="text-align: center;"><img src="legend/RedeSUAS_10_ProteçãoeAtendimentoIntegralaFamílias6.png" /></td><td>Proteção e Atendimento Integral a Famílias</td></tr><tr><td style="text-align: center;"><img src="legend/RedeSUAS_10_ProteçãoSocialEspecialparaPessoascomDeficiênciaesuasFamílias7.png" /></td><td>Proteção Social Especial para Pessoas com Deficiência e suas Famílias</td></tr><tr><td style="text-align: center;"><img src="legend/RedeSUAS_10_RestaurantePopular8.png" /></td><td>Restaurante Popular</td></tr><tr><td style="text-align: center;"><img src="legend/RedeSUAS_10_9.png" /></td><td></td></tr></table>', layer: layer_RedeSUAS_10},
-            {label: 'CRAS - Bairros<br /><table><tr><td style="text-align: center;"><img src="legend/CRASBairros_9_Alvorada0.png" /></td><td>Alvorada</td></tr><tr><td style="text-align: center;"><img src="legend/CRASBairros_9_BrancaVieira1.png" /></td><td>Branca Vieira</td></tr><tr><td style="text-align: center;"><img src="legend/CRASBairros_9_Floriano2.png" /></td><td>Floriano</td></tr><tr><td style="text-align: center;"><img src="legend/CRASBairros_9_Iguatemi3.png" /></td><td>Iguatemi</td></tr><tr><td style="text-align: center;"><img src="legend/CRASBairros_9_Itaipu4.png" /></td><td>Itaipu</td></tr><tr><td style="text-align: center;"><img src="legend/CRASBairros_9_Mandacaru5.png" /></td><td>Mandacaru</td></tr><tr><td style="text-align: center;"><img src="legend/CRASBairros_9_Morangueira6.png" /></td><td>Morangueira</td></tr><tr><td style="text-align: center;"><img src="legend/CRASBairros_9_NeyBraga7.png" /></td><td>Ney Braga</td></tr><tr><td style="text-align: center;"><img src="legend/CRASBairros_9_Requião8.png" /></td><td>Requião</td></tr><tr><td style="text-align: center;"><img src="legend/CRASBairros_9_SantaClara9.png" /></td><td>Santa Clara</td></tr><tr><td style="text-align: center;"><img src="legend/CRASBairros_9_SantaFelicidade10.png" /></td><td>Santa Felicidade</td></tr><tr><td style="text-align: center;"><img src="legend/CRASBairros_9_SãoJudasTadeu11.png" /></td><td>São Judas Tadeu</td></tr></table>', layer: layer_CRASBairros_9},
+            {label: 'Rede - SUAS<br /><table><tr><td style="text-align: center;"><img src="legend/RedeSUAS_10_AcolhimentoInstitucional0.png" /></td><td>Acolhimento Institucional</td></tr><tr><td style="text-align: center;"><img src="legend/RedeSUAS_10_CentroDia1.png" /></td><td>Centro Dia</td></tr><tr><td style="text-align: center;"><img src="legend/RedeSUAS_10_CentroPOP2.png" /></td><td>Centro POP</td></tr><tr><td style="text-align: center;"><img src="legend/RedeSUAS_10_ConselhosTutelares3.png" /></td><td>Conselhos Tutelares</td></tr><tr><td style="text-align: center;"><img src="legend/RedeSUAS_10_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos4.png" /></td><td>Entidades de Assessoramento, Defesa e Garantia de Direitos</td></tr><tr><td style="text-align: center;"><img src="legend/RedeSUAS_10_EntidadesdoCMDCA5.png" /></td><td>Entidades do CMDCA</td></tr><tr><td style="text-align: center;"><img src="legend/RedeSUAS_10_EntidadesdoCMDI6.png" /></td><td>Entidades do CMDI</td></tr><tr><td style="text-align: center;"><img src="legend/RedeSUAS_10_EntidadesdoCOMAD7.png" /></td><td>Entidades do COMAD</td></tr><tr><td style="text-align: center;"><img src="legend/RedeSUAS_10_HabilitaçãoeReabilitaçãoàPessoacomDeficiência8.png" /></td><td>Habilitação e Reabilitação à Pessoa com Deficiência</td></tr><tr><td style="text-align: center;"><img src="legend/RedeSUAS_10_InclusãoProdutiva9.png" /></td><td>Inclusão Produtiva</td></tr><tr><td style="text-align: center;"><img src="legend/RedeSUAS_10_OutrosServiços10.png" /></td><td>Outros Serviços</td></tr><tr><td style="text-align: center;"><img src="legend/RedeSUAS_10_PAEFI11.png" /></td><td>PAEFI</td></tr><tr><td style="text-align: center;"><img src="legend/RedeSUAS_10_CRAS12.png" /></td><td>CRAS</td></tr><tr><td style="text-align: center;"><img src="legend/RedeSUAS_10_RestaurantePopular13.png" /></td><td>Restaurante Popular</td></tr><tr><td style="text-align: center;"><img src="legend/RedeSUAS_10_SCFV14.png" /></td><td>SCFV</td></tr></table>', layer: layer_RedeSUAS_10},
+            {label: '<img src="legend/Bairros_9.png" /> Bairros', layer: layer_Bairros_9},
             {label: 'CRAS - Área de abrangencia<br /><table><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_8_Alvorada0.png" /></td><td>Alvorada</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_8_BrancaVieira1.png" /></td><td>Branca Vieira</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_8_Floriano2.png" /></td><td>Floriano</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_8_Iguatemi3.png" /></td><td>Iguatemi</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_8_Itaipu4.png" /></td><td>Itaipu</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_8_Mandacaru5.png" /></td><td>Mandacaru</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_8_Morangueira6.png" /></td><td>Morangueira</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_8_NeyBraga7.png" /></td><td>Ney Braga</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_8_Requião8.png" /></td><td>Requião</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_8_SantaClara9.png" /></td><td>Santa Clara</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_8_SantaFelicidade10.png" /></td><td>Santa Felicidade</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_8_SãoJudasTadeu11.png" /></td><td>São Judas Tadeu</td></tr></table>', layer: layer_CRASreadeabrangencia_8},
             {label: 'CRAS -  Famílias cadastradas<br /><table><tr><td style="text-align: center;"><img src="legend/CRASFamliascadastradas_7_68020120.png" /></td><td>680 - 2012</td></tr><tr><td style="text-align: center;"><img src="legend/CRASFamliascadastradas_7_201233441.png" /></td><td>2012 - 3344</td></tr><tr><td style="text-align: center;"><img src="legend/CRASFamliascadastradas_7_334446752.png" /></td><td>3344 - 4675</td></tr><tr><td style="text-align: center;"><img src="legend/CRASFamliascadastradas_7_467560073.png" /></td><td>4675 - 6007</td></tr><tr><td style="text-align: center;"><img src="legend/CRASFamliascadastradas_7_600773394.png" /></td><td>6007 - 7339</td></tr></table>', layer: layer_CRASFamliascadastradas_7},
             {label: 'CRAS -  Indivíduos cadastrados<br /><table><tr><td style="text-align: center;"><img src="legend/CRASIndivduoscadastrados_6_159642980.png" /></td><td>1596 - 4298</td></tr><tr><td style="text-align: center;"><img src="legend/CRASIndivduoscadastrados_6_429870001.png" /></td><td>4298 - 7000</td></tr><tr><td style="text-align: center;"><img src="legend/CRASIndivduoscadastrados_6_700097012.png" /></td><td>7000 - 9701</td></tr><tr><td style="text-align: center;"><img src="legend/CRASIndivduoscadastrados_6_9701124033.png" /></td><td>9701 - 12403</td></tr><tr><td style="text-align: center;"><img src="legend/CRASIndivduoscadastrados_6_12403151054.png" /></td><td>12403 - 15105</td></tr></table>', layer: layer_CRASIndivduoscadastrados_6},
@@ -1687,7 +1612,7 @@
         document.getElementById("all").appendChild(col1);
         document.getElementById("all").appendChild(col2);
         col1.appendChild(mapDiv)
-        var Filters = {"familias": "real","Serviços": "str"};
+        var Filters = {"Famílias cadastradas": "real","Famílias cadastradas na faixa de renda per capita de R$0 a R$218,00": "real","Famílias cadastradas na faixa de renda per capita de R$218,00 a R$706,00": "real","CRAS de referência": "str","Serviços": "str"};
         function filterFunc() {
           map.eachLayer(function(lyr){
           if ("options" in lyr && "dataVar" in lyr["options"]){
@@ -1779,36 +1704,141 @@
         }
             document.getElementById("menu").appendChild(
                 document.createElement("div"));
-            var div_familias = document.createElement("div");
-            div_familias.id = "div_familias";
-            div_familias.className = "slider";
-            document.getElementById("menu").appendChild(div_familias);
-            var lab_familias = document.createElement('div');
-            lab_familias.innerHTML  = 'familias: <span id="val_familias"></span>';
-            lab_familias.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_familias);
-            var reset_familias = document.createElement('div');
-            reset_familias.innerHTML = 'clear filter';
-            reset_familias.className = 'filterlabel';
-            lab_familias.className = 'filterlabel';
-            reset_familias.onclick = function() {
-                sel_familias.noUiSlider.reset();
+            var div_Famliascadastradas = document.createElement("div");
+            div_Famliascadastradas.id = "div_Famliascadastradas";
+            div_Famliascadastradas.className = "slider";
+            document.getElementById("menu").appendChild(div_Famliascadastradas);
+            var lab_Famliascadastradas = document.createElement('div');
+            lab_Famliascadastradas.innerHTML  = 'Famílias cadastradas: <span id="val_Famliascadastradas"></span>';
+            lab_Famliascadastradas.className = 'filterlabel';
+            document.getElementById("menu").appendChild(lab_Famliascadastradas);
+            var reset_Famliascadastradas = document.createElement('div');
+            reset_Famliascadastradas.innerHTML = 'clear filter';
+            reset_Famliascadastradas.className = 'filterlabel';
+            lab_Famliascadastradas.className = 'filterlabel';
+            reset_Famliascadastradas.onclick = function() {
+                sel_Famliascadastradas.noUiSlider.reset();
             };
-            document.getElementById("menu").appendChild(reset_familias);
-            var sel_familias = document.getElementById('div_familias');
-            noUiSlider.create(sel_familias, {
+            document.getElementById("menu").appendChild(reset_Famliascadastradas);
+            var sel_Famliascadastradas = document.getElementById('div_Famliascadastradas');
+            noUiSlider.create(sel_Famliascadastradas, {
                 connect: true,
-                start: [1.0, 2202.0],
+                start: [-1.0, 2202.0],
                 range: {
-                min: 1.0,
+                min: -1.0,
                 max: 2202.0
                 }
             });
-            sel_familias.noUiSlider.on('update', function (values) {
-            val_familias = document.getElementById('val_familias');
-            val_familias.innerHTML = values.join(' - ');
+            sel_Famliascadastradas.noUiSlider.on('update', function (values) {
+            val_Famliascadastradas = document.getElementById('val_Famliascadastradas');
+            val_Famliascadastradas.innerHTML = values.join(' - ');
                 filterFunc()
             });
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_FamliascadastradasnafaixaderendapercapitadeR0aR21800 = document.createElement("div");
+            div_FamliascadastradasnafaixaderendapercapitadeR0aR21800.id = "div_FamliascadastradasnafaixaderendapercapitadeR0aR21800";
+            div_FamliascadastradasnafaixaderendapercapitadeR0aR21800.className = "slider";
+            document.getElementById("menu").appendChild(div_FamliascadastradasnafaixaderendapercapitadeR0aR21800);
+            var lab_FamliascadastradasnafaixaderendapercapitadeR0aR21800 = document.createElement('div');
+            lab_FamliascadastradasnafaixaderendapercapitadeR0aR21800.innerHTML  = 'Famílias cadastradas na faixa de renda per capita de R$0 a R$218,00: <span id="val_FamliascadastradasnafaixaderendapercapitadeR0aR21800"></span>';
+            lab_FamliascadastradasnafaixaderendapercapitadeR0aR21800.className = 'filterlabel';
+            document.getElementById("menu").appendChild(lab_FamliascadastradasnafaixaderendapercapitadeR0aR21800);
+            var reset_FamliascadastradasnafaixaderendapercapitadeR0aR21800 = document.createElement('div');
+            reset_FamliascadastradasnafaixaderendapercapitadeR0aR21800.innerHTML = 'clear filter';
+            reset_FamliascadastradasnafaixaderendapercapitadeR0aR21800.className = 'filterlabel';
+            lab_FamliascadastradasnafaixaderendapercapitadeR0aR21800.className = 'filterlabel';
+            reset_FamliascadastradasnafaixaderendapercapitadeR0aR21800.onclick = function() {
+                sel_FamliascadastradasnafaixaderendapercapitadeR0aR21800.noUiSlider.reset();
+            };
+            document.getElementById("menu").appendChild(reset_FamliascadastradasnafaixaderendapercapitadeR0aR21800);
+            var sel_FamliascadastradasnafaixaderendapercapitadeR0aR21800 = document.getElementById('div_FamliascadastradasnafaixaderendapercapitadeR0aR21800');
+            noUiSlider.create(sel_FamliascadastradasnafaixaderendapercapitadeR0aR21800, {
+                connect: true,
+                start: [-1.0, 646.0],
+                range: {
+                min: -1.0,
+                max: 646.0
+                }
+            });
+            sel_FamliascadastradasnafaixaderendapercapitadeR0aR21800.noUiSlider.on('update', function (values) {
+            val_FamliascadastradasnafaixaderendapercapitadeR0aR21800 = document.getElementById('val_FamliascadastradasnafaixaderendapercapitadeR0aR21800');
+            val_FamliascadastradasnafaixaderendapercapitadeR0aR21800.innerHTML = values.join(' - ');
+                filterFunc()
+            });
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_FamliascadastradasnafaixaderendapercapitadeR21800aR70600 = document.createElement("div");
+            div_FamliascadastradasnafaixaderendapercapitadeR21800aR70600.id = "div_FamliascadastradasnafaixaderendapercapitadeR21800aR70600";
+            div_FamliascadastradasnafaixaderendapercapitadeR21800aR70600.className = "slider";
+            document.getElementById("menu").appendChild(div_FamliascadastradasnafaixaderendapercapitadeR21800aR70600);
+            var lab_FamliascadastradasnafaixaderendapercapitadeR21800aR70600 = document.createElement('div');
+            lab_FamliascadastradasnafaixaderendapercapitadeR21800aR70600.innerHTML  = 'Famílias cadastradas na faixa de renda per capita de R$218,00 a R$706,00: <span id="val_FamliascadastradasnafaixaderendapercapitadeR21800aR70600"></span>';
+            lab_FamliascadastradasnafaixaderendapercapitadeR21800aR70600.className = 'filterlabel';
+            document.getElementById("menu").appendChild(lab_FamliascadastradasnafaixaderendapercapitadeR21800aR70600);
+            var reset_FamliascadastradasnafaixaderendapercapitadeR21800aR70600 = document.createElement('div');
+            reset_FamliascadastradasnafaixaderendapercapitadeR21800aR70600.innerHTML = 'clear filter';
+            reset_FamliascadastradasnafaixaderendapercapitadeR21800aR70600.className = 'filterlabel';
+            lab_FamliascadastradasnafaixaderendapercapitadeR21800aR70600.className = 'filterlabel';
+            reset_FamliascadastradasnafaixaderendapercapitadeR21800aR70600.onclick = function() {
+                sel_FamliascadastradasnafaixaderendapercapitadeR21800aR70600.noUiSlider.reset();
+            };
+            document.getElementById("menu").appendChild(reset_FamliascadastradasnafaixaderendapercapitadeR21800aR70600);
+            var sel_FamliascadastradasnafaixaderendapercapitadeR21800aR70600 = document.getElementById('div_FamliascadastradasnafaixaderendapercapitadeR21800aR70600');
+            noUiSlider.create(sel_FamliascadastradasnafaixaderendapercapitadeR21800aR70600, {
+                connect: true,
+                start: [-1.0, 402.0],
+                range: {
+                min: -1.0,
+                max: 402.0
+                }
+            });
+            sel_FamliascadastradasnafaixaderendapercapitadeR21800aR70600.noUiSlider.on('update', function (values) {
+            val_FamliascadastradasnafaixaderendapercapitadeR21800aR70600 = document.getElementById('val_FamliascadastradasnafaixaderendapercapitadeR21800aR70600');
+            val_FamliascadastradasnafaixaderendapercapitadeR21800aR70600.innerHTML = values.join(' - ');
+                filterFunc()
+            });
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_CRASdereferncia = document.createElement('div');
+            div_CRASdereferncia.id = "div_CRASdereferncia";
+            div_CRASdereferncia.className= "filterselect";
+            document.getElementById("menu").appendChild(div_CRASdereferncia);
+            sel_CRASdereferncia = document.createElement('select');
+            sel_CRASdereferncia.multiple = true;
+            sel_CRASdereferncia.size = 10;
+            sel_CRASdereferncia.id = "sel_CRASdereferncia";
+            var CRASdereferncia_options_str = "<option value='' unselected></option>";
+            sel_CRASdereferncia.onchange = function(){filterFunc()};
+            CRASdereferncia_options_str  += '<option value="Alvorada">Alvorada</option>';
+            CRASdereferncia_options_str  += '<option value="Branca Vieira">Branca Vieira</option>';
+            CRASdereferncia_options_str  += '<option value="Iguatemi">Iguatemi</option>';
+            CRASdereferncia_options_str  += '<option value="Itaipu">Itaipu</option>';
+            CRASdereferncia_options_str  += '<option value="Mandacaru">Mandacaru</option>';
+            CRASdereferncia_options_str  += '<option value="Morangueira">Morangueira</option>';
+            CRASdereferncia_options_str  += '<option value="Ney Braga">Ney Braga</option>';
+            CRASdereferncia_options_str  += '<option value="Requião">Requião</option>';
+            CRASdereferncia_options_str  += '<option value="Santa Clara">Santa Clara</option>';
+            CRASdereferncia_options_str  += '<option value="Santa Felicidade">Santa Felicidade</option>';
+            CRASdereferncia_options_str  += '<option value="Unidade Atendimento Floriano (CRAS Itaipú)">Unidade Atendimento Floriano (CRAS Itaipú)</option>';
+            CRASdereferncia_options_str  += '<option value="Unidade Atendimento São Judas Tadeu(CRAS Alvorada">Unidade Atendimento São Judas Tadeu(CRAS Alvorada</option>';
+            sel_CRASdereferncia.innerHTML = CRASdereferncia_options_str;
+            div_CRASdereferncia.appendChild(sel_CRASdereferncia);
+            var lab_CRASdereferncia = document.createElement('div');
+            lab_CRASdereferncia.innerHTML = 'CRAS de referência';
+            lab_CRASdereferncia.className = 'filterlabel';
+            div_CRASdereferncia.appendChild(lab_CRASdereferncia);
+            var reset_CRASdereferncia = document.createElement('div');
+            reset_CRASdereferncia.innerHTML = 'clear filter';
+            reset_CRASdereferncia.className = 'filterlabel';
+            reset_CRASdereferncia.onclick = function() {
+                var options = document.getElementById("sel_CRASdereferncia").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_CRASdereferncia.appendChild(reset_CRASdereferncia);
             document.getElementById("menu").appendChild(
                 document.createElement("div"));
             var div_Servios = document.createElement('div');
@@ -1817,19 +1847,25 @@
             document.getElementById("menu").appendChild(div_Servios);
             sel_Servios = document.createElement('select');
             sel_Servios.multiple = true;
-            sel_Servios.size = 9;
+            sel_Servios.size = 10;
             sel_Servios.id = "sel_Servios";
             var Servios_options_str = "<option value='' unselected></option>";
             sel_Servios.onchange = function(){filterFunc()};
             Servios_options_str  += '<option value="Acolhimento Institucional">Acolhimento Institucional</option>';
+            Servios_options_str  += '<option value="Centro Dia">Centro Dia</option>';
+            Servios_options_str  += '<option value="Centro POP">Centro POP</option>';
             Servios_options_str  += '<option value="Conselhos Tutelares">Conselhos Tutelares</option>';
-            Servios_options_str  += '<option value="Convivência e Fortalecimento de Vínculos">Convivência e Fortalecimento de Vínculos</option>';
-            Servios_options_str  += '<option value="Especializado para  pessoas em Situação de Rua">Especializado para  pessoas em Situação de Rua</option>';
+            Servios_options_str  += '<option value="Entidades de Assessoramento, Defesa e Garantia de Direitos">Entidades de Assessoramento, Defesa e Garantia de Direitos</option>';
+            Servios_options_str  += '<option value="Entidades do CMDCA">Entidades do CMDCA</option>';
+            Servios_options_str  += '<option value="Entidades do CMDI">Entidades do CMDI</option>';
+            Servios_options_str  += '<option value="Entidades do COMAD">Entidades do COMAD</option>';
+            Servios_options_str  += '<option value="Habilitação e Reabilitação à Pessoa com Deficiência">Habilitação e Reabilitação à Pessoa com Deficiência</option>';
+            Servios_options_str  += '<option value="Inclusão Produtiva">Inclusão Produtiva</option>';
             Servios_options_str  += '<option value="Outros Serviços">Outros Serviços</option>';
-            Servios_options_str  += '<option value="Proteção Social Especial para Pessoas com Deficiência e suas Famílias">Proteção Social Especial para Pessoas com Deficiência e suas Famílias</option>';
-            Servios_options_str  += '<option value="Proteção e Atendimento Especializado a Famílias e Individuos">Proteção e Atendimento Especializado a Famílias e Individuos</option>';
-            Servios_options_str  += '<option value="Proteção e Atendimento Integral a Famílias">Proteção e Atendimento Integral a Famílias</option>';
+            Servios_options_str  += '<option value="PAEFI">PAEFI</option>';
+            Servios_options_str  += '<option value="PAIF">PAIF</option>';
             Servios_options_str  += '<option value="Restaurante Popular">Restaurante Popular</option>';
+            Servios_options_str  += '<option value="SCFV">SCFV</option>';
             sel_Servios.innerHTML = Servios_options_str;
             div_Servios.appendChild(sel_Servios);
             var lab_Servios = document.createElement('div');
