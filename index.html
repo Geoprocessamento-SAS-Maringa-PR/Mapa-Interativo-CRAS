@@ -1161,7 +1161,7 @@
         }
 
         function style_CRASreadeabrangencia_6_0(feature) {
-            switch(String(feature.properties['q2wHide_CRAS'])) {
+            switch(String(feature.properties['CRAS'])) {
                 case 'Alvorada':
                     return {
                 pane: 'pane_CRASreadeabrangencia_6',
@@ -1546,12 +1546,8 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <th scope="row">Linha</th>\
-                        <td>' + (feature.properties['Linha'] !== null ? autolinker.link(feature.properties['Linha'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Qtd. Linha</th>\
-                        <td>' + (feature.properties['Qtd. Linha'] !== null ? autolinker.link(feature.properties['Qtd. Linha'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Ponto de Ônibus (linhas):</th>\
+                        <td>' + (feature.properties['Ponto (linhas que passam pelo ponto)'] !== null ? autolinker.link(feature.properties['Ponto (linhas que passam pelo ponto)'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
@@ -2897,7 +2893,7 @@
         document.getElementById("all").appendChild(col1);
         document.getElementById("all").appendChild(col2);
         col1.appendChild(mapDiv)
-        var Filters = {"Famílias cadastradas na faixa de renda per capita de R$0 a R$218,00:": "real","CRAS de referência:": "str","Linha de ônibus": "str"};
+        var Filters = {"Famílias cadastradas:": "real","Famílias cadastradas na faixa de renda per capita de R$0 a R$218,00:": "real","CRAS de referência:": "str","Linha de ônibus": "str","Ponto (linhas que passam pelo ponto)": "str"};
         function filterFunc() {
           map.eachLayer(function(lyr){
           if ("options" in lyr && "dataVar" in lyr["options"]){
@@ -2987,6 +2983,38 @@
           }
           })
         }
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_Famliascadastradas = document.createElement("div");
+            div_Famliascadastradas.id = "div_Famliascadastradas";
+            div_Famliascadastradas.className = "slider";
+            document.getElementById("menu").appendChild(div_Famliascadastradas);
+            var lab_Famliascadastradas = document.createElement('div');
+            lab_Famliascadastradas.innerHTML  = 'Famílias cadastradas:: <span id="val_Famliascadastradas"></span>';
+            lab_Famliascadastradas.className = 'filterlabel';
+            document.getElementById("menu").appendChild(lab_Famliascadastradas);
+            var reset_Famliascadastradas = document.createElement('div');
+            reset_Famliascadastradas.innerHTML = 'clear filter';
+            reset_Famliascadastradas.className = 'filterlabel';
+            lab_Famliascadastradas.className = 'filterlabel';
+            reset_Famliascadastradas.onclick = function() {
+                sel_Famliascadastradas.noUiSlider.reset();
+            };
+            document.getElementById("menu").appendChild(reset_Famliascadastradas);
+            var sel_Famliascadastradas = document.getElementById('div_Famliascadastradas');
+            noUiSlider.create(sel_Famliascadastradas, {
+                connect: true,
+                start: [1.0, 2140.0],
+                range: {
+                min: 1.0,
+                max: 2140.0
+                }
+            });
+            sel_Famliascadastradas.noUiSlider.on('update', function (values) {
+            val_Famliascadastradas = document.getElementById('val_Famliascadastradas');
+            val_Famliascadastradas.innerHTML = values.join(' - ');
+                filterFunc()
+            });
             document.getElementById("menu").appendChild(
                 document.createElement("div"));
             var div_FamliascadastradasnafaixaderendapercapitadeR0aR21800 = document.createElement("div");
@@ -3154,6 +3182,432 @@
                 filterFunc();
             };
             div_Linhadenibus.appendChild(reset_Linhadenibus);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_Pontolinhasquepassampeloponto = document.createElement('div');
+            div_Pontolinhasquepassampeloponto.id = "div_Pontolinhasquepassampeloponto";
+            div_Pontolinhasquepassampeloponto.className= "filterselect";
+            document.getElementById("menu").appendChild(div_Pontolinhasquepassampeloponto);
+            sel_Pontolinhasquepassampeloponto = document.createElement('select');
+            sel_Pontolinhasquepassampeloponto.multiple = true;
+            sel_Pontolinhasquepassampeloponto.size = 10;
+            sel_Pontolinhasquepassampeloponto.id = "sel_Pontolinhasquepassampeloponto";
+            var Pontolinhasquepassampeloponto_options_str = "<option value='' unselected></option>";
+            sel_Pontolinhasquepassampeloponto.onchange = function(){filterFunc()};
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007">007</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 008, 023, 152, 234, 235">007, 008, 023, 152, 234, 235</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 008, 023, 233, 234, 235">007, 008, 023, 233, 234, 235</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 008, 023, 234, 235">007, 008, 023, 234, 235</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 008, 141, 152, 204, 205">007, 008, 141, 152, 204, 205</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 008, 152">007, 008, 152</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 008, 528">007, 008, 528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 009, 022, 152, 234">007, 009, 022, 152, 234</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 009, 023, 233, 234, 235">007, 009, 023, 233, 234, 235</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 009, 141, 152, 204, 205">007, 009, 141, 152, 204, 205</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 009, 152">007, 009, 152</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 009, 528">007, 009, 528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 010, 324, 721, 736, 739, UEM">007, 010, 324, 721, 736, 739, UEM</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 010, 324, 735, 736, 739, UEM">007, 010, 324, 735, 736, 739, UEM</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 131, 138">007, 131, 138</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 137, 139">007, 137, 139</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 138">007, 138</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 324, 721, 734, 736, 739, UEM">007, 324, 721, 734, 736, 739, UEM</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 324, 721, 734, 739">007, 324, 721, 734, 739</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 324, 721, 736, 739, UEM">007, 324, 721, 736, 739, UEM</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 324, 734, 735, 736, 739, UEM">007, 324, 734, 735, 736, 739, UEM</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 324, 734, 735, 739">007, 324, 734, 735, 739</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 324, 735, 736, 739, UEM">007, 324, 735, 736, 739, UEM</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 324, 735, 739">007, 324, 735, 739</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 528">007, 528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 721, 736, 739">007, 721, 736, 739</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 721, 739">007, 721, 739</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 735, 736, 739">007, 735, 736, 739</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 735, 739">007, 735, 739</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="007, 739">007, 739</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="008">008</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="008, 011, 020, 131, 137, 138, 139, 141, 152, 177, 179, 204, 205, 512">008, 011, 020, 131, 137, 138, 139, 141, 152, 177, 179, 204, 205, 512</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="008, 020, 233">008, 020, 233</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="008, 020, 233, 721, 736">008, 020, 233, 721, 736</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="008, 021, 022">008, 021, 022</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="008, 021, 022, 026">008, 021, 022, 026</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="008, 022, 234">008, 022, 234</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="008, 023, 233, 234, 235">008, 023, 233, 234, 235</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="008, 023, 234">008, 023, 234</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="008, 040">008, 040</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="008, 041">008, 041</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="008, 131, 137, 138, 139, 141, 152, 179, 204, 205">008, 131, 137, 138, 139, 141, 152, 179, 204, 205</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="008, 131, 137, 139, 141, 152, 179, 204, 205">008, 131, 137, 139, 141, 152, 179, 204, 205</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="008, 178, 459, 466">008, 178, 459, 466</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="008, 201, 713, 721, 722">008, 201, 713, 721, 722</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="008, 222">008, 222</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="008, 324, 326, 414">008, 324, 326, 414</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="008, 335">008, 335</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="008, 459">008, 459</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="008, 461, 721, 736">008, 461, 721, 736</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="008, 528">008, 528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="008, 721, 736">008, 721, 736</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="009">009</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="009, 011, 021, 131, 137, 138, 139, 141, 152, 177, 179, 204, 205, 512">009, 011, 021, 131, 137, 138, 139, 141, 152, 177, 179, 204, 205, 512</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="009, 011, 131, 137, 138, 139, 141, 152, 179, 204, 205">009, 011, 131, 137, 138, 139, 141, 152, 179, 204, 205</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="009, 011, 131, 137, 139, 141, 152, 179, 204, 205">009, 011, 131, 137, 139, 141, 152, 179, 204, 205</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="009, 011, 137, 138, 139, 141, 152, 179, 204, 205">009, 011, 137, 138, 139, 141, 152, 179, 204, 205</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="009, 021">009, 021</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="009, 021, 022">009, 021, 022</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="009, 021, 022, 026">009, 021, 022, 026</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="009, 022">009, 022</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="009, 022, 023">009, 022, 023</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="009, 022, 234">009, 022, 234</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="009, 023, 233, 234, 235">009, 023, 233, 234, 235</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="009, 023, 234">009, 023, 234</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="009, 040">009, 040</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="009, 040, 458">009, 040, 458</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="009, 131, 137, 139, 141, 152, 179, 204, 205">009, 131, 137, 139, 141, 152, 179, 204, 205</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="009, 137, 139, 141, 152, 204, 205">009, 137, 139, 141, 152, 204, 205</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="009, 201, 713, 722, 735">009, 201, 713, 722, 735</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="009, 220, 324, 326, 414, 415, 427, 458">009, 220, 324, 326, 414, 415, 427, 458</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="009, 220, 324, 326, 414, 415, 427, 459">009, 220, 324, 326, 414, 415, 427, 459</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="009, 324, 326, 414">009, 324, 326, 414</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="009, 335">009, 335</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="009, 458, 466">009, 458, 466</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="009, 461, 611, 734, 735, 736">009, 461, 611, 734, 735, 736</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="009, 461, 611, 735, 736">009, 461, 611, 735, 736</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="009, 528">009, 528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="010">010</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="010, 011, 021, 026, 131, 137, 138, 139, 141, 152, 162, 177, 179, 204, 205, 233, 324, 461, 512, 721, 734, 736, 739, UEM">010, 011, 021, 026, 131, 137, 138, 139, 141, 152, 162, 177, 179, 204, 205, 233, 324, 461, 512, 721, 734, 736, 739, UEM</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="010, 020, 131, 137, 139, 152, 233, 323, 461, 611, 734, 735, 736, 739, UEM">010, 020, 131, 137, 139, 152, 233, 323, 461, 611, 734, 735, 736, 739, UEM</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="010, 020, 233, 323, 461, 611, 734, 735, 736, 739, UEM">010, 020, 233, 323, 461, 611, 734, 735, 736, 739, UEM</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="010, 021, 131, 137, 139, 152, 324, 461, 734, 739, UEM">010, 021, 131, 137, 139, 152, 324, 461, 734, 739, UEM</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="010, 021, 324">010, 021, 324</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="010, 021, 324, 461, 734, 739, UEM">010, 021, 324, 461, 734, 739, UEM</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="010, 021, 324, 461, 739, UEM">010, 021, 324, 461, 739, UEM</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="010, 021, 324, 739">010, 021, 324, 739</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="010, 021, 324, 739, UEM">010, 021, 324, 739, UEM</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="010, 324">010, 324</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="010, 324, 739, UEM">010, 324, 739, UEM</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="010, 713, 721, 722">010, 713, 721, 722</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="010, 713, 722, 735">010, 713, 722, 735</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="010, 721, 722">010, 721, 722</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="010, 722">010, 722</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="010, 734">010, 734</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="010, 739, UEM">010, 739, UEM</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="010, UEM">010, UEM</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="011, 026, 131, 137, 138, 139, 141, 152, 162, 177, 179, 204, 205, 512">011, 026, 131, 137, 138, 139, 141, 152, 162, 177, 179, 204, 205, 512</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="011, 026, 131, 137, 138, 141, 152, 162, 177, 179, 204, 205, 233, 512, 721, 736">011, 026, 131, 137, 138, 141, 152, 162, 177, 179, 204, 205, 233, 512, 721, 736</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="011, 138">011, 138</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="020">020</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="020, 021, 022, 233, 235, 528">020, 021, 022, 233, 235, 528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="020, 022, 222, 234, 235, 242, 243, 314, 323, 334, 335, 416">020, 022, 222, 234, 235, 242, 243, 314, 323, 334, 335, 416</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="020, 026, 162, 169, 175, 177, 233, 512">020, 026, 162, 169, 175, 177, 233, 512</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="020, 162">020, 162</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="020, 177, 512">020, 177, 512</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="020, 222, 233">020, 222, 233</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="021">021</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="021, 022, 026">021, 022, 026</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="021, 022, 026, 528">021, 022, 026, 528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="021, 022, 222, 234, 235, 242, 243, 314, 323, 334, 416">021, 022, 222, 234, 235, 242, 243, 314, 323, 334, 416</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="021, 022, 222, 235, 242, 243, 314, 323, 334, 416">021, 022, 222, 235, 242, 243, 314, 323, 334, 416</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="021, 022, 233, 235, 528">021, 022, 233, 235, 528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="021, 022, 528">021, 022, 528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="021, 026">021, 026</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="021, 026, 162, 169, 175, 177, 233, 512">021, 026, 162, 169, 175, 177, 233, 512</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="021, 177, 512">021, 177, 512</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="021, 222, 233">021, 222, 233</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="021, 324, 461, 734, 739, UEM">021, 324, 461, 734, 739, UEM</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="022">022</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="022, 023">022, 023</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="022, 177, 512">022, 177, 512</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="023">023</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="023, 026">023, 026</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="023, 026, 138, 141, 162, 177, 179, 204, 205, 512">023, 026, 138, 141, 162, 177, 179, 204, 205, 512</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="023, 243">023, 243</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="026">026</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="026, 152">026, 152</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="026, 162">026, 162</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="026, 162, 169, 175, 177, 222, 512">026, 162, 169, 175, 177, 222, 512</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="026, 162, 169, 175, 233">026, 162, 169, 175, 233</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="026, 162, 233">026, 162, 233</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="026, 179">026, 179</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="026, 234">026, 234</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="040">040</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="040, 041">040, 041</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="040, 041, 177, 178, 201, 219, 221, 222, 324, 326, 459, 460, 461, 466, 512, 528, 528A, 531, 713, 721, 722">040, 041, 177, 178, 201, 219, 221, 222, 324, 326, 459, 460, 461, 466, 512, 528, 528A, 531, 713, 721, 722</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="040, 177, 178, 201, 221, 459, 460, 461, 466, 512, 528, 528A, 531, 713, 721, 722">040, 177, 178, 201, 221, 459, 460, 461, 466, 512, 528, 528A, 531, 713, 721, 722</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="041">041</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="041, 178, 466">041, 178, 466</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="041, 219, 222, 324">041, 219, 222, 324</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="041, 219, 222, 324, 326">041, 219, 222, 324, 326</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="041, 458, 466">041, 458, 466</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="131">131</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="131, 137, 139">131, 137, 139</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="131, 137, 139, 152">131, 137, 139, 152</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="131, 138">131, 138</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="131, 139">131, 139</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="137">137</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="137, 138, 139">137, 138, 139</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="137, 139">137, 139</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="138">138</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="138, 139">138, 139</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="138, 141">138, 141</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="139">139</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="141">141</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="152">152</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="152, 233">152, 233</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="152, 233, 235">152, 233, 235</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="152, 235">152, 235</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="152, 528">152, 528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="162">162</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="162, 233">162, 233</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="169">169</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="169, 175">169, 175</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="169, 175, 177, 222, 512">169, 175, 177, 222, 512</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="169, 175, 222">169, 175, 222</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="169, 220, 324, 326, 414, 415, 427, 459">169, 220, 324, 326, 414, 415, 427, 459</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="169, 220, 324, 326, 414, 415, 459">169, 220, 324, 326, 414, 415, 459</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="169, 220, 414, 415, 427, 458">169, 220, 414, 415, 427, 458</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="169, 222">169, 222</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="169, 323">169, 323</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="175">175</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="175, 179">175, 179</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="177">177</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="177, 179, 222, 512">177, 179, 222, 512</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="177, 179, 512">177, 179, 512</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="177, 222, 512">177, 222, 512</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="177, 466">177, 466</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="177, 512">177, 512</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="177, 531">177, 531</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="178">178</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="178, 220, 459">178, 220, 459</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="178, 459, 466">178, 459, 466</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="178, 466">178, 466</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="179">179</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="201">201</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="201, 460">201, 460</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="201, 460, 461">201, 460, 461</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="201, 460, 461, 611">201, 460, 461, 611</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="201, 461">201, 461</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="201, 461, 611">201, 461, 611</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="204, 205">204, 205</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="205">205</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="219, 220, 222">219, 220, 222</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="219, 222">219, 222</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="219, 222, 466">219, 222, 466</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="219, 466">219, 466</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="220">220</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="220, 222">220, 222</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="220, 324, 326, 414, 415, 427, 458">220, 324, 326, 414, 415, 427, 458</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="220, 324, 326, 414, 415, 427, 459">220, 324, 326, 414, 415, 427, 459</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="220, 415, 427, 458">220, 415, 427, 458</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="220, 415, 427, 459">220, 415, 427, 459</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="220, 415, 458">220, 415, 458</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="220, 415, 459">220, 415, 459</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="220, 427">220, 427</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="220, 458">220, 458</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="220, 458, 466">220, 458, 466</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="220, 459">220, 459</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="220, 459, 466">220, 459, 466</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="221">221</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="222">222</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="222, 233">222, 233</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="222, 512">222, 512</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="233">233</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="233, 235">233, 235</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="234">234</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="234, 235">234, 235</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="235">235</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="242">242</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="242, 243">242, 243</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="242, 314">242, 314</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="243">243</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254A">254A</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254A, 008, 020, 021, 022, 233, 234, 235, 528">254A, 008, 020, 021, 022, 233, 234, 235, 528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254A, 008, 020, 022, 222, 234, 235, 528">254A, 008, 020, 022, 222, 234, 235, 528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254A, 008, 234">254A, 008, 234</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254A, 009, 021, 022, 222, 234, 235, 243, 528">254A, 009, 021, 022, 222, 234, 235, 243, 528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254A, 009, 021, 022, 233, 234, 235, 528">254A, 009, 021, 022, 233, 234, 235, 528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254A, 009, 234">254A, 009, 234</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254A, 243">254A, 243</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254M, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 801, 802, 901, 903, 905">254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254M, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 801, 802, 901, 903, 905</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254M, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 801, 802, 901, 903, 905, 021, 022, 169, 175, 222, 234, 235, 242, 243, 314, 323, 334, 335, 416, 528">254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254M, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 801, 802, 901, 903, 905, 021, 022, 169, 175, 222, 234, 235, 242, 243, 314, 323, 334, 335, 416, 528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254M, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 801, 802, 901, 905, 021, 022, 169, 175, 222, 234, 235, 242, 243, 314, 323, 334, 335, 416, 528">254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254M, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 801, 802, 901, 905, 021, 022, 169, 175, 222, 234, 235, 242, 243, 314, 323, 334, 335, 416, 528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254M, 254N, 254SJ, 254SP, 254U, 254V, 254VZ, 801, 802, 902, 903, 905, 020, 022, 175, 222, 234, 235, 242, 243, 314, 323, 334, 335, 416, 528">254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254M, 254N, 254SJ, 254SP, 254U, 254V, 254VZ, 801, 802, 902, 903, 905, 020, 022, 175, 222, 234, 235, 242, 243, 314, 323, 334, 335, 416, 528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254M, 254N, 254SJ, 254SP, 254U, 254V, 254VZ, 801, 802, 902, 903, 905, 020, 022, 222, 234, 235, 242, 243, 314, 323, 334, 416">254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254M, 254N, 254SJ, 254SP, 254U, 254V, 254VZ, 801, 802, 902, 903, 905, 020, 022, 222, 234, 235, 242, 243, 314, 323, 334, 416</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 009, 021, 022, 222, 234, 235, 242, 243, 314, 528">254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 009, 021, 022, 222, 234, 235, 242, 243, 314, 528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 009, 021, 022, 222, 234, 235, 243, 528">254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 009, 021, 022, 222, 234, 235, 243, 528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254SJ, 254SP, 254U, 254V, 254VZ, 008, 020, 022, 222, 234, 235, 242, 243, 314, 528">254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254SJ, 254SP, 254U, 254V, 254VZ, 008, 020, 022, 222, 234, 235, 242, 243, 314, 528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254SJ, 254SP, 254U, 254V, 254VZ, 008, 020, 022, 222, 234, 235, 243, 528">254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254SJ, 254SP, 254U, 254V, 254VZ, 008, 020, 022, 222, 234, 235, 243, 528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254A, 254CT, 254I, 254IT, 254J, 254L, 254M, 254N, 254SJ, 254SP, 254U, 254V, 254VZ, 175, 528">254A, 254CT, 254I, 254IT, 254J, 254L, 254M, 254N, 254SJ, 254SP, 254U, 254V, 254VZ, 175, 528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254A, 254I, 254SP, 254U">254A, 254I, 254SP, 254U</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254A, 254U">254A, 254U</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 023">254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 023</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 4AO, 023, 243">254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 4AO, 023, 243</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254O, 254SJ, 254U, 254V, 254VZ, 480SD, 4AO">254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254O, 254SJ, 254U, 254V, 254VZ, 480SD, 4AO</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254CT, 254E, 254IT, 254J, 254L, 254N, 254O, 254SJ, 254V, 254VZ, 480SD">254CT, 254E, 254IT, 254J, 254L, 254N, 254O, 254SJ, 254V, 254VZ, 480SD</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254CT, 254E, 254IT, 254J, 254L, 254N, 254O, 254SJ, 254V, 254VZ, 480SD, 4AO">254CT, 254E, 254IT, 254J, 254L, 254N, 254O, 254SJ, 254V, 254VZ, 480SD, 4AO</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254CT, 254J">254CT, 254J</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254E">254E</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254I, 254IT">254I, 254IT</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254I, 254SP, 254U">254I, 254SP, 254U</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254I, 254SP, 254U, 023, 242">254I, 254SP, 254U, 023, 242</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254I, 254SP, 254U, 242">254I, 254SP, 254U, 242</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254I, 254U">254I, 254U</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254IT, 254L, 254O, 254SJ">254IT, 254L, 254O, 254SJ</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254L, 254U">254L, 254U</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254M">254M</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254M, 254VZ">254M, 254VZ</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254M, 254VZ, 323">254M, 254VZ, 323</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254M, 323">254M, 323</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254M, 801, 802, 901, 903, 905">254M, 801, 802, 901, 903, 905</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254O">254O</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254SA">254SA</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254SA, 178">254SA, 178</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254SA, 254VZ">254SA, 254VZ</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254SA, 323">254SA, 323</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254SA, 323, 324, 326">254SA, 323, 324, 326</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254SA, 335">254SA, 335</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254SA, 528, 528A">254SA, 528, 528A</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254SA, 801, 802, 901, 902, 903, 178, 201, 512, 528, 528A">254SA, 801, 802, 901, 902, 903, 178, 201, 512, 528, 528A</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254SA, 801, 802, 901, 902, 903, 178, 512, 528, 528A">254SA, 801, 802, 901, 902, 903, 178, 512, 528, 528A</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254SA, 801, 802, 901, 902, 903, 201, 512, 528, 528A">254SA, 801, 802, 901, 902, 903, 201, 512, 528, 528A</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254SA, 801, 802, 901, 903, 178, 201, 512, 528, 528A">254SA, 801, 802, 901, 903, 178, 201, 512, 528, 528A</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254SA, 801, 802, 902, 903, 178, 201, 512, 528, 528A">254SA, 801, 802, 902, 903, 178, 201, 512, 528, 528A</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254SA, 801, 802, 903, 178, 201, 512, 528A">254SA, 801, 802, 903, 178, 201, 512, 528A</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254SJ, 254SP">254SJ, 254SP</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254SP, 023, 242, 243">254SP, 023, 242, 243</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254SP, 242">254SP, 242</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254V, 254N, 480SD">254V, 254N, 480SD</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="254VZ">254VZ</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="314">314</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="323">323</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="323, 324, 326">323, 324, 326</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="323, 324, 326, 334">323, 324, 326, 334</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="323, 334, 416">323, 334, 416</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="323, 416">323, 416</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="324">324</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="324, 326">324, 326</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="324, 326, 334">324, 326, 334</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="324, 326, 334, 335">324, 326, 334, 335</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="324, 326, 335">324, 326, 335</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="324, 326, 414">324, 326, 414</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="324, 460">324, 460</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="324, 460, 713">324, 460, 713</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="324, 713">324, 713</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="324, 734">324, 734</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="334">334</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="334, 335">334, 335</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="335">335</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="335, 416">335, 416</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="335, 528">335, 528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="414">414</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="414, 415">414, 415</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="414, 415, 416">414, 415, 416</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="414, 427">414, 427</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="415">415</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="415, 416">415, 416</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="415, 458">415, 458</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="415, 459">415, 459</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="416">416</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="427">427</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="427, 458">427, 458</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="427, 459">427, 459</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="458">458</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="458, 459">458, 459</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="458, 466">458, 466</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="459">459</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="460">460</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="460, 461">460, 461</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="460, 713">460, 713</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="461">461</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="461, 611">461, 611</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="466">466</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="466, 531">466, 531</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="480SD, 4AO, 023">480SD, 4AO, 023</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="512">512</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="512, 528, 528A">512, 528, 528A</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="528">528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="528, 528A">528, 528A</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="531">531</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="713">713</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="713, 721, 722, 734">713, 721, 722, 734</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="713, 721, 722, 734, 735, 736">713, 721, 722, 734, 735, 736</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="713, 722, 734, 735">713, 722, 734, 735</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="713, 734">713, 734</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="713, 735">713, 735</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="721">721</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="721, 722">721, 722</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="721, 722, 734, 735, 736">721, 722, 734, 735, 736</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="721, 722, 735, 736">721, 722, 735, 736</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="721, 735, 739">721, 735, 739</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="721, 736">721, 736</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="721, 736, 739">721, 736, 739</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="722">722</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="722, 735">722, 735</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="731, 739">731, 739</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="734">734</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="734, 736">734, 736</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="735">735</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="735, 739">735, 739</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="736">736</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="739">739</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="739, UEM">739, UEM</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="801, 178, 201, 528, 528A, 531">801, 178, 201, 528, 528A, 531</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="801, 178, 528, 528A, 531">801, 178, 528, 528A, 531</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="801, 802, 901, 902, 903, 905, 906">801, 802, 901, 902, 903, 905, 906</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="801, 802, 901, 902, 903, 905, 906, 008, 009, 040, 177, 178, 461, 512, 528, 528A, 531">801, 802, 901, 902, 903, 905, 906, 008, 009, 040, 177, 178, 461, 512, 528, 528A, 531</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="801, 802, 901, 902, 903, 905, 906, 009, 177, 178, 221, 460, 461, 512, 528, 528A, 531">801, 802, 901, 902, 903, 905, 906, 009, 177, 178, 221, 460, 461, 512, 528, 528A, 531</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="801, 802, 901, 902, 903, 905, 906, 009, 177, 178, 461, 512, 528, 528A, 531">801, 802, 901, 902, 903, 905, 906, 009, 177, 178, 461, 512, 528, 528A, 531</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="801, 802, 901, 902, 903, 905, 906, 040, 041, 177, 178, 201, 219, 221, 222, 458, 460, 461, 466, 512, 528, 528A, 531, 713, 722, 735">801, 802, 901, 902, 903, 905, 906, 040, 041, 177, 178, 201, 219, 221, 222, 458, 460, 461, 466, 512, 528, 528A, 531, 713, 722, 735</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="801, 802, 901, 902, 903, 905, 906, 040, 041, 177, 178, 201, 221, 458, 460, 461, 466, 512, 528, 528A, 531, 713, 722, 735">801, 802, 901, 902, 903, 905, 906, 040, 041, 177, 178, 201, 221, 458, 460, 461, 466, 512, 528, 528A, 531, 713, 722, 735</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="801, 802, 901, 902, 903, 905, 906, 177, 178, 201, 512, 528, 528A, 531">801, 802, 901, 902, 903, 905, 906, 177, 178, 201, 512, 528, 528A, 531</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="801, 802, 901, 902, 903, 905, 906, 907, 008, 177, 178, 221, 460, 461, 512, 528, 528A, 531">801, 802, 901, 902, 903, 905, 906, 907, 008, 177, 178, 221, 460, 461, 512, 528, 528A, 531</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="801, 802, 901, 902, 903, 905, 906, 907, 008, 177, 178, 461, 512, 528, 528A, 531">801, 802, 901, 902, 903, 905, 906, 907, 008, 177, 178, 461, 512, 528, 528A, 531</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="801, 802, 901, 902, 903, 905, 906, 907, 177, 178, 201, 512, 528, 528A, 531">801, 802, 901, 902, 903, 905, 906, 907, 177, 178, 201, 512, 528, 528A, 531</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="801, 802, 901, 902, 903, 905, 907, 177, 178, 201, 512, 528, 528A, 531">801, 802, 901, 902, 903, 905, 907, 177, 178, 201, 512, 528, 528A, 531</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="801, 802, 901, 902, 903, 906, 008, 528A, 713, 721, 722">801, 802, 901, 902, 903, 906, 008, 528A, 713, 721, 722</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="801, 802, 901, 902, 903, 906, 009, 713, 722, 735">801, 802, 901, 902, 903, 906, 009, 713, 722, 735</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="801, 802, 901, 902, 903, 906, 201">801, 802, 901, 902, 903, 906, 201</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="801, 802, 901, 902, 903, 906, 201, 528A">801, 802, 901, 902, 903, 906, 201, 528A</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="801, 802, 901, 903, 905">801, 802, 901, 903, 905</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="801, 802, 901, 903, 905, 021, 169, 175, 222, 234, 235, 242, 243, 323, 334, 335, 416, 528">801, 802, 901, 903, 905, 021, 169, 175, 222, 234, 235, 242, 243, 323, 334, 335, 416, 528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="801, 802, 901, 903, 905, 040, 041, 177, 201, 460, 461, 466, 512, 528, 528A, 531">801, 802, 901, 903, 905, 040, 041, 177, 201, 460, 461, 466, 512, 528, 528A, 531</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="801, 802, 902, 903, 905, 906, 041, 219, 222, 324, 326">801, 802, 902, 903, 905, 906, 041, 219, 222, 324, 326</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="801, 802, 902, 903, 905, 907, 178, 201, 528, 528A, 531">801, 802, 902, 903, 905, 907, 178, 201, 528, 528A, 531</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="801, 802, 903">801, 802, 903</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="801, 802, 903, 178">801, 802, 903, 178</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="802, 901, 902, 903, 905, 906, 177, 512, 528">802, 901, 902, 903, 905, 906, 177, 512, 528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="901, 040, 177, 178, 201, 221, 459, 460, 461, 466, 512, 528, 528A, 531, 713, 721, 722">901, 040, 177, 178, 201, 221, 459, 460, 461, 466, 512, 528, 528A, 531, 713, 721, 722</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="901, 902">901, 902</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="901, 902, 531">901, 902, 531</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="901, 902, 905, 906">901, 902, 905, 906</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="901, 902, 905, 906, 531">901, 902, 905, 906, 531</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="901, 902, 905, 906, 907, 531">901, 902, 905, 906, 907, 531</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="901, 902, 905, 907, 531">901, 902, 905, 907, 531</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="901, 902, 906, 177, 512, 528">901, 902, 906, 177, 512, 528</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="902, 040, 041, 177, 178, 201, 219, 221, 222, 324, 326, 459, 460, 461, 466, 512, 528, 528A, 531, 713, 721, 722">902, 040, 041, 177, 178, 201, 219, 221, 222, 324, 326, 459, 460, 461, 466, 512, 528, 528A, 531, 713, 721, 722</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="902, 201">902, 201</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="902, 460, 461">902, 460, 461</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="902, 460, 461, 611">902, 460, 461, 611</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="902, 461">902, 461</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="902, 531">902, 531</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="905, 040, 177, 178, 221, 458, 460, 461, 466, 512, 528, 531, 713, 722, 735">905, 040, 177, 178, 221, 458, 460, 461, 466, 512, 528, 531, 713, 722, 735</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="905, 177, 178, 221, 458, 460, 461, 466, 512, 528, 531, 713, 722, 735">905, 177, 178, 221, 458, 460, 461, 466, 512, 528, 531, 713, 722, 735</option>';
+            Pontolinhasquepassampeloponto_options_str  += '<option value="905, 177, 178, 221, 459, 460, 461, 466, 512, 528, 528A, 531, 713, 721, 722">905, 177, 178, 221, 459, 460, 461, 466, 512, 528, 528A, 531, 713, 721, 722</option>';
+            sel_Pontolinhasquepassampeloponto.innerHTML = Pontolinhasquepassampeloponto_options_str;
+            div_Pontolinhasquepassampeloponto.appendChild(sel_Pontolinhasquepassampeloponto);
+            var lab_Pontolinhasquepassampeloponto = document.createElement('div');
+            lab_Pontolinhasquepassampeloponto.innerHTML = 'Ponto (linhas que passam pelo ponto)';
+            lab_Pontolinhasquepassampeloponto.className = 'filterlabel';
+            div_Pontolinhasquepassampeloponto.appendChild(lab_Pontolinhasquepassampeloponto);
+            var reset_Pontolinhasquepassampeloponto = document.createElement('div');
+            reset_Pontolinhasquepassampeloponto.innerHTML = 'clear filter';
+            reset_Pontolinhasquepassampeloponto.className = 'filterlabel';
+            reset_Pontolinhasquepassampeloponto.onclick = function() {
+                var options = document.getElementById("sel_Pontolinhasquepassampeloponto").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_Pontolinhasquepassampeloponto.appendChild(reset_Pontolinhasquepassampeloponto);
         </script>
     </body>
 </html>
