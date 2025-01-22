@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="css/filter.css">
 <link rel="stylesheet" href="css/nouislider.min.css">
         <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
         html, body, #map {
             width: 100%;
@@ -39,37 +40,35 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="js/leaflet-measure.js"></script>
         <script src="js/tailDT.js"></script>
 <script src="js/nouislider.min.js"></script>
 <script src="js/wNumb.js"></script>
         <script src="data/Limitemunicipal_1.js"></script>
         <script src="data/CRASreadeabrangencia01042024_2.js"></script>
         <script src="data/CRASreadeabrangencia_3.js"></script>
-        <script src="data/Pessoascadastradasacimade60anos_4.js"></script>
-        <script src="data/FamliascadastradasnafaixaderendapercapitadeR21800aR70600_5.js"></script>
-        <script src="data/FamliascadastradasnafaixaderendapercapitadeR0aR21800_6.js"></script>
-        <script src="data/FamliasPBFcadastradas_7.js"></script>
-        <script src="data/Famliascadastradas_8.js"></script>
-        <script src="data/CRASreadeabrangncia_9.js"></script>
-        <script src="data/Setorescensitrios_10.js"></script>
-        <script src="data/Bairros_11.js"></script>
-        <script src="data/Pontosdenibus_12.js"></script>
-        <script src="data/Linhasnibus_13.js"></script>
-        <script src="data/RedeEducao_14.js"></script>
-        <script src="data/RedeEsporte_15.js"></script>
-        <script src="data/RedeSade_16.js"></script>
-        <script src="data/Outrosservios_17.js"></script>
-        <script src="data/EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_18.js"></script>
-        <script src="data/RestaurantePopular_19.js"></script>
-        <script src="data/InclusoProdutiva_20.js"></script>
-        <script src="data/HabilitaoeReabilitaoPessoacomDeficincia_21.js"></script>
-        <script src="data/Acolhimentoinstitucional_22.js"></script>
-        <script src="data/SCFV_23.js"></script>
-        <script src="data/ConselhoTutelar_24.js"></script>
-        <script src="data/CentroDia_25.js"></script>
-        <script src="data/CentroPOP_26.js"></script>
-        <script src="data/CREAS_27.js"></script>
-        <script src="data/CRAS_28.js"></script>
+        <script src="data/CRASreadeabrangencia_4.js"></script>
+        <script src="data/Bairros_5.js"></script>
+        <script src="data/CRASreadeabrangencia_6.js"></script>
+        <script src="data/Setorescensitrios_7.js"></script>
+        <script src="data/Bairros_8.js"></script>
+        <script src="data/Pontosdenibus_9.js"></script>
+        <script src="data/Linhadenibus_10.js"></script>
+        <script src="data/RedeEducao_11.js"></script>
+        <script src="data/RedeEsporte_12.js"></script>
+        <script src="data/RedeSade_13.js"></script>
+        <script src="data/Outrosservios_14.js"></script>
+        <script src="data/EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15.js"></script>
+        <script src="data/RestaurantePopular_16.js"></script>
+        <script src="data/InclusoProdutiva_17.js"></script>
+        <script src="data/HabilitaoeReabilitaoPessoacomDeficincia_18.js"></script>
+        <script src="data/Acolhimentoinstitucional_19.js"></script>
+        <script src="data/SCFV_20.js"></script>
+        <script src="data/ConselhoTutelar_21.js"></script>
+        <script src="data/CentroDia_22.js"></script>
+        <script src="data/CentroPOP_23.js"></script>
+        <script src="data/CREAS_24.js"></script>
+        <script src="data/CRAS_25.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -142,13 +141,23 @@
             abstract.show = function () {
                 this._div.classList.remove("abstract");
                 this._div.classList.add("abstractUncollapsed");
-                this._div.innerHTML = 'Fonte de dados: <br />RELCAD ( 29/ 09/ 2024 )<br />IBGE ( 2022 )';
+                this._div.innerHTML = 'Elaboração: <br />Kauan Borin R. de M.<br />Fonte de dados: <br />RELCAD (07/ 12/ 2024)<br />IBGE (2022)';
         };
         abstract.addTo(map);
         var zoomControl = L.control.zoom({
             position: 'topleft'
         }).addTo(map);
         L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0].innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0].className += ' fas fa-ruler';
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
             if (bounds_group.getLayers().length) {
@@ -733,8 +742,7 @@
             style: style_CRASreadeabrangencia_3_0,
         });
         bounds_group.addLayer(layer_CRASreadeabrangencia_3);
-        map.addLayer(layer_CRASreadeabrangencia_3);
-        function pop_Pessoascadastradasacimade60anos_4(feature, layer) {
+        function pop_CRASreadeabrangencia_4(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -749,620 +757,6 @@
                     <tr>\
                         <th scope="row">CRAS:</th>\
                         <td>' + (feature.properties['CRAS'] !== null ? autolinker.link(feature.properties['CRAS'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Pessoas cadastradas - acima de 60 anos:</th>\
-                        <td>' + (feature.properties['CONT.60'] !== null ? autolinker.link(feature.properties['CONT.60'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
-        }
-
-        function style_Pessoascadastradasacimade60anos_4_0(feature) {
-            if (feature.properties['CONT.60'] >= 47.000000 && feature.properties['CONT.60'] <= 680.000000 ) {
-                return {
-                pane: 'pane_Pessoascadastradasacimade60anos_4',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(253,239,216,1.0)',
-                interactive: true,
-            }
-            }
-            if (feature.properties['CONT.60'] >= 680.000000 && feature.properties['CONT.60'] <= 1313.000000 ) {
-                return {
-                pane: 'pane_Pessoascadastradasacimade60anos_4',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(252,220,178,1.0)',
-                interactive: true,
-            }
-            }
-            if (feature.properties['CONT.60'] >= 1313.000000 && feature.properties['CONT.60'] <= 1946.000000 ) {
-                return {
-                pane: 'pane_Pessoascadastradasacimade60anos_4',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(251,140,88,1.0)',
-                interactive: true,
-            }
-            }
-            if (feature.properties['CONT.60'] >= 1946.000000 && feature.properties['CONT.60'] <= 2579.000000 ) {
-                return {
-                pane: 'pane_Pessoascadastradasacimade60anos_4',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(232,110,79,1.0)',
-                interactive: true,
-            }
-            }
-            if (feature.properties['CONT.60'] >= 2579.000000 && feature.properties['CONT.60'] <= 3212.000000 ) {
-                return {
-                pane: 'pane_Pessoascadastradasacimade60anos_4',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(179,0,0,1.0)',
-                interactive: true,
-            }
-            }
-        }
-        map.createPane('pane_Pessoascadastradasacimade60anos_4');
-        map.getPane('pane_Pessoascadastradasacimade60anos_4').style.zIndex = 404;
-        map.getPane('pane_Pessoascadastradasacimade60anos_4').style['mix-blend-mode'] = 'normal';
-        var layer_Pessoascadastradasacimade60anos_4 = new L.geoJson(json_Pessoascadastradasacimade60anos_4, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_Pessoascadastradasacimade60anos_4',
-            layerName: 'layer_Pessoascadastradasacimade60anos_4',
-            pane: 'pane_Pessoascadastradasacimade60anos_4',
-            onEachFeature: pop_Pessoascadastradasacimade60anos_4,
-            style: style_Pessoascadastradasacimade60anos_4_0,
-        });
-        bounds_group.addLayer(layer_Pessoascadastradasacimade60anos_4);
-        function pop_FamliascadastradasnafaixaderendapercapitadeR21800aR70600_5(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    for (var i in e.target._eventParents) {
-                        if (typeof e.target._eventParents[i].resetStyle === 'function') {
-                            e.target._eventParents[i].resetStyle(e.target);
-                        }
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <th scope="row">CRAS:</th>\
-                        <td>' + (feature.properties['CRAS'] !== null ? autolinker.link(feature.properties['CRAS'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Famílias cadastradas na faixa de renda per capita de R$218,00 a R$706,00:</th>\
-                        <td>' + (feature.properties['CONT.218A7'] !== null ? autolinker.link(feature.properties['CONT.218A7'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
-        }
-
-        function style_FamliascadastradasnafaixaderendapercapitadeR21800aR70600_5_0(feature) {
-            if (feature.properties['CONT.218A7'] >= 40.000000 && feature.properties['CONT.218A7'] <= 263.800000 ) {
-                return {
-                pane: 'pane_FamliascadastradasnafaixaderendapercapitadeR21800aR70600_5',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(253,239,216,1.0)',
-                interactive: true,
-            }
-            }
-            if (feature.properties['CONT.218A7'] >= 263.800000 && feature.properties['CONT.218A7'] <= 487.600000 ) {
-                return {
-                pane: 'pane_FamliascadastradasnafaixaderendapercapitadeR21800aR70600_5',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(252,220,178,1.0)',
-                interactive: true,
-            }
-            }
-            if (feature.properties['CONT.218A7'] >= 487.600000 && feature.properties['CONT.218A7'] <= 711.400000 ) {
-                return {
-                pane: 'pane_FamliascadastradasnafaixaderendapercapitadeR21800aR70600_5',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(251,140,88,1.0)',
-                interactive: true,
-            }
-            }
-            if (feature.properties['CONT.218A7'] >= 711.400000 && feature.properties['CONT.218A7'] <= 935.200000 ) {
-                return {
-                pane: 'pane_FamliascadastradasnafaixaderendapercapitadeR21800aR70600_5',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(232,110,79,1.0)',
-                interactive: true,
-            }
-            }
-            if (feature.properties['CONT.218A7'] >= 935.200000 && feature.properties['CONT.218A7'] <= 1159.000000 ) {
-                return {
-                pane: 'pane_FamliascadastradasnafaixaderendapercapitadeR21800aR70600_5',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(179,0,0,1.0)',
-                interactive: true,
-            }
-            }
-        }
-        map.createPane('pane_FamliascadastradasnafaixaderendapercapitadeR21800aR70600_5');
-        map.getPane('pane_FamliascadastradasnafaixaderendapercapitadeR21800aR70600_5').style.zIndex = 405;
-        map.getPane('pane_FamliascadastradasnafaixaderendapercapitadeR21800aR70600_5').style['mix-blend-mode'] = 'normal';
-        var layer_FamliascadastradasnafaixaderendapercapitadeR21800aR70600_5 = new L.geoJson(json_FamliascadastradasnafaixaderendapercapitadeR21800aR70600_5, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_FamliascadastradasnafaixaderendapercapitadeR21800aR70600_5',
-            layerName: 'layer_FamliascadastradasnafaixaderendapercapitadeR21800aR70600_5',
-            pane: 'pane_FamliascadastradasnafaixaderendapercapitadeR21800aR70600_5',
-            onEachFeature: pop_FamliascadastradasnafaixaderendapercapitadeR21800aR70600_5,
-            style: style_FamliascadastradasnafaixaderendapercapitadeR21800aR70600_5_0,
-        });
-        bounds_group.addLayer(layer_FamliascadastradasnafaixaderendapercapitadeR21800aR70600_5);
-        function pop_FamliascadastradasnafaixaderendapercapitadeR0aR21800_6(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    for (var i in e.target._eventParents) {
-                        if (typeof e.target._eventParents[i].resetStyle === 'function') {
-                            e.target._eventParents[i].resetStyle(e.target);
-                        }
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <th scope="row">CRAS</th>\
-                        <td>' + (feature.properties['CRAS'] !== null ? autolinker.link(feature.properties['CRAS'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Famílias cadastradas na faixa de renda per capita de R$0 a R$218,00:</th>\
-                        <td>' + (feature.properties['CONT.0A208'] !== null ? autolinker.link(feature.properties['CONT.0A208'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
-        }
-
-        function style_FamliascadastradasnafaixaderendapercapitadeR0aR21800_6_0(feature) {
-            if (feature.properties['CONT.0A208'] >= 153.000000 && feature.properties['CONT.0A208'] <= 440.400000 ) {
-                return {
-                pane: 'pane_FamliascadastradasnafaixaderendapercapitadeR0aR21800_6',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(253,239,216,1.0)',
-                interactive: true,
-            }
-            }
-            if (feature.properties['CONT.0A208'] >= 440.400000 && feature.properties['CONT.0A208'] <= 727.800000 ) {
-                return {
-                pane: 'pane_FamliascadastradasnafaixaderendapercapitadeR0aR21800_6',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(252,220,178,1.0)',
-                interactive: true,
-            }
-            }
-            if (feature.properties['CONT.0A208'] >= 727.800000 && feature.properties['CONT.0A208'] <= 1015.200000 ) {
-                return {
-                pane: 'pane_FamliascadastradasnafaixaderendapercapitadeR0aR21800_6',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(251,140,88,1.0)',
-                interactive: true,
-            }
-            }
-            if (feature.properties['CONT.0A208'] >= 1015.200000 && feature.properties['CONT.0A208'] <= 1302.600000 ) {
-                return {
-                pane: 'pane_FamliascadastradasnafaixaderendapercapitadeR0aR21800_6',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(232,110,79,1.0)',
-                interactive: true,
-            }
-            }
-            if (feature.properties['CONT.0A208'] >= 1302.600000 && feature.properties['CONT.0A208'] <= 1590.000000 ) {
-                return {
-                pane: 'pane_FamliascadastradasnafaixaderendapercapitadeR0aR21800_6',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(179,0,0,1.0)',
-                interactive: true,
-            }
-            }
-        }
-        map.createPane('pane_FamliascadastradasnafaixaderendapercapitadeR0aR21800_6');
-        map.getPane('pane_FamliascadastradasnafaixaderendapercapitadeR0aR21800_6').style.zIndex = 406;
-        map.getPane('pane_FamliascadastradasnafaixaderendapercapitadeR0aR21800_6').style['mix-blend-mode'] = 'normal';
-        var layer_FamliascadastradasnafaixaderendapercapitadeR0aR21800_6 = new L.geoJson(json_FamliascadastradasnafaixaderendapercapitadeR0aR21800_6, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_FamliascadastradasnafaixaderendapercapitadeR0aR21800_6',
-            layerName: 'layer_FamliascadastradasnafaixaderendapercapitadeR0aR21800_6',
-            pane: 'pane_FamliascadastradasnafaixaderendapercapitadeR0aR21800_6',
-            onEachFeature: pop_FamliascadastradasnafaixaderendapercapitadeR0aR21800_6,
-            style: style_FamliascadastradasnafaixaderendapercapitadeR0aR21800_6_0,
-        });
-        bounds_group.addLayer(layer_FamliascadastradasnafaixaderendapercapitadeR0aR21800_6);
-        function pop_FamliasPBFcadastradas_7(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    for (var i in e.target._eventParents) {
-                        if (typeof e.target._eventParents[i].resetStyle === 'function') {
-                            e.target._eventParents[i].resetStyle(e.target);
-                        }
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <th scope="row">CRAS:</th>\
-                        <td>' + (feature.properties['CRAS'] !== null ? autolinker.link(feature.properties['CRAS'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Famílias PBF cadastradas:</th>\
-                        <td>' + (feature.properties['NUMPOINTS'] !== null ? autolinker.link(feature.properties['NUMPOINTS'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
-        }
-
-        function style_FamliasPBFcadastradas_7_0(feature) {
-            if (feature.properties['NUMPOINTS'] >= 157.000000 && feature.properties['NUMPOINTS'] <= 438.000000 ) {
-                return {
-                pane: 'pane_FamliasPBFcadastradas_7',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(253,239,216,1.0)',
-                interactive: true,
-            }
-            }
-            if (feature.properties['NUMPOINTS'] >= 438.000000 && feature.properties['NUMPOINTS'] <= 719.000000 ) {
-                return {
-                pane: 'pane_FamliasPBFcadastradas_7',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(252,220,178,1.0)',
-                interactive: true,
-            }
-            }
-            if (feature.properties['NUMPOINTS'] >= 719.000000 && feature.properties['NUMPOINTS'] <= 1000.000000 ) {
-                return {
-                pane: 'pane_FamliasPBFcadastradas_7',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(251,140,88,1.0)',
-                interactive: true,
-            }
-            }
-            if (feature.properties['NUMPOINTS'] >= 1000.000000 && feature.properties['NUMPOINTS'] <= 1281.000000 ) {
-                return {
-                pane: 'pane_FamliasPBFcadastradas_7',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(232,110,79,1.0)',
-                interactive: true,
-            }
-            }
-            if (feature.properties['NUMPOINTS'] >= 1281.000000 && feature.properties['NUMPOINTS'] <= 1562.000000 ) {
-                return {
-                pane: 'pane_FamliasPBFcadastradas_7',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(179,0,0,1.0)',
-                interactive: true,
-            }
-            }
-        }
-        map.createPane('pane_FamliasPBFcadastradas_7');
-        map.getPane('pane_FamliasPBFcadastradas_7').style.zIndex = 407;
-        map.getPane('pane_FamliasPBFcadastradas_7').style['mix-blend-mode'] = 'normal';
-        var layer_FamliasPBFcadastradas_7 = new L.geoJson(json_FamliasPBFcadastradas_7, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_FamliasPBFcadastradas_7',
-            layerName: 'layer_FamliasPBFcadastradas_7',
-            pane: 'pane_FamliasPBFcadastradas_7',
-            onEachFeature: pop_FamliasPBFcadastradas_7,
-            style: style_FamliasPBFcadastradas_7_0,
-        });
-        bounds_group.addLayer(layer_FamliasPBFcadastradas_7);
-        function pop_Famliascadastradas_8(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    for (var i in e.target._eventParents) {
-                        if (typeof e.target._eventParents[i].resetStyle === 'function') {
-                            e.target._eventParents[i].resetStyle(e.target);
-                        }
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <th scope="row">CRAS:</th>\
-                        <td>' + (feature.properties['CRAS'] !== null ? autolinker.link(feature.properties['CRAS'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Famílias cadastradas:</th>\
-                        <td>' + (feature.properties['CONT.FAM'] !== null ? autolinker.link(feature.properties['CONT.FAM'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
-        }
-
-        function style_Famliascadastradas_8_0(feature) {
-            if (feature.properties['CONT.FAM'] >= 446.000000 && feature.properties['CONT.FAM'] <= 1294.000000 ) {
-                return {
-                pane: 'pane_Famliascadastradas_8',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(253,239,216,1.0)',
-                interactive: true,
-            }
-            }
-            if (feature.properties['CONT.FAM'] >= 1294.000000 && feature.properties['CONT.FAM'] <= 3054.000000 ) {
-                return {
-                pane: 'pane_Famliascadastradas_8',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(252,220,178,1.0)',
-                interactive: true,
-            }
-            }
-            if (feature.properties['CONT.FAM'] >= 3054.000000 && feature.properties['CONT.FAM'] <= 3815.000000 ) {
-                return {
-                pane: 'pane_Famliascadastradas_8',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(251,140,88,1.0)',
-                interactive: true,
-            }
-            }
-            if (feature.properties['CONT.FAM'] >= 3815.000000 && feature.properties['CONT.FAM'] <= 5710.000000 ) {
-                return {
-                pane: 'pane_Famliascadastradas_8',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(232,110,79,1.0)',
-                interactive: true,
-            }
-            }
-            if (feature.properties['CONT.FAM'] >= 5710.000000 && feature.properties['CONT.FAM'] <= 6450.000000 ) {
-                return {
-                pane: 'pane_Famliascadastradas_8',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(179,0,0,1.0)',
-                interactive: true,
-            }
-            }
-        }
-        map.createPane('pane_Famliascadastradas_8');
-        map.getPane('pane_Famliascadastradas_8').style.zIndex = 408;
-        map.getPane('pane_Famliascadastradas_8').style['mix-blend-mode'] = 'normal';
-        var layer_Famliascadastradas_8 = new L.geoJson(json_Famliascadastradas_8, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_Famliascadastradas_8',
-            layerName: 'layer_Famliascadastradas_8',
-            pane: 'pane_Famliascadastradas_8',
-            onEachFeature: pop_Famliascadastradas_8,
-            style: style_Famliascadastradas_8_0,
-        });
-        bounds_group.addLayer(layer_Famliascadastradas_8);
-        function pop_CRASreadeabrangncia_9(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    for (var i in e.target._eventParents) {
-                        if (typeof e.target._eventParents[i].resetStyle === 'function') {
-                            e.target._eventParents[i].resetStyle(e.target);
-                        }
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <th scope="row">Unidade:</th>\
-                        <td>' + (feature.properties['CRAS_NOME'] !== null ? autolinker.link(feature.properties['CRAS_NOME'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Famílias cadastradas:</th>\
-                        <td>' + (feature.properties['CONT.FAM'] !== null ? autolinker.link(feature.properties['CONT.FAM'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Pessoas cadastradas:</th>\
-                        <td>' + (feature.properties['CONT.INDV'] !== null ? autolinker.link(feature.properties['CONT.INDV'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Famílias PBF cadastradas:</th>\
-                        <td>' + (feature.properties['CONT.PBF'] !== null ? autolinker.link(feature.properties['CONT.PBF'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">BPC - PCD:</th>\
-                        <td>' + (feature.properties['BPC.PCD'] !== null ? autolinker.link(feature.properties['BPC.PCD'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">BPC - IDOSO:</th>\
-                        <td>' + (feature.properties['BPC_IDOSO'] !== null ? autolinker.link(feature.properties['BPC_IDOSO'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Pessoas acima de 60 anos:</th>\
-                        <td>' + (feature.properties['CONT.60'] !== null ? autolinker.link(feature.properties['CONT.60'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Famílias cadastradas na faixa de renda per capita de R$0 a R$218,00:</th>\
@@ -1373,8 +767,28 @@
                         <td>' + (feature.properties['CONT.706'] !== null ? autolinker.link(feature.properties['CONT.706'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
+                        <th scope="row">Famílias PBF cadastradas:</th>\
+                        <td>' + (feature.properties['CONT.PBF'] !== null ? autolinker.link(feature.properties['CONT.PBF'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Famílias cadastradas:</th>\
+                        <td>' + (feature.properties['CONT.FAM'] !== null ? autolinker.link(feature.properties['CONT.FAM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pessoas acima de 60 anos:</th>\
+                        <td>' + (feature.properties['CONT.60'] !== null ? autolinker.link(feature.properties['CONT.60'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">BPC - PCD:</th>\
+                        <td>' + (feature.properties['BPC.PCD'] !== null ? autolinker.link(feature.properties['BPC.PCD'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">BPC - IDOSO:</th>\
+                        <td>' + (feature.properties['BPC_IDOSO'] !== null ? autolinker.link(feature.properties['BPC_IDOSO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
                         <th scope="row">População residente IBGE (2022):</th>\
-                        <td>' + (feature.properties['População residente IBGE (2022)'] !== null ? autolinker.link(feature.properties['População residente IBGE (2022)'].toLocaleString()) : '') + '</td>\
+                        <td>' + (feature.properties['v0001'] !== null ? autolinker.link(feature.properties['v0001'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
@@ -1384,11 +798,11 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_CRASreadeabrangncia_9_0(feature) {
-            switch(String(feature.properties['q2wHide_CRAS'])) {
+        function style_CRASreadeabrangencia_4_0(feature) {
+            switch(String(feature.properties['CRAS'])) {
                 case 'Alvorada':
                     return {
-                pane: 'pane_CRASreadeabrangncia_9',
+                pane: 'pane_CRASreadeabrangencia_4',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1403,7 +817,7 @@
                     break;
                 case 'Branca Vieira':
                     return {
-                pane: 'pane_CRASreadeabrangncia_9',
+                pane: 'pane_CRASreadeabrangencia_4',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1418,7 +832,7 @@
                     break;
                 case 'Floriano':
                     return {
-                pane: 'pane_CRASreadeabrangncia_9',
+                pane: 'pane_CRASreadeabrangencia_4',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1433,7 +847,7 @@
                     break;
                 case 'Iguatemi':
                     return {
-                pane: 'pane_CRASreadeabrangncia_9',
+                pane: 'pane_CRASreadeabrangencia_4',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1448,7 +862,7 @@
                     break;
                 case 'Itaipu':
                     return {
-                pane: 'pane_CRASreadeabrangncia_9',
+                pane: 'pane_CRASreadeabrangencia_4',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1463,7 +877,7 @@
                     break;
                 case 'Mandacaru':
                     return {
-                pane: 'pane_CRASreadeabrangncia_9',
+                pane: 'pane_CRASreadeabrangencia_4',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1478,7 +892,7 @@
                     break;
                 case 'Morangueira':
                     return {
-                pane: 'pane_CRASreadeabrangncia_9',
+                pane: 'pane_CRASreadeabrangencia_4',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1493,7 +907,7 @@
                     break;
                 case 'Ney Braga':
                     return {
-                pane: 'pane_CRASreadeabrangncia_9',
+                pane: 'pane_CRASreadeabrangencia_4',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1508,7 +922,7 @@
                     break;
                 case 'Requião':
                     return {
-                pane: 'pane_CRASreadeabrangncia_9',
+                pane: 'pane_CRASreadeabrangencia_4',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1523,7 +937,7 @@
                     break;
                 case 'Santa Clara':
                     return {
-                pane: 'pane_CRASreadeabrangncia_9',
+                pane: 'pane_CRASreadeabrangencia_4',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1538,7 +952,7 @@
                     break;
                 case 'Santa Felicidade':
                     return {
-                pane: 'pane_CRASreadeabrangncia_9',
+                pane: 'pane_CRASreadeabrangencia_4',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1553,7 +967,7 @@
                     break;
                 case 'São Judas Tadeu':
                     return {
-                pane: 'pane_CRASreadeabrangncia_9',
+                pane: 'pane_CRASreadeabrangencia_4',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1568,7 +982,7 @@
                     break;
                 case 'Centro POP':
                     return {
-                pane: 'pane_CRASreadeabrangncia_9',
+                pane: 'pane_CRASreadeabrangencia_4',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1583,91 +997,20 @@
                     break;
             }
         }
-        map.createPane('pane_CRASreadeabrangncia_9');
-        map.getPane('pane_CRASreadeabrangncia_9').style.zIndex = 409;
-        map.getPane('pane_CRASreadeabrangncia_9').style['mix-blend-mode'] = 'normal';
-        var layer_CRASreadeabrangncia_9 = new L.geoJson(json_CRASreadeabrangncia_9, {
+        map.createPane('pane_CRASreadeabrangencia_4');
+        map.getPane('pane_CRASreadeabrangencia_4').style.zIndex = 404;
+        map.getPane('pane_CRASreadeabrangencia_4').style['mix-blend-mode'] = 'normal';
+        var layer_CRASreadeabrangencia_4 = new L.geoJson(json_CRASreadeabrangencia_4, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_CRASreadeabrangncia_9',
-            layerName: 'layer_CRASreadeabrangncia_9',
-            pane: 'pane_CRASreadeabrangncia_9',
-            onEachFeature: pop_CRASreadeabrangncia_9,
-            style: style_CRASreadeabrangncia_9_0,
+            dataVar: 'json_CRASreadeabrangencia_4',
+            layerName: 'layer_CRASreadeabrangencia_4',
+            pane: 'pane_CRASreadeabrangencia_4',
+            onEachFeature: pop_CRASreadeabrangencia_4,
+            style: style_CRASreadeabrangencia_4_0,
         });
-        bounds_group.addLayer(layer_CRASreadeabrangncia_9);
-        map.addLayer(layer_CRASreadeabrangncia_9);
-        function pop_Setorescensitrios_10(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    for (var i in e.target._eventParents) {
-                        if (typeof e.target._eventParents[i].resetStyle === 'function') {
-                            e.target._eventParents[i].resetStyle(e.target);
-                        }
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <th scope="row">Código do setor:</th>\
-                        <td>' + (feature.properties['CD_SETOR'] !== null ? autolinker.link(feature.properties['CD_SETOR'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Área km²:</th>\
-                        <td>' + (feature.properties['AREA_KM2'] !== null ? autolinker.link(feature.properties['AREA_KM2'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Código do município:</th>\
-                        <td>' + (feature.properties['CD_MUN'] !== null ? autolinker.link(feature.properties['CD_MUN'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Nome do município:</th>\
-                        <td>' + (feature.properties['NM_MUN'] !== null ? autolinker.link(feature.properties['NM_MUN'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">População residente:</th>\
-                        <td>' + (feature.properties['v0001'] !== null ? autolinker.link(feature.properties['v0001'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">CRAS de referência:</th>\
-                        <td>' + (feature.properties['CRAS'] !== null ? autolinker.link(feature.properties['CRAS'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
-        }
-
-        function style_Setorescensitrios_10_0() {
-            return {
-                pane: 'pane_Setorescensitrios_10',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fillOpacity: 0,
-                interactive: true,
-            }
-        }
-        map.createPane('pane_Setorescensitrios_10');
-        map.getPane('pane_Setorescensitrios_10').style.zIndex = 410;
-        map.getPane('pane_Setorescensitrios_10').style['mix-blend-mode'] = 'normal';
-        var layer_Setorescensitrios_10 = new L.geoJson(json_Setorescensitrios_10, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_Setorescensitrios_10',
-            layerName: 'layer_Setorescensitrios_10',
-            pane: 'pane_Setorescensitrios_10',
-            onEachFeature: pop_Setorescensitrios_10,
-            style: style_Setorescensitrios_10_0,
-        });
-        bounds_group.addLayer(layer_Setorescensitrios_10);
-        function pop_Bairros_11(feature, layer) {
+        bounds_group.addLayer(layer_CRASreadeabrangencia_4);
+        function pop_Bairros_5(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -1731,9 +1074,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Bairros_11_0() {
+        function style_Bairros_5_0() {
             return {
-                pane: 'pane_Bairros_11',
+                pane: 'pane_Bairros_5',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -1744,20 +1087,453 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_Bairros_11');
-        map.getPane('pane_Bairros_11').style.zIndex = 411;
-        map.getPane('pane_Bairros_11').style['mix-blend-mode'] = 'normal';
-        var layer_Bairros_11 = new L.geoJson(json_Bairros_11, {
+        map.createPane('pane_Bairros_5');
+        map.getPane('pane_Bairros_5').style.zIndex = 405;
+        map.getPane('pane_Bairros_5').style['mix-blend-mode'] = 'normal';
+        var layer_Bairros_5 = new L.geoJson(json_Bairros_5, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Bairros_11',
-            layerName: 'layer_Bairros_11',
-            pane: 'pane_Bairros_11',
-            onEachFeature: pop_Bairros_11,
-            style: style_Bairros_11_0,
+            dataVar: 'json_Bairros_5',
+            layerName: 'layer_Bairros_5',
+            pane: 'pane_Bairros_5',
+            onEachFeature: pop_Bairros_5,
+            style: style_Bairros_5_0,
         });
-        bounds_group.addLayer(layer_Bairros_11);
-        function pop_Pontosdenibus_12(feature, layer) {
+        bounds_group.addLayer(layer_Bairros_5);
+        function pop_CRASreadeabrangencia_6(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (var i in e.target._eventParents) {
+                        if (typeof e.target._eventParents[i].resetStyle === 'function') {
+                            e.target._eventParents[i].resetStyle(e.target);
+                        }
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Unidade:</th>\
+                        <td class="visible-with-data" id="CRAS_NOME">' + (feature.properties['CRAS_NOME'] !== null ? autolinker.link(feature.properties['CRAS_NOME'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Famílias cadastradas:</th>\
+                        <td class="visible-with-data" id="CONT.FAM">' + (feature.properties['CONT.FAM'] !== null ? autolinker.link(feature.properties['CONT.FAM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pessoas cadastradas:</th>\
+                        <td class="visible-with-data" id="CONT.INDV">' + (feature.properties['CONT.INDV'] !== null ? autolinker.link(feature.properties['CONT.INDV'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Famílias PBF cadastradas:</th>\
+                        <td class="visible-with-data" id="CONT.PBF">' + (feature.properties['CONT.PBF'] !== null ? autolinker.link(feature.properties['CONT.PBF'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">BPC - PCD:</th>\
+                        <td class="visible-with-data" id="BPC.PCD">' + (feature.properties['BPC.PCD'] !== null ? autolinker.link(feature.properties['BPC.PCD'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">BPC - IDOSO:</th>\
+                        <td class="visible-with-data" id="BPC_IDOSO">' + (feature.properties['BPC_IDOSO'] !== null ? autolinker.link(feature.properties['BPC_IDOSO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pessoas acima de 60 anos:</th>\
+                        <td class="visible-with-data" id="CONT.60">' + (feature.properties['CONT.60'] !== null ? autolinker.link(feature.properties['CONT.60'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Famílias cadastradas na faixa de renda per capita de R$0 a R$218,00:</th>\
+                        <td class="visible-with-data" id="0A218">' + (feature.properties['0A218'] !== null ? autolinker.link(feature.properties['0A218'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Famílias cadatradas na faixa de renda per capita de R$218,00 a R$706,00</th>\
+                        <td class="visible-with-data" id="CONT.706">' + (feature.properties['CONT.706'] !== null ? autolinker.link(feature.properties['CONT.706'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">População residente IBGE (2022):</th>\
+                        <td class="visible-with-data" id="População residente IBGE (2022)">' + (feature.properties['População residente IBGE (2022)'] !== null ? autolinker.link(feature.properties['População residente IBGE (2022)'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_CRASreadeabrangencia_6_0(feature) {
+            switch(String(feature.properties['q2wHide_CRAS'])) {
+                case 'Alvorada':
+                    return {
+                pane: 'pane_CRASreadeabrangencia_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.8549019607843137)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,241,113,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Branca Vieira':
+                    return {
+                pane: 'pane_CRASreadeabrangencia_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.8549019607843137)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(53,240,206,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Floriano':
+                    return {
+                pane: 'pane_CRASreadeabrangencia_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.8549019607843137)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,107,51,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Iguatemi':
+                    return {
+                pane: 'pane_CRASreadeabrangencia_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.8549019607843137)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(120,70,227,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Itaipu':
+                    return {
+                pane: 'pane_CRASreadeabrangencia_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.8549019607843137)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(124,201,236,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Mandacaru':
+                    return {
+                pane: 'pane_CRASreadeabrangencia_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.8549019607843137)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(146,201,28,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Morangueira':
+                    return {
+                pane: 'pane_CRASreadeabrangencia_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.8549019607843137)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(204,182,82,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Ney Braga':
+                    return {
+                pane: 'pane_CRASreadeabrangencia_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.8549019607843137)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(202,102,170,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Requião':
+                    return {
+                pane: 'pane_CRASreadeabrangencia_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.8549019607843137)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(211,75,102,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Santa Clara':
+                    return {
+                pane: 'pane_CRASreadeabrangencia_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.8549019607843137)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(119,139,228,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Santa Felicidade':
+                    return {
+                pane: 'pane_CRASreadeabrangencia_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.8549019607843137)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,234,160,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'São Judas Tadeu':
+                    return {
+                pane: 'pane_CRASreadeabrangencia_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.8549019607843137)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(107,229,146,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Centro POP':
+                    return {
+                pane: 'pane_CRASreadeabrangencia_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.8549019607843137)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(186,213,188,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_CRASreadeabrangencia_6');
+        map.getPane('pane_CRASreadeabrangencia_6').style.zIndex = 406;
+        map.getPane('pane_CRASreadeabrangencia_6').style['mix-blend-mode'] = 'normal';
+        var layer_CRASreadeabrangencia_6 = new L.geoJson(json_CRASreadeabrangencia_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_CRASreadeabrangencia_6',
+            layerName: 'layer_CRASreadeabrangencia_6',
+            pane: 'pane_CRASreadeabrangencia_6',
+            onEachFeature: pop_CRASreadeabrangencia_6,
+            style: style_CRASreadeabrangencia_6_0,
+        });
+        bounds_group.addLayer(layer_CRASreadeabrangencia_6);
+        map.addLayer(layer_CRASreadeabrangencia_6);
+        function pop_Setorescensitrios_7(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (var i in e.target._eventParents) {
+                        if (typeof e.target._eventParents[i].resetStyle === 'function') {
+                            e.target._eventParents[i].resetStyle(e.target);
+                        }
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Código do setor:</th>\
+                        <td>' + (feature.properties['CD_SETOR'] !== null ? autolinker.link(feature.properties['CD_SETOR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Área km²:</th>\
+                        <td>' + (feature.properties['AREA_KM2'] !== null ? autolinker.link(feature.properties['AREA_KM2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Código do município:</th>\
+                        <td>' + (feature.properties['CD_MUN'] !== null ? autolinker.link(feature.properties['CD_MUN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nome do município:</th>\
+                        <td>' + (feature.properties['NM_MUN'] !== null ? autolinker.link(feature.properties['NM_MUN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">População residente:</th>\
+                        <td>' + (feature.properties['v0001'] !== null ? autolinker.link(feature.properties['v0001'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CRAS de referência:</th>\
+                        <td>' + (feature.properties['CRAS'] !== null ? autolinker.link(feature.properties['CRAS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_Setorescensitrios_7_0() {
+            return {
+                pane: 'pane_Setorescensitrios_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Setorescensitrios_7');
+        map.getPane('pane_Setorescensitrios_7').style.zIndex = 407;
+        map.getPane('pane_Setorescensitrios_7').style['mix-blend-mode'] = 'normal';
+        var layer_Setorescensitrios_7 = new L.geoJson(json_Setorescensitrios_7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Setorescensitrios_7',
+            layerName: 'layer_Setorescensitrios_7',
+            pane: 'pane_Setorescensitrios_7',
+            onEachFeature: pop_Setorescensitrios_7,
+            style: style_Setorescensitrios_7_0,
+        });
+        bounds_group.addLayer(layer_Setorescensitrios_7);
+        function pop_Bairros_8(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (var i in e.target._eventParents) {
+                        if (typeof e.target._eventParents[i].resetStyle === 'function') {
+                            e.target._eventParents[i].resetStyle(e.target);
+                        }
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">CRAS de referência:</th>\
+                        <td class="visible-with-data" id="CRAS de referência:">' + (feature.properties['CRAS de referência:'] !== null ? autolinker.link(feature.properties['CRAS de referência:'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bairro:</th>\
+                        <td class="visible-with-data" id="Bairro:">' + (feature.properties['Bairro:'] !== null ? autolinker.link(feature.properties['Bairro:'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Zona:</th>\
+                        <td class="visible-with-data" id="Zona:">' + (feature.properties['Zona:'] !== null ? autolinker.link(feature.properties['Zona:'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Famílias cadastradas:</th>\
+                        <td class="visible-with-data" id="Famílias cadastradas:">' + (feature.properties['Famílias cadastradas:'] !== null ? autolinker.link(feature.properties['Famílias cadastradas:'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pessoas cadastradas:</th>\
+                        <td class="visible-with-data" id="Pessoas cadastradas:">' + (feature.properties['Pessoas cadastradas:'] !== null ? autolinker.link(feature.properties['Pessoas cadastradas:'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Famílias PBF cadastradas:</th>\
+                        <td>' + (feature.properties['Famílias PBF cadastradas:'] !== null ? autolinker.link(feature.properties['Famílias PBF cadastradas:'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">BPC - IDOSO:</th>\
+                        <td class="visible-with-data" id="BPC - IDOSO:">' + (feature.properties['BPC - IDOSO:'] !== null ? autolinker.link(feature.properties['BPC - IDOSO:'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">BPC - PCD:</th>\
+                        <td class="visible-with-data" id="BPC - PCD:">' + (feature.properties['BPC - PCD:'] !== null ? autolinker.link(feature.properties['BPC - PCD:'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Famílias cadastradas na faixa de renda per capita de R$0 a R$218,00:</th>\
+                        <td class="visible-with-data" id="Famílias cadastradas na faixa de renda per capita de R$0 a R$218,00:">' + (feature.properties['Famílias cadastradas na faixa de renda per capita de R$0 a R$218,00:'] !== null ? autolinker.link(feature.properties['Famílias cadastradas na faixa de renda per capita de R$0 a R$218,00:'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Famílias cadastradas na faixa de renda per capita de R$218,00 a R$706,00:</th>\
+                        <td class="visible-with-data" id="Famílias cadastradas na faixa de renda per capita de R$218,00 a R$706,00:">' + (feature.properties['Famílias cadastradas na faixa de renda per capita de R$218,00 a R$706,00:'] !== null ? autolinker.link(feature.properties['Famílias cadastradas na faixa de renda per capita de R$218,00 a R$706,00:'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pessoas cadastradas - acima de 60 anos:</th>\
+                        <td class="visible-with-data" id="Pessoas cadastradas - acima de 60 anos:">' + (feature.properties['Pessoas cadastradas - acima de 60 anos:'] !== null ? autolinker.link(feature.properties['Pessoas cadastradas - acima de 60 anos:'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_Bairros_8_0() {
+            return {
+                pane: 'pane_Bairros_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Bairros_8');
+        map.getPane('pane_Bairros_8').style.zIndex = 408;
+        map.getPane('pane_Bairros_8').style['mix-blend-mode'] = 'normal';
+        var layer_Bairros_8 = new L.geoJson(json_Bairros_8, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Bairros_8',
+            layerName: 'layer_Bairros_8',
+            pane: 'pane_Bairros_8',
+            onEachFeature: pop_Bairros_8,
+            style: style_Bairros_8_0,
+        });
+        bounds_group.addLayer(layer_Bairros_8);
+        function pop_Pontosdenibus_9(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -1785,9 +1561,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Pontosdenibus_12_0() {
+        function style_Pontosdenibus_9_0() {
             return {
-                pane: 'pane_Pontosdenibus_12',
+                pane: 'pane_Pontosdenibus_9',
                 radius: 2.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -1801,26 +1577,26 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_Pontosdenibus_12');
-        map.getPane('pane_Pontosdenibus_12').style.zIndex = 412;
-        map.getPane('pane_Pontosdenibus_12').style['mix-blend-mode'] = 'normal';
-        var layer_Pontosdenibus_12 = new L.geoJson(json_Pontosdenibus_12, {
+        map.createPane('pane_Pontosdenibus_9');
+        map.getPane('pane_Pontosdenibus_9').style.zIndex = 409;
+        map.getPane('pane_Pontosdenibus_9').style['mix-blend-mode'] = 'normal';
+        var layer_Pontosdenibus_9 = new L.geoJson(json_Pontosdenibus_9, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Pontosdenibus_12',
-            layerName: 'layer_Pontosdenibus_12',
-            pane: 'pane_Pontosdenibus_12',
-            onEachFeature: pop_Pontosdenibus_12,
+            dataVar: 'json_Pontosdenibus_9',
+            layerName: 'layer_Pontosdenibus_9',
+            pane: 'pane_Pontosdenibus_9',
+            onEachFeature: pop_Pontosdenibus_9,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_Pontosdenibus_12_0(feature));
+                return L.circleMarker(latlng, style_Pontosdenibus_9_0(feature));
             },
         });
-        bounds_group.addLayer(layer_Pontosdenibus_12);
-        function pop_Linhasnibus_13(feature, layer) {
+        bounds_group.addLayer(layer_Pontosdenibus_9);
+        function pop_Linhadenibus_10(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -1833,16 +1609,12 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <th scope="row">Linha:</th>\
-                        <td>' + (feature.properties['Linha'] !== null ? autolinker.link(feature.properties['Linha'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Linha de ônibus</th>\
+                        <td class="visible-with-data" id="Linha de ônibus">' + (feature.properties['Linha de ônibus'] !== null ? autolinker.link(feature.properties['Linha de ônibus'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Sentido:</th>\
-                        <td>' + (feature.properties['Sentido'] !== null ? autolinker.link(feature.properties['Sentido'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Linhas</th>\
-                        <td>' + (feature.properties['Linhas'] !== null ? autolinker.link(feature.properties['Linhas'].toLocaleString()) : '') + '</td>\
+                        <td class="visible-with-data" id="Sentido">' + (feature.properties['Sentido'] !== null ? autolinker.link(feature.properties['Sentido'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
@@ -1852,9 +1624,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Linhasnibus_13_0() {
+        function style_Linhadenibus_10_0() {
             return {
-                pane: 'pane_Linhasnibus_13',
+                pane: 'pane_Linhadenibus_10',
                 opacity: 1,
                 color: 'rgba(43,39,36,1.0)',
                 dashArray: '',
@@ -1865,20 +1637,20 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_Linhasnibus_13');
-        map.getPane('pane_Linhasnibus_13').style.zIndex = 413;
-        map.getPane('pane_Linhasnibus_13').style['mix-blend-mode'] = 'normal';
-        var layer_Linhasnibus_13 = new L.geoJson(json_Linhasnibus_13, {
+        map.createPane('pane_Linhadenibus_10');
+        map.getPane('pane_Linhadenibus_10').style.zIndex = 410;
+        map.getPane('pane_Linhadenibus_10').style['mix-blend-mode'] = 'normal';
+        var layer_Linhadenibus_10 = new L.geoJson(json_Linhadenibus_10, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Linhasnibus_13',
-            layerName: 'layer_Linhasnibus_13',
-            pane: 'pane_Linhasnibus_13',
-            onEachFeature: pop_Linhasnibus_13,
-            style: style_Linhasnibus_13_0,
+            dataVar: 'json_Linhadenibus_10',
+            layerName: 'layer_Linhadenibus_10',
+            pane: 'pane_Linhadenibus_10',
+            onEachFeature: pop_Linhadenibus_10,
+            style: style_Linhadenibus_10_0,
         });
-        bounds_group.addLayer(layer_Linhasnibus_13);
-        function pop_RedeEducao_14(feature, layer) {
+        bounds_group.addLayer(layer_Linhadenibus_10);
+        function pop_RedeEducao_11(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -1918,38 +1690,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_RedeEducao_14_0() {
+        function style_RedeEducao_11_0() {
             return {
-                pane: 'pane_RedeEducao_14',
+                pane: 'pane_RedeEducao_11',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/RedeEducao_14.svg',
+            iconUrl: 'markers/RedeEducao_11.svg',
             iconSize: [16.72, 16.72]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_RedeEducao_14');
-        map.getPane('pane_RedeEducao_14').style.zIndex = 414;
-        map.getPane('pane_RedeEducao_14').style['mix-blend-mode'] = 'normal';
-        var layer_RedeEducao_14 = new L.geoJson(json_RedeEducao_14, {
+        map.createPane('pane_RedeEducao_11');
+        map.getPane('pane_RedeEducao_11').style.zIndex = 411;
+        map.getPane('pane_RedeEducao_11').style['mix-blend-mode'] = 'normal';
+        var layer_RedeEducao_11 = new L.geoJson(json_RedeEducao_11, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_RedeEducao_14',
-            layerName: 'layer_RedeEducao_14',
-            pane: 'pane_RedeEducao_14',
-            onEachFeature: pop_RedeEducao_14,
+            dataVar: 'json_RedeEducao_11',
+            layerName: 'layer_RedeEducao_11',
+            pane: 'pane_RedeEducao_11',
+            onEachFeature: pop_RedeEducao_11,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_RedeEducao_14_0(feature));
+                return L.marker(latlng, style_RedeEducao_11_0(feature));
             },
         });
-        bounds_group.addLayer(layer_RedeEducao_14);
-        function pop_RedeEsporte_15(feature, layer) {
+        bounds_group.addLayer(layer_RedeEducao_11);
+        function pop_RedeEsporte_12(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -1989,38 +1761,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_RedeEsporte_15_0() {
+        function style_RedeEsporte_12_0() {
             return {
-                pane: 'pane_RedeEsporte_15',
+                pane: 'pane_RedeEsporte_12',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/RedeEsporte_15.svg',
+            iconUrl: 'markers/RedeEsporte_12.svg',
             iconSize: [15.959999999999999, 15.959999999999999]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_RedeEsporte_15');
-        map.getPane('pane_RedeEsporte_15').style.zIndex = 415;
-        map.getPane('pane_RedeEsporte_15').style['mix-blend-mode'] = 'normal';
-        var layer_RedeEsporte_15 = new L.geoJson(json_RedeEsporte_15, {
+        map.createPane('pane_RedeEsporte_12');
+        map.getPane('pane_RedeEsporte_12').style.zIndex = 412;
+        map.getPane('pane_RedeEsporte_12').style['mix-blend-mode'] = 'normal';
+        var layer_RedeEsporte_12 = new L.geoJson(json_RedeEsporte_12, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_RedeEsporte_15',
-            layerName: 'layer_RedeEsporte_15',
-            pane: 'pane_RedeEsporte_15',
-            onEachFeature: pop_RedeEsporte_15,
+            dataVar: 'json_RedeEsporte_12',
+            layerName: 'layer_RedeEsporte_12',
+            pane: 'pane_RedeEsporte_12',
+            onEachFeature: pop_RedeEsporte_12,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_RedeEsporte_15_0(feature));
+                return L.marker(latlng, style_RedeEsporte_12_0(feature));
             },
         });
-        bounds_group.addLayer(layer_RedeEsporte_15);
-        function pop_RedeSade_16(feature, layer) {
+        bounds_group.addLayer(layer_RedeEsporte_12);
+        function pop_RedeSade_13(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -2060,38 +1832,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_RedeSade_16_0() {
+        function style_RedeSade_13_0() {
             return {
-                pane: 'pane_RedeSade_16',
+                pane: 'pane_RedeSade_13',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/RedeSade_16.svg',
+            iconUrl: 'markers/RedeSade_13.svg',
             iconSize: [22.799999999999997, 22.799999999999997]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_RedeSade_16');
-        map.getPane('pane_RedeSade_16').style.zIndex = 416;
-        map.getPane('pane_RedeSade_16').style['mix-blend-mode'] = 'normal';
-        var layer_RedeSade_16 = new L.geoJson(json_RedeSade_16, {
+        map.createPane('pane_RedeSade_13');
+        map.getPane('pane_RedeSade_13').style.zIndex = 413;
+        map.getPane('pane_RedeSade_13').style['mix-blend-mode'] = 'normal';
+        var layer_RedeSade_13 = new L.geoJson(json_RedeSade_13, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_RedeSade_16',
-            layerName: 'layer_RedeSade_16',
-            pane: 'pane_RedeSade_16',
-            onEachFeature: pop_RedeSade_16,
+            dataVar: 'json_RedeSade_13',
+            layerName: 'layer_RedeSade_13',
+            pane: 'pane_RedeSade_13',
+            onEachFeature: pop_RedeSade_13,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_RedeSade_16_0(feature));
+                return L.marker(latlng, style_RedeSade_13_0(feature));
             },
         });
-        bounds_group.addLayer(layer_RedeSade_16);
-        function pop_Outrosservios_17(feature, layer) {
+        bounds_group.addLayer(layer_RedeSade_13);
+        function pop_Outrosservios_14(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -2139,38 +1911,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Outrosservios_17_0() {
+        function style_Outrosservios_14_0() {
             return {
-                pane: 'pane_Outrosservios_17',
+                pane: 'pane_Outrosservios_14',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/Outrosservios_17.svg',
+            iconUrl: 'markers/Outrosservios_14.svg',
             iconSize: [10.639999999999999, 10.639999999999999]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_Outrosservios_17');
-        map.getPane('pane_Outrosservios_17').style.zIndex = 417;
-        map.getPane('pane_Outrosservios_17').style['mix-blend-mode'] = 'normal';
-        var layer_Outrosservios_17 = new L.geoJson(json_Outrosservios_17, {
+        map.createPane('pane_Outrosservios_14');
+        map.getPane('pane_Outrosservios_14').style.zIndex = 414;
+        map.getPane('pane_Outrosservios_14').style['mix-blend-mode'] = 'normal';
+        var layer_Outrosservios_14 = new L.geoJson(json_Outrosservios_14, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Outrosservios_17',
-            layerName: 'layer_Outrosservios_17',
-            pane: 'pane_Outrosservios_17',
-            onEachFeature: pop_Outrosservios_17,
+            dataVar: 'json_Outrosservios_14',
+            layerName: 'layer_Outrosservios_14',
+            pane: 'pane_Outrosservios_14',
+            onEachFeature: pop_Outrosservios_14,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_Outrosservios_17_0(feature));
+                return L.marker(latlng, style_Outrosservios_14_0(feature));
             },
         });
-        bounds_group.addLayer(layer_Outrosservios_17);
-        function pop_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_18(feature, layer) {
+        bounds_group.addLayer(layer_Outrosservios_14);
+        function pop_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -2218,38 +1990,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_18_0() {
+        function style_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15_0() {
             return {
-                pane: 'pane_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_18',
+                pane: 'pane_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_18.svg',
+            iconUrl: 'markers/EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15.svg',
             iconSize: [16.72, 16.72]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_18');
-        map.getPane('pane_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_18').style.zIndex = 418;
-        map.getPane('pane_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_18').style['mix-blend-mode'] = 'normal';
-        var layer_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_18 = new L.geoJson(json_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_18, {
+        map.createPane('pane_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15');
+        map.getPane('pane_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15').style.zIndex = 415;
+        map.getPane('pane_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15').style['mix-blend-mode'] = 'normal';
+        var layer_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15 = new L.geoJson(json_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_18',
-            layerName: 'layer_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_18',
-            pane: 'pane_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_18',
-            onEachFeature: pop_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_18,
+            dataVar: 'json_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15',
+            layerName: 'layer_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15',
+            pane: 'pane_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15',
+            onEachFeature: pop_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_18_0(feature));
+                return L.marker(latlng, style_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15_0(feature));
             },
         });
-        bounds_group.addLayer(layer_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_18);
-        function pop_RestaurantePopular_19(feature, layer) {
+        bounds_group.addLayer(layer_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15);
+        function pop_RestaurantePopular_16(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -2297,38 +2069,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_RestaurantePopular_19_0() {
+        function style_RestaurantePopular_16_0() {
             return {
-                pane: 'pane_RestaurantePopular_19',
+                pane: 'pane_RestaurantePopular_16',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/RestaurantePopular_19.svg',
+            iconUrl: 'markers/RestaurantePopular_16.svg',
             iconSize: [22.799999999999997, 22.799999999999997]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_RestaurantePopular_19');
-        map.getPane('pane_RestaurantePopular_19').style.zIndex = 419;
-        map.getPane('pane_RestaurantePopular_19').style['mix-blend-mode'] = 'normal';
-        var layer_RestaurantePopular_19 = new L.geoJson(json_RestaurantePopular_19, {
+        map.createPane('pane_RestaurantePopular_16');
+        map.getPane('pane_RestaurantePopular_16').style.zIndex = 416;
+        map.getPane('pane_RestaurantePopular_16').style['mix-blend-mode'] = 'normal';
+        var layer_RestaurantePopular_16 = new L.geoJson(json_RestaurantePopular_16, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_RestaurantePopular_19',
-            layerName: 'layer_RestaurantePopular_19',
-            pane: 'pane_RestaurantePopular_19',
-            onEachFeature: pop_RestaurantePopular_19,
+            dataVar: 'json_RestaurantePopular_16',
+            layerName: 'layer_RestaurantePopular_16',
+            pane: 'pane_RestaurantePopular_16',
+            onEachFeature: pop_RestaurantePopular_16,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_RestaurantePopular_19_0(feature));
+                return L.marker(latlng, style_RestaurantePopular_16_0(feature));
             },
         });
-        bounds_group.addLayer(layer_RestaurantePopular_19);
-        function pop_InclusoProdutiva_20(feature, layer) {
+        bounds_group.addLayer(layer_RestaurantePopular_16);
+        function pop_InclusoProdutiva_17(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -2376,38 +2148,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_InclusoProdutiva_20_0() {
+        function style_InclusoProdutiva_17_0() {
             return {
-                pane: 'pane_InclusoProdutiva_20',
+                pane: 'pane_InclusoProdutiva_17',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/InclusoProdutiva_20.svg',
+            iconUrl: 'markers/InclusoProdutiva_17.svg',
             iconSize: [22.04, 22.04]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_InclusoProdutiva_20');
-        map.getPane('pane_InclusoProdutiva_20').style.zIndex = 420;
-        map.getPane('pane_InclusoProdutiva_20').style['mix-blend-mode'] = 'normal';
-        var layer_InclusoProdutiva_20 = new L.geoJson(json_InclusoProdutiva_20, {
+        map.createPane('pane_InclusoProdutiva_17');
+        map.getPane('pane_InclusoProdutiva_17').style.zIndex = 417;
+        map.getPane('pane_InclusoProdutiva_17').style['mix-blend-mode'] = 'normal';
+        var layer_InclusoProdutiva_17 = new L.geoJson(json_InclusoProdutiva_17, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_InclusoProdutiva_20',
-            layerName: 'layer_InclusoProdutiva_20',
-            pane: 'pane_InclusoProdutiva_20',
-            onEachFeature: pop_InclusoProdutiva_20,
+            dataVar: 'json_InclusoProdutiva_17',
+            layerName: 'layer_InclusoProdutiva_17',
+            pane: 'pane_InclusoProdutiva_17',
+            onEachFeature: pop_InclusoProdutiva_17,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_InclusoProdutiva_20_0(feature));
+                return L.marker(latlng, style_InclusoProdutiva_17_0(feature));
             },
         });
-        bounds_group.addLayer(layer_InclusoProdutiva_20);
-        function pop_HabilitaoeReabilitaoPessoacomDeficincia_21(feature, layer) {
+        bounds_group.addLayer(layer_InclusoProdutiva_17);
+        function pop_HabilitaoeReabilitaoPessoacomDeficincia_18(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -2455,38 +2227,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_HabilitaoeReabilitaoPessoacomDeficincia_21_0() {
+        function style_HabilitaoeReabilitaoPessoacomDeficincia_18_0() {
             return {
-                pane: 'pane_HabilitaoeReabilitaoPessoacomDeficincia_21',
+                pane: 'pane_HabilitaoeReabilitaoPessoacomDeficincia_18',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/HabilitaoeReabilitaoPessoacomDeficincia_21.svg',
+            iconUrl: 'markers/HabilitaoeReabilitaoPessoacomDeficincia_18.svg',
             iconSize: [18.24, 18.24]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_HabilitaoeReabilitaoPessoacomDeficincia_21');
-        map.getPane('pane_HabilitaoeReabilitaoPessoacomDeficincia_21').style.zIndex = 421;
-        map.getPane('pane_HabilitaoeReabilitaoPessoacomDeficincia_21').style['mix-blend-mode'] = 'normal';
-        var layer_HabilitaoeReabilitaoPessoacomDeficincia_21 = new L.geoJson(json_HabilitaoeReabilitaoPessoacomDeficincia_21, {
+        map.createPane('pane_HabilitaoeReabilitaoPessoacomDeficincia_18');
+        map.getPane('pane_HabilitaoeReabilitaoPessoacomDeficincia_18').style.zIndex = 418;
+        map.getPane('pane_HabilitaoeReabilitaoPessoacomDeficincia_18').style['mix-blend-mode'] = 'normal';
+        var layer_HabilitaoeReabilitaoPessoacomDeficincia_18 = new L.geoJson(json_HabilitaoeReabilitaoPessoacomDeficincia_18, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_HabilitaoeReabilitaoPessoacomDeficincia_21',
-            layerName: 'layer_HabilitaoeReabilitaoPessoacomDeficincia_21',
-            pane: 'pane_HabilitaoeReabilitaoPessoacomDeficincia_21',
-            onEachFeature: pop_HabilitaoeReabilitaoPessoacomDeficincia_21,
+            dataVar: 'json_HabilitaoeReabilitaoPessoacomDeficincia_18',
+            layerName: 'layer_HabilitaoeReabilitaoPessoacomDeficincia_18',
+            pane: 'pane_HabilitaoeReabilitaoPessoacomDeficincia_18',
+            onEachFeature: pop_HabilitaoeReabilitaoPessoacomDeficincia_18,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_HabilitaoeReabilitaoPessoacomDeficincia_21_0(feature));
+                return L.marker(latlng, style_HabilitaoeReabilitaoPessoacomDeficincia_18_0(feature));
             },
         });
-        bounds_group.addLayer(layer_HabilitaoeReabilitaoPessoacomDeficincia_21);
-        function pop_Acolhimentoinstitucional_22(feature, layer) {
+        bounds_group.addLayer(layer_HabilitaoeReabilitaoPessoacomDeficincia_18);
+        function pop_Acolhimentoinstitucional_19(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -2534,38 +2306,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Acolhimentoinstitucional_22_0() {
+        function style_Acolhimentoinstitucional_19_0() {
             return {
-                pane: 'pane_Acolhimentoinstitucional_22',
+                pane: 'pane_Acolhimentoinstitucional_19',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/Acolhimentoinstitucional_22.svg',
+            iconUrl: 'markers/Acolhimentoinstitucional_19.svg',
             iconSize: [17.479999999999997, 17.479999999999997]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_Acolhimentoinstitucional_22');
-        map.getPane('pane_Acolhimentoinstitucional_22').style.zIndex = 422;
-        map.getPane('pane_Acolhimentoinstitucional_22').style['mix-blend-mode'] = 'normal';
-        var layer_Acolhimentoinstitucional_22 = new L.geoJson(json_Acolhimentoinstitucional_22, {
+        map.createPane('pane_Acolhimentoinstitucional_19');
+        map.getPane('pane_Acolhimentoinstitucional_19').style.zIndex = 419;
+        map.getPane('pane_Acolhimentoinstitucional_19').style['mix-blend-mode'] = 'normal';
+        var layer_Acolhimentoinstitucional_19 = new L.geoJson(json_Acolhimentoinstitucional_19, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Acolhimentoinstitucional_22',
-            layerName: 'layer_Acolhimentoinstitucional_22',
-            pane: 'pane_Acolhimentoinstitucional_22',
-            onEachFeature: pop_Acolhimentoinstitucional_22,
+            dataVar: 'json_Acolhimentoinstitucional_19',
+            layerName: 'layer_Acolhimentoinstitucional_19',
+            pane: 'pane_Acolhimentoinstitucional_19',
+            onEachFeature: pop_Acolhimentoinstitucional_19,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_Acolhimentoinstitucional_22_0(feature));
+                return L.marker(latlng, style_Acolhimentoinstitucional_19_0(feature));
             },
         });
-        bounds_group.addLayer(layer_Acolhimentoinstitucional_22);
-        function pop_SCFV_23(feature, layer) {
+        bounds_group.addLayer(layer_Acolhimentoinstitucional_19);
+        function pop_SCFV_20(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -2613,38 +2385,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_SCFV_23_0() {
+        function style_SCFV_20_0() {
             return {
-                pane: 'pane_SCFV_23',
+                pane: 'pane_SCFV_20',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/SCFV_23.svg',
+            iconUrl: 'markers/SCFV_20.svg',
             iconSize: [19.755364, 19.755364]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_SCFV_23');
-        map.getPane('pane_SCFV_23').style.zIndex = 423;
-        map.getPane('pane_SCFV_23').style['mix-blend-mode'] = 'normal';
-        var layer_SCFV_23 = new L.geoJson(json_SCFV_23, {
+        map.createPane('pane_SCFV_20');
+        map.getPane('pane_SCFV_20').style.zIndex = 420;
+        map.getPane('pane_SCFV_20').style['mix-blend-mode'] = 'normal';
+        var layer_SCFV_20 = new L.geoJson(json_SCFV_20, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_SCFV_23',
-            layerName: 'layer_SCFV_23',
-            pane: 'pane_SCFV_23',
-            onEachFeature: pop_SCFV_23,
+            dataVar: 'json_SCFV_20',
+            layerName: 'layer_SCFV_20',
+            pane: 'pane_SCFV_20',
+            onEachFeature: pop_SCFV_20,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_SCFV_23_0(feature));
+                return L.marker(latlng, style_SCFV_20_0(feature));
             },
         });
-        bounds_group.addLayer(layer_SCFV_23);
-        function pop_ConselhoTutelar_24(feature, layer) {
+        bounds_group.addLayer(layer_SCFV_20);
+        function pop_ConselhoTutelar_21(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -2692,38 +2464,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_ConselhoTutelar_24_0() {
+        function style_ConselhoTutelar_21_0() {
             return {
-                pane: 'pane_ConselhoTutelar_24',
+                pane: 'pane_ConselhoTutelar_21',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/ConselhoTutelar_24.svg',
+            iconUrl: 'markers/ConselhoTutelar_21.svg',
             iconSize: [17.479999999999997, 17.479999999999997]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_ConselhoTutelar_24');
-        map.getPane('pane_ConselhoTutelar_24').style.zIndex = 424;
-        map.getPane('pane_ConselhoTutelar_24').style['mix-blend-mode'] = 'normal';
-        var layer_ConselhoTutelar_24 = new L.geoJson(json_ConselhoTutelar_24, {
+        map.createPane('pane_ConselhoTutelar_21');
+        map.getPane('pane_ConselhoTutelar_21').style.zIndex = 421;
+        map.getPane('pane_ConselhoTutelar_21').style['mix-blend-mode'] = 'normal';
+        var layer_ConselhoTutelar_21 = new L.geoJson(json_ConselhoTutelar_21, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_ConselhoTutelar_24',
-            layerName: 'layer_ConselhoTutelar_24',
-            pane: 'pane_ConselhoTutelar_24',
-            onEachFeature: pop_ConselhoTutelar_24,
+            dataVar: 'json_ConselhoTutelar_21',
+            layerName: 'layer_ConselhoTutelar_21',
+            pane: 'pane_ConselhoTutelar_21',
+            onEachFeature: pop_ConselhoTutelar_21,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_ConselhoTutelar_24_0(feature));
+                return L.marker(latlng, style_ConselhoTutelar_21_0(feature));
             },
         });
-        bounds_group.addLayer(layer_ConselhoTutelar_24);
-        function pop_CentroDia_25(feature, layer) {
+        bounds_group.addLayer(layer_ConselhoTutelar_21);
+        function pop_CentroDia_22(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -2771,38 +2543,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_CentroDia_25_0() {
+        function style_CentroDia_22_0() {
             return {
-                pane: 'pane_CentroDia_25',
+                pane: 'pane_CentroDia_22',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/CentroDia_25.svg',
+            iconUrl: 'markers/CentroDia_22.svg',
             iconSize: [17.479999999999997, 17.479999999999997]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_CentroDia_25');
-        map.getPane('pane_CentroDia_25').style.zIndex = 425;
-        map.getPane('pane_CentroDia_25').style['mix-blend-mode'] = 'normal';
-        var layer_CentroDia_25 = new L.geoJson(json_CentroDia_25, {
+        map.createPane('pane_CentroDia_22');
+        map.getPane('pane_CentroDia_22').style.zIndex = 422;
+        map.getPane('pane_CentroDia_22').style['mix-blend-mode'] = 'normal';
+        var layer_CentroDia_22 = new L.geoJson(json_CentroDia_22, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_CentroDia_25',
-            layerName: 'layer_CentroDia_25',
-            pane: 'pane_CentroDia_25',
-            onEachFeature: pop_CentroDia_25,
+            dataVar: 'json_CentroDia_22',
+            layerName: 'layer_CentroDia_22',
+            pane: 'pane_CentroDia_22',
+            onEachFeature: pop_CentroDia_22,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_CentroDia_25_0(feature));
+                return L.marker(latlng, style_CentroDia_22_0(feature));
             },
         });
-        bounds_group.addLayer(layer_CentroDia_25);
-        function pop_CentroPOP_26(feature, layer) {
+        bounds_group.addLayer(layer_CentroDia_22);
+        function pop_CentroPOP_23(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -2850,38 +2622,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_CentroPOP_26_0() {
+        function style_CentroPOP_23_0() {
             return {
-                pane: 'pane_CentroPOP_26',
+                pane: 'pane_CentroPOP_23',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/CentroPOP_26.svg',
+            iconUrl: 'markers/CentroPOP_23.svg',
             iconSize: [17.479999999999997, 17.479999999999997]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_CentroPOP_26');
-        map.getPane('pane_CentroPOP_26').style.zIndex = 426;
-        map.getPane('pane_CentroPOP_26').style['mix-blend-mode'] = 'normal';
-        var layer_CentroPOP_26 = new L.geoJson(json_CentroPOP_26, {
+        map.createPane('pane_CentroPOP_23');
+        map.getPane('pane_CentroPOP_23').style.zIndex = 423;
+        map.getPane('pane_CentroPOP_23').style['mix-blend-mode'] = 'normal';
+        var layer_CentroPOP_23 = new L.geoJson(json_CentroPOP_23, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_CentroPOP_26',
-            layerName: 'layer_CentroPOP_26',
-            pane: 'pane_CentroPOP_26',
-            onEachFeature: pop_CentroPOP_26,
+            dataVar: 'json_CentroPOP_23',
+            layerName: 'layer_CentroPOP_23',
+            pane: 'pane_CentroPOP_23',
+            onEachFeature: pop_CentroPOP_23,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_CentroPOP_26_0(feature));
+                return L.marker(latlng, style_CentroPOP_23_0(feature));
             },
         });
-        bounds_group.addLayer(layer_CentroPOP_26);
-        function pop_CREAS_27(feature, layer) {
+        bounds_group.addLayer(layer_CentroPOP_23);
+        function pop_CREAS_24(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -2929,38 +2701,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_CREAS_27_0() {
+        function style_CREAS_24_0() {
             return {
-                pane: 'pane_CREAS_27',
+                pane: 'pane_CREAS_24',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/CREAS_27.svg',
+            iconUrl: 'markers/CREAS_24.svg',
             iconSize: [17.479999999999997, 17.479999999999997]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_CREAS_27');
-        map.getPane('pane_CREAS_27').style.zIndex = 427;
-        map.getPane('pane_CREAS_27').style['mix-blend-mode'] = 'normal';
-        var layer_CREAS_27 = new L.geoJson(json_CREAS_27, {
+        map.createPane('pane_CREAS_24');
+        map.getPane('pane_CREAS_24').style.zIndex = 424;
+        map.getPane('pane_CREAS_24').style['mix-blend-mode'] = 'normal';
+        var layer_CREAS_24 = new L.geoJson(json_CREAS_24, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_CREAS_27',
-            layerName: 'layer_CREAS_27',
-            pane: 'pane_CREAS_27',
-            onEachFeature: pop_CREAS_27,
+            dataVar: 'json_CREAS_24',
+            layerName: 'layer_CREAS_24',
+            pane: 'pane_CREAS_24',
+            onEachFeature: pop_CREAS_24,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_CREAS_27_0(feature));
+                return L.marker(latlng, style_CREAS_24_0(feature));
             },
         });
-        bounds_group.addLayer(layer_CREAS_27);
-        function pop_CRAS_28(feature, layer) {
+        bounds_group.addLayer(layer_CREAS_24);
+        function pop_CRAS_25(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -3004,42 +2776,42 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_CRAS_28_0() {
+        function style_CRAS_25_0() {
             return {
-                pane: 'pane_CRAS_28',
+                pane: 'pane_CRAS_25',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/CRAS_28.svg',
+            iconUrl: 'markers/CRAS_25.svg',
             iconSize: [17.479999999999997, 17.479999999999997]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_CRAS_28');
-        map.getPane('pane_CRAS_28').style.zIndex = 428;
-        map.getPane('pane_CRAS_28').style['mix-blend-mode'] = 'normal';
-        var layer_CRAS_28 = new L.geoJson(json_CRAS_28, {
+        map.createPane('pane_CRAS_25');
+        map.getPane('pane_CRAS_25').style.zIndex = 425;
+        map.getPane('pane_CRAS_25').style['mix-blend-mode'] = 'normal';
+        var layer_CRAS_25 = new L.geoJson(json_CRAS_25, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_CRAS_28',
-            layerName: 'layer_CRAS_28',
-            pane: 'pane_CRAS_28',
-            onEachFeature: pop_CRAS_28,
+            dataVar: 'json_CRAS_25',
+            layerName: 'layer_CRAS_25',
+            pane: 'pane_CRAS_25',
+            onEachFeature: pop_CRAS_25,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_CRAS_28_0(feature));
+                return L.marker(latlng, style_CRAS_25_0(feature));
             },
         });
-        bounds_group.addLayer(layer_CRAS_28);
-        map.addLayer(layer_CRAS_28);
-        map.createPane('pane_Transparncia_29');
-        map.getPane('pane_Transparncia_29').style.zIndex = 429;
-        var layer_Transparncia_29 = L.tileLayer('https://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}@2x.png', {
-            pane: 'pane_Transparncia_29',
+        bounds_group.addLayer(layer_CRAS_25);
+        map.addLayer(layer_CRAS_25);
+        map.createPane('pane_Transparncia_26');
+        map.getPane('pane_Transparncia_26').style.zIndex = 426;
+        var layer_Transparncia_26 = L.tileLayer('https://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}@2x.png', {
+            pane: 'pane_Transparncia_26',
             opacity: 0.34,
             attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</a>',
             minZoom: 11,
@@ -3047,8 +2819,8 @@
             minNativeZoom: 0,
             maxNativeZoom: 20
         });
-        layer_Transparncia_29;
-        map.addLayer(layer_Transparncia_29);
+        layer_Transparncia_26;
+        map.addLayer(layer_Transparncia_26);
         var osmGeocoder = new L.Control.Geocoder({
             collapsed: true,
             position: 'topleft',
@@ -3061,37 +2833,34 @@
         .title += 'Search for a place';
         var baseMaps = {};
         var overlaysTree = [
-            {label: "Transparência", layer: layer_Transparncia_29},
+            {label: "Transparência", layer: layer_Transparncia_26},
         {label: '<b>Rede - SUAS</b>', selectAllCheckbox: true, children: [
-            {label: '<img src="legend/CRAS_28.png" /> CRAS', layer: layer_CRAS_28},
-            {label: '<img src="legend/CREAS_27.png" /> CREAS', layer: layer_CREAS_27},
-            {label: '<img src="legend/CentroPOP_26.png" /> Centro POP', layer: layer_CentroPOP_26},
-            {label: '<img src="legend/CentroDia_25.png" /> Centro Dia', layer: layer_CentroDia_25},
-            {label: '<img src="legend/ConselhoTutelar_24.png" /> Conselho Tutelar', layer: layer_ConselhoTutelar_24},
-            {label: '<img src="legend/SCFV_23.png" /> SCFV', layer: layer_SCFV_23},
-            {label: '<img src="legend/Acolhimentoinstitucional_22.png" /> Acolhimento institucional', layer: layer_Acolhimentoinstitucional_22},
-            {label: '<img src="legend/HabilitaoeReabilitaoPessoacomDeficincia_21.png" /> Habilitação e Reabilitação à Pessoa com Deficiência', layer: layer_HabilitaoeReabilitaoPessoacomDeficincia_21},
-            {label: '<img src="legend/InclusoProdutiva_20.png" /> Inclusão Produtiva', layer: layer_InclusoProdutiva_20},
-            {label: '<img src="legend/RestaurantePopular_19.png" /> Restaurante Popular', layer: layer_RestaurantePopular_19},
-            {label: '<img src="legend/EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_18.png" /> Entidades de Assessoramento, Defesa e Garantia de Direitos', layer: layer_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_18},
-            {label: '<img src="legend/Outrosservios_17.png" /> Outros serviços', layer: layer_Outrosservios_17},]},
+            {label: '<img src="legend/CRAS_25.png" /> CRAS', layer: layer_CRAS_25},
+            {label: '<img src="legend/CREAS_24.png" /> CREAS', layer: layer_CREAS_24},
+            {label: '<img src="legend/CentroPOP_23.png" /> Centro POP', layer: layer_CentroPOP_23},
+            {label: '<img src="legend/CentroDia_22.png" /> Centro Dia', layer: layer_CentroDia_22},
+            {label: '<img src="legend/ConselhoTutelar_21.png" /> Conselho Tutelar', layer: layer_ConselhoTutelar_21},
+            {label: '<img src="legend/SCFV_20.png" /> SCFV', layer: layer_SCFV_20},
+            {label: '<img src="legend/Acolhimentoinstitucional_19.png" /> Acolhimento institucional', layer: layer_Acolhimentoinstitucional_19},
+            {label: '<img src="legend/HabilitaoeReabilitaoPessoacomDeficincia_18.png" /> Habilitação e Reabilitação à Pessoa com Deficiência', layer: layer_HabilitaoeReabilitaoPessoacomDeficincia_18},
+            {label: '<img src="legend/InclusoProdutiva_17.png" /> Inclusão Produtiva', layer: layer_InclusoProdutiva_17},
+            {label: '<img src="legend/RestaurantePopular_16.png" /> Restaurante Popular', layer: layer_RestaurantePopular_16},
+            {label: '<img src="legend/EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15.png" /> Entidades de Assessoramento, Defesa e Garantia de Direitos', layer: layer_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15},
+            {label: '<img src="legend/Outrosservios_14.png" /> Outros serviços', layer: layer_Outrosservios_14},]},
         {label: '<b>Outras redes</b>', selectAllCheckbox: true, children: [
-            {label: '<img src="legend/RedeSade_16.png" /> Rede - Saúde', layer: layer_RedeSade_16},
-            {label: '<img src="legend/RedeEsporte_15.png" /> Rede - Esporte', layer: layer_RedeEsporte_15},
-            {label: '<img src="legend/RedeEducao_14.png" /> Rede - Educação', layer: layer_RedeEducao_14},]},
+            {label: '<img src="legend/RedeSade_13.png" /> Rede - Saúde', layer: layer_RedeSade_13},
+            {label: '<img src="legend/RedeEsporte_12.png" /> Rede - Esporte', layer: layer_RedeEsporte_12},
+            {label: '<img src="legend/RedeEducao_11.png" /> Rede - Educação', layer: layer_RedeEducao_11},]},
         {label: '<b>Ônibus - Linhas e Pontos</b>', selectAllCheckbox: true, children: [
-            {label: '<img src="legend/Linhasnibus_13.png" /> Linhas Ônibus', layer: layer_Linhasnibus_13},
-            {label: '<img src="legend/Pontosdenibus_12.png" /> Pontos de Ônibus', layer: layer_Pontosdenibus_12},]},
+            {label: '<img src="legend/Linhadenibus_10.png" /> Linha de Ônibus', layer: layer_Linhadenibus_10},
+            {label: '<img src="legend/Pontosdenibus_9.png" /> Pontos de Ônibus', layer: layer_Pontosdenibus_9},]},
         {label: '<b>Áreas de abrangência</b>', selectAllCheckbox: true, children: [
-            {label: '<img src="legend/Bairros_11.png" /> Bairros', layer: layer_Bairros_11},
-            {label: '<img src="legend/Setorescensitrios_10.png" /> Setores censitários', layer: layer_Setorescensitrios_10},
-            {label: 'CRAS - Área de abrangência<br /><table><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangncia_9_Alvorada0.png" /></td><td>Alvorada</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangncia_9_BrancaVieira1.png" /></td><td>Branca Vieira</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangncia_9_Floriano2.png" /></td><td>Floriano</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangncia_9_Iguatemi3.png" /></td><td>Iguatemi</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangncia_9_Itaipu4.png" /></td><td>Itaipu</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangncia_9_Mandacaru5.png" /></td><td>Mandacaru</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangncia_9_Morangueira6.png" /></td><td>Morangueira</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangncia_9_NeyBraga7.png" /></td><td>Ney Braga</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangncia_9_Requião8.png" /></td><td>Requião</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangncia_9_SantaClara9.png" /></td><td>Santa Clara</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangncia_9_SantaFelicidade10.png" /></td><td>Santa Felicidade</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangncia_9_SãoJudasTadeu11.png" /></td><td>São Judas Tadeu</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangncia_9_CentroPOP12.png" /></td><td>Centro POP</td></tr></table>', layer: layer_CRASreadeabrangncia_9},]},
+            {label: '<img src="legend/Bairros_8.png" /> Bairros', layer: layer_Bairros_8},
+            {label: '<img src="legend/Setorescensitrios_7.png" /> Setores censitários', layer: layer_Setorescensitrios_7},
+            {label: 'CRAS - Área de abrangencia<br /><table><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_Alvorada0.png" /></td><td>Alvorada</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_BrancaVieira1.png" /></td><td>Branca Vieira</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_Floriano2.png" /></td><td>Floriano</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_Iguatemi3.png" /></td><td>Iguatemi</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_Itaipu4.png" /></td><td>Itaipu</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_Mandacaru5.png" /></td><td>Mandacaru</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_Morangueira6.png" /></td><td>Morangueira</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_NeyBraga7.png" /></td><td>Ney Braga</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_Requião8.png" /></td><td>Requião</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_SantaClara9.png" /></td><td>Santa Clara</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_SantaFelicidade10.png" /></td><td>Santa Felicidade</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_SãoJudasTadeu11.png" /></td><td>São Judas Tadeu</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_CentroPOP12.png" /></td><td>Centro POP</td></tr></table>', layer: layer_CRASreadeabrangencia_6},]},
         {label: '<b>RELCAD (29/09/2024)</b>', selectAllCheckbox: true, children: [
-            {label: 'Famílias cadastradas<br /><table><tr><td style="text-align: center;"><img src="legend/Famliascadastradas_8_44612940.png" /></td><td>446 - 1294</td></tr><tr><td style="text-align: center;"><img src="legend/Famliascadastradas_8_129430541.png" /></td><td>1294 - 3054</td></tr><tr><td style="text-align: center;"><img src="legend/Famliascadastradas_8_305438152.png" /></td><td>3054 - 3815</td></tr><tr><td style="text-align: center;"><img src="legend/Famliascadastradas_8_381557103.png" /></td><td>3815 - 5710</td></tr><tr><td style="text-align: center;"><img src="legend/Famliascadastradas_8_571064504.png" /></td><td>5710 - 6450</td></tr></table>', layer: layer_Famliascadastradas_8},
-            {label: 'Famílias PBF cadastradas<br /><table><tr><td style="text-align: center;"><img src="legend/FamliasPBFcadastradas_7_1574380.png" /></td><td>157 - 438</td></tr><tr><td style="text-align: center;"><img src="legend/FamliasPBFcadastradas_7_4387191.png" /></td><td>438 - 719</td></tr><tr><td style="text-align: center;"><img src="legend/FamliasPBFcadastradas_7_71910002.png" /></td><td>719 - 1000</td></tr><tr><td style="text-align: center;"><img src="legend/FamliasPBFcadastradas_7_100012813.png" /></td><td>1000 - 1281</td></tr><tr><td style="text-align: center;"><img src="legend/FamliasPBFcadastradas_7_128115624.png" /></td><td>1281 - 1562</td></tr></table>', layer: layer_FamliasPBFcadastradas_7},
-            {label: 'Famílias cadastradas na faixa de renda per capita de R$0 a R$218,00<br /><table><tr><td style="text-align: center;"><img src="legend/FamliascadastradasnafaixaderendapercapitadeR0aR21800_6_1534400.png" /></td><td>153 - 440</td></tr><tr><td style="text-align: center;"><img src="legend/FamliascadastradasnafaixaderendapercapitadeR0aR21800_6_4407281.png" /></td><td>440 - 728</td></tr><tr><td style="text-align: center;"><img src="legend/FamliascadastradasnafaixaderendapercapitadeR0aR21800_6_72810152.png" /></td><td>728 - 1015</td></tr><tr><td style="text-align: center;"><img src="legend/FamliascadastradasnafaixaderendapercapitadeR0aR21800_6_101513033.png" /></td><td>1015 - 1303</td></tr><tr><td style="text-align: center;"><img src="legend/FamliascadastradasnafaixaderendapercapitadeR0aR21800_6_130315904.png" /></td><td>1303 - 1590</td></tr></table>', layer: layer_FamliascadastradasnafaixaderendapercapitadeR0aR21800_6},
-            {label: 'Famílias cadastradas na faixa de renda per capita de R$218,00 a R$706,00<br /><table><tr><td style="text-align: center;"><img src="legend/FamliascadastradasnafaixaderendapercapitadeR21800aR70600_5_402640.png" /></td><td>40 - 264</td></tr><tr><td style="text-align: center;"><img src="legend/FamliascadastradasnafaixaderendapercapitadeR21800aR70600_5_2644881.png" /></td><td>264 - 488</td></tr><tr><td style="text-align: center;"><img src="legend/FamliascadastradasnafaixaderendapercapitadeR21800aR70600_5_4887112.png" /></td><td>488 - 711</td></tr><tr><td style="text-align: center;"><img src="legend/FamliascadastradasnafaixaderendapercapitadeR21800aR70600_5_7119353.png" /></td><td>711 - 935</td></tr><tr><td style="text-align: center;"><img src="legend/FamliascadastradasnafaixaderendapercapitadeR21800aR70600_5_93511594.png" /></td><td>935 - 1159</td></tr></table>', layer: layer_FamliascadastradasnafaixaderendapercapitadeR21800aR70600_5},
-            {label: 'Pessoas cadastradas - acima de 60 anos<br /><table><tr><td style="text-align: center;"><img src="legend/Pessoascadastradasacimade60anos_4_476800.png" /></td><td>47 - 680</td></tr><tr><td style="text-align: center;"><img src="legend/Pessoascadastradasacimade60anos_4_68013131.png" /></td><td>680 - 1313</td></tr><tr><td style="text-align: center;"><img src="legend/Pessoascadastradasacimade60anos_4_131319462.png" /></td><td>1313 - 1946</td></tr><tr><td style="text-align: center;"><img src="legend/Pessoascadastradasacimade60anos_4_194625793.png" /></td><td>1946 - 2579</td></tr><tr><td style="text-align: center;"><img src="legend/Pessoascadastradasacimade60anos_4_257932124.png" /></td><td>2579 - 3212</td></tr></table>', layer: layer_Pessoascadastradasacimade60anos_4},]},
+            {label: '<img src="legend/Bairros_5.png" /> Bairros', layer: layer_Bairros_5},
+            {label: 'CRAS - Área de abrangencia<br /><table><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_4_Alvorada0.png" /></td><td>Alvorada</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_4_BrancaVieira1.png" /></td><td>Branca Vieira</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_4_Floriano2.png" /></td><td>Floriano</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_4_Iguatemi3.png" /></td><td>Iguatemi</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_4_Itaipu4.png" /></td><td>Itaipu</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_4_Mandacaru5.png" /></td><td>Mandacaru</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_4_Morangueira6.png" /></td><td>Morangueira</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_4_NeyBraga7.png" /></td><td>Ney Braga</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_4_Requião8.png" /></td><td>Requião</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_4_SantaClara9.png" /></td><td>Santa Clara</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_4_SantaFelicidade10.png" /></td><td>Santa Felicidade</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_4_SãoJudasTadeu11.png" /></td><td>São Judas Tadeu</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_4_CentroPOP12.png" /></td><td>Centro POP</td></tr></table>', layer: layer_CRASreadeabrangencia_4},]},
         {label: '<b>RELCAD (03/06/2024)</b>', selectAllCheckbox: true, children: [
             {label: 'CRAS - Área de abrangencia<br /><table><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_3_Alvorada0.png" /></td><td>Alvorada</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_3_BrancaVieira1.png" /></td><td>Branca Vieira</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_3_Floriano2.png" /></td><td>Floriano</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_3_Iguatemi3.png" /></td><td>Iguatemi</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_3_Itaipu4.png" /></td><td>Itaipu</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_3_Mandacaru5.png" /></td><td>Mandacaru</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_3_Morangueira6.png" /></td><td>Morangueira</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_3_NeyBraga7.png" /></td><td>Ney Braga</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_3_Requião8.png" /></td><td>Requião</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_3_SantaClara9.png" /></td><td>Santa Clara</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_3_SantaFelicidade10.png" /></td><td>Santa Felicidade</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_3_SãoJudasTadeu11.png" /></td><td>São Judas Tadeu</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_3_CentroPOP12.png" /></td><td>Centro POP</td></tr></table>', layer: layer_CRASreadeabrangencia_3},]},
         {label: '<b>RELCAD (01/04/2024)</b>', selectAllCheckbox: true, children: [
@@ -3128,7 +2897,7 @@
         document.getElementById("all").appendChild(col1);
         document.getElementById("all").appendChild(col2);
         col1.appendChild(mapDiv)
-        var Filters = {"Famílias cadastradas:": "real","Famílias cadastradas na faixa de renda per capita de R$0 a R$218,00:": "real","Famílias cadastradas na faixa de renda per capita de R$218,00 a R$706,00:": "real","CRAS de referência:": "str","Linhas": "str"};
+        var Filters = {"Famílias cadastradas na faixa de renda per capita de R$0 a R$218,00:": "real","CRAS de referência:": "str","Linha de ônibus": "str"};
         function filterFunc() {
           map.eachLayer(function(lyr){
           if ("options" in lyr && "dataVar" in lyr["options"]){
@@ -3220,38 +2989,6 @@
         }
             document.getElementById("menu").appendChild(
                 document.createElement("div"));
-            var div_Famliascadastradas = document.createElement("div");
-            div_Famliascadastradas.id = "div_Famliascadastradas";
-            div_Famliascadastradas.className = "slider";
-            document.getElementById("menu").appendChild(div_Famliascadastradas);
-            var lab_Famliascadastradas = document.createElement('div');
-            lab_Famliascadastradas.innerHTML  = 'Famílias cadastradas:: <span id="val_Famliascadastradas"></span>';
-            lab_Famliascadastradas.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_Famliascadastradas);
-            var reset_Famliascadastradas = document.createElement('div');
-            reset_Famliascadastradas.innerHTML = 'clear filter';
-            reset_Famliascadastradas.className = 'filterlabel';
-            lab_Famliascadastradas.className = 'filterlabel';
-            reset_Famliascadastradas.onclick = function() {
-                sel_Famliascadastradas.noUiSlider.reset();
-            };
-            document.getElementById("menu").appendChild(reset_Famliascadastradas);
-            var sel_Famliascadastradas = document.getElementById('div_Famliascadastradas');
-            noUiSlider.create(sel_Famliascadastradas, {
-                connect: true,
-                start: [1.0, 2113.0],
-                range: {
-                min: 1.0,
-                max: 2113.0
-                }
-            });
-            sel_Famliascadastradas.noUiSlider.on('update', function (values) {
-            val_Famliascadastradas = document.getElementById('val_Famliascadastradas');
-            val_Famliascadastradas.innerHTML = values.join(' - ');
-                filterFunc()
-            });
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
             var div_FamliascadastradasnafaixaderendapercapitadeR0aR21800 = document.createElement("div");
             div_FamliascadastradasnafaixaderendapercapitadeR0aR21800.id = "div_FamliascadastradasnafaixaderendapercapitadeR0aR21800";
             div_FamliascadastradasnafaixaderendapercapitadeR0aR21800.className = "slider";
@@ -3271,47 +3008,15 @@
             var sel_FamliascadastradasnafaixaderendapercapitadeR0aR21800 = document.getElementById('div_FamliascadastradasnafaixaderendapercapitadeR0aR21800');
             noUiSlider.create(sel_FamliascadastradasnafaixaderendapercapitadeR0aR21800, {
                 connect: true,
-                start: [1.0, 687.0],
+                start: [1.0, 713.0],
                 range: {
                 min: 1.0,
-                max: 687.0
+                max: 713.0
                 }
             });
             sel_FamliascadastradasnafaixaderendapercapitadeR0aR21800.noUiSlider.on('update', function (values) {
             val_FamliascadastradasnafaixaderendapercapitadeR0aR21800 = document.getElementById('val_FamliascadastradasnafaixaderendapercapitadeR0aR21800');
             val_FamliascadastradasnafaixaderendapercapitadeR0aR21800.innerHTML = values.join(' - ');
-                filterFunc()
-            });
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_FamliascadastradasnafaixaderendapercapitadeR21800aR70600 = document.createElement("div");
-            div_FamliascadastradasnafaixaderendapercapitadeR21800aR70600.id = "div_FamliascadastradasnafaixaderendapercapitadeR21800aR70600";
-            div_FamliascadastradasnafaixaderendapercapitadeR21800aR70600.className = "slider";
-            document.getElementById("menu").appendChild(div_FamliascadastradasnafaixaderendapercapitadeR21800aR70600);
-            var lab_FamliascadastradasnafaixaderendapercapitadeR21800aR70600 = document.createElement('div');
-            lab_FamliascadastradasnafaixaderendapercapitadeR21800aR70600.innerHTML  = 'Famílias cadastradas na faixa de renda per capita de R$218,00 a R$706,00:: <span id="val_FamliascadastradasnafaixaderendapercapitadeR21800aR70600"></span>';
-            lab_FamliascadastradasnafaixaderendapercapitadeR21800aR70600.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_FamliascadastradasnafaixaderendapercapitadeR21800aR70600);
-            var reset_FamliascadastradasnafaixaderendapercapitadeR21800aR70600 = document.createElement('div');
-            reset_FamliascadastradasnafaixaderendapercapitadeR21800aR70600.innerHTML = 'clear filter';
-            reset_FamliascadastradasnafaixaderendapercapitadeR21800aR70600.className = 'filterlabel';
-            lab_FamliascadastradasnafaixaderendapercapitadeR21800aR70600.className = 'filterlabel';
-            reset_FamliascadastradasnafaixaderendapercapitadeR21800aR70600.onclick = function() {
-                sel_FamliascadastradasnafaixaderendapercapitadeR21800aR70600.noUiSlider.reset();
-            };
-            document.getElementById("menu").appendChild(reset_FamliascadastradasnafaixaderendapercapitadeR21800aR70600);
-            var sel_FamliascadastradasnafaixaderendapercapitadeR21800aR70600 = document.getElementById('div_FamliascadastradasnafaixaderendapercapitadeR21800aR70600');
-            noUiSlider.create(sel_FamliascadastradasnafaixaderendapercapitadeR21800aR70600, {
-                connect: true,
-                start: [1.0, 361.0],
-                range: {
-                min: 1.0,
-                max: 361.0
-                }
-            });
-            sel_FamliascadastradasnafaixaderendapercapitadeR21800aR70600.noUiSlider.on('update', function (values) {
-            val_FamliascadastradasnafaixaderendapercapitadeR21800aR70600 = document.getElementById('val_FamliascadastradasnafaixaderendapercapitadeR21800aR70600');
-            val_FamliascadastradasnafaixaderendapercapitadeR21800aR70600.innerHTML = values.join(' - ');
                 filterFunc()
             });
             document.getElementById("menu").appendChild(
@@ -3358,97 +3063,97 @@
             div_CRASdereferncia.appendChild(reset_CRASdereferncia);
             document.getElementById("menu").appendChild(
                 document.createElement("div"));
-            var div_Linhas = document.createElement('div');
-            div_Linhas.id = "div_Linhas";
-            div_Linhas.className= "filterselect";
-            document.getElementById("menu").appendChild(div_Linhas);
-            sel_Linhas = document.createElement('select');
-            sel_Linhas.multiple = true;
-            sel_Linhas.size = 10;
-            sel_Linhas.id = "sel_Linhas";
-            var Linhas_options_str = "<option value='' unselected></option>";
-            sel_Linhas.onchange = function(){filterFunc()};
-            Linhas_options_str  += '<option value="007">007</option>';
-            Linhas_options_str  += '<option value="008">008</option>';
-            Linhas_options_str  += '<option value="009">009</option>';
-            Linhas_options_str  += '<option value="010">010</option>';
-            Linhas_options_str  += '<option value="011">011</option>';
-            Linhas_options_str  += '<option value="020">020</option>';
-            Linhas_options_str  += '<option value="021">021</option>';
-            Linhas_options_str  += '<option value="022">022</option>';
-            Linhas_options_str  += '<option value="023">023</option>';
-            Linhas_options_str  += '<option value="026">026</option>';
-            Linhas_options_str  += '<option value="040">040</option>';
-            Linhas_options_str  += '<option value="041">041</option>';
-            Linhas_options_str  += '<option value="131">131</option>';
-            Linhas_options_str  += '<option value="137">137</option>';
-            Linhas_options_str  += '<option value="138">138</option>';
-            Linhas_options_str  += '<option value="139">139</option>';
-            Linhas_options_str  += '<option value="141">141</option>';
-            Linhas_options_str  += '<option value="152">152</option>';
-            Linhas_options_str  += '<option value="162">162</option>';
-            Linhas_options_str  += '<option value="169">169</option>';
-            Linhas_options_str  += '<option value="175">175</option>';
-            Linhas_options_str  += '<option value="177">177</option>';
-            Linhas_options_str  += '<option value="178">178</option>';
-            Linhas_options_str  += '<option value="179">179</option>';
-            Linhas_options_str  += '<option value="201">201</option>';
-            Linhas_options_str  += '<option value="204">204</option>';
-            Linhas_options_str  += '<option value="205">205</option>';
-            Linhas_options_str  += '<option value="219">219</option>';
-            Linhas_options_str  += '<option value="220">220</option>';
-            Linhas_options_str  += '<option value="221">221</option>';
-            Linhas_options_str  += '<option value="222">222</option>';
-            Linhas_options_str  += '<option value="233">233</option>';
-            Linhas_options_str  += '<option value="234">234</option>';
-            Linhas_options_str  += '<option value="235">235</option>';
-            Linhas_options_str  += '<option value="242">242</option>';
-            Linhas_options_str  += '<option value="243">243</option>';
-            Linhas_options_str  += '<option value="314">314</option>';
-            Linhas_options_str  += '<option value="323">323</option>';
-            Linhas_options_str  += '<option value="324">324</option>';
-            Linhas_options_str  += '<option value="326">326</option>';
-            Linhas_options_str  += '<option value="334">334</option>';
-            Linhas_options_str  += '<option value="335">335</option>';
-            Linhas_options_str  += '<option value="414">414</option>';
-            Linhas_options_str  += '<option value="415">415</option>';
-            Linhas_options_str  += '<option value="416">416</option>';
-            Linhas_options_str  += '<option value="427">427</option>';
-            Linhas_options_str  += '<option value="458">458</option>';
-            Linhas_options_str  += '<option value="459">459</option>';
-            Linhas_options_str  += '<option value="460">460</option>';
-            Linhas_options_str  += '<option value="461">461</option>';
-            Linhas_options_str  += '<option value="466">466</option>';
-            Linhas_options_str  += '<option value="512">512</option>';
-            Linhas_options_str  += '<option value="528">528</option>';
-            Linhas_options_str  += '<option value="528A">528A</option>';
-            Linhas_options_str  += '<option value="531">531</option>';
-            Linhas_options_str  += '<option value="611">611</option>';
-            Linhas_options_str  += '<option value="713">713</option>';
-            Linhas_options_str  += '<option value="721">721</option>';
-            Linhas_options_str  += '<option value="722">722</option>';
-            Linhas_options_str  += '<option value="734">734</option>';
-            Linhas_options_str  += '<option value="735">735</option>';
-            Linhas_options_str  += '<option value="736">736</option>';
-            Linhas_options_str  += '<option value="739">739</option>';
-            Linhas_options_str  += '<option value="UEM">UEM</option>';
-            sel_Linhas.innerHTML = Linhas_options_str;
-            div_Linhas.appendChild(sel_Linhas);
-            var lab_Linhas = document.createElement('div');
-            lab_Linhas.innerHTML = 'Linhas';
-            lab_Linhas.className = 'filterlabel';
-            div_Linhas.appendChild(lab_Linhas);
-            var reset_Linhas = document.createElement('div');
-            reset_Linhas.innerHTML = 'clear filter';
-            reset_Linhas.className = 'filterlabel';
-            reset_Linhas.onclick = function() {
-                var options = document.getElementById("sel_Linhas").options;
+            var div_Linhadenibus = document.createElement('div');
+            div_Linhadenibus.id = "div_Linhadenibus";
+            div_Linhadenibus.className= "filterselect";
+            document.getElementById("menu").appendChild(div_Linhadenibus);
+            sel_Linhadenibus = document.createElement('select');
+            sel_Linhadenibus.multiple = true;
+            sel_Linhadenibus.size = 10;
+            sel_Linhadenibus.id = "sel_Linhadenibus";
+            var Linhadenibus_options_str = "<option value='' unselected></option>";
+            sel_Linhadenibus.onchange = function(){filterFunc()};
+            Linhadenibus_options_str  += '<option value="007">007</option>';
+            Linhadenibus_options_str  += '<option value="008">008</option>';
+            Linhadenibus_options_str  += '<option value="009">009</option>';
+            Linhadenibus_options_str  += '<option value="010">010</option>';
+            Linhadenibus_options_str  += '<option value="011">011</option>';
+            Linhadenibus_options_str  += '<option value="020">020</option>';
+            Linhadenibus_options_str  += '<option value="021">021</option>';
+            Linhadenibus_options_str  += '<option value="022">022</option>';
+            Linhadenibus_options_str  += '<option value="023">023</option>';
+            Linhadenibus_options_str  += '<option value="026">026</option>';
+            Linhadenibus_options_str  += '<option value="040">040</option>';
+            Linhadenibus_options_str  += '<option value="041">041</option>';
+            Linhadenibus_options_str  += '<option value="131">131</option>';
+            Linhadenibus_options_str  += '<option value="137">137</option>';
+            Linhadenibus_options_str  += '<option value="138">138</option>';
+            Linhadenibus_options_str  += '<option value="139">139</option>';
+            Linhadenibus_options_str  += '<option value="141">141</option>';
+            Linhadenibus_options_str  += '<option value="152">152</option>';
+            Linhadenibus_options_str  += '<option value="162">162</option>';
+            Linhadenibus_options_str  += '<option value="169">169</option>';
+            Linhadenibus_options_str  += '<option value="175">175</option>';
+            Linhadenibus_options_str  += '<option value="177">177</option>';
+            Linhadenibus_options_str  += '<option value="178">178</option>';
+            Linhadenibus_options_str  += '<option value="179">179</option>';
+            Linhadenibus_options_str  += '<option value="201">201</option>';
+            Linhadenibus_options_str  += '<option value="204">204</option>';
+            Linhadenibus_options_str  += '<option value="205">205</option>';
+            Linhadenibus_options_str  += '<option value="219">219</option>';
+            Linhadenibus_options_str  += '<option value="220">220</option>';
+            Linhadenibus_options_str  += '<option value="221">221</option>';
+            Linhadenibus_options_str  += '<option value="222">222</option>';
+            Linhadenibus_options_str  += '<option value="233">233</option>';
+            Linhadenibus_options_str  += '<option value="234">234</option>';
+            Linhadenibus_options_str  += '<option value="235">235</option>';
+            Linhadenibus_options_str  += '<option value="242">242</option>';
+            Linhadenibus_options_str  += '<option value="243">243</option>';
+            Linhadenibus_options_str  += '<option value="314">314</option>';
+            Linhadenibus_options_str  += '<option value="323">323</option>';
+            Linhadenibus_options_str  += '<option value="324">324</option>';
+            Linhadenibus_options_str  += '<option value="326">326</option>';
+            Linhadenibus_options_str  += '<option value="334">334</option>';
+            Linhadenibus_options_str  += '<option value="335">335</option>';
+            Linhadenibus_options_str  += '<option value="414">414</option>';
+            Linhadenibus_options_str  += '<option value="415">415</option>';
+            Linhadenibus_options_str  += '<option value="416">416</option>';
+            Linhadenibus_options_str  += '<option value="427">427</option>';
+            Linhadenibus_options_str  += '<option value="458">458</option>';
+            Linhadenibus_options_str  += '<option value="459">459</option>';
+            Linhadenibus_options_str  += '<option value="460">460</option>';
+            Linhadenibus_options_str  += '<option value="461">461</option>';
+            Linhadenibus_options_str  += '<option value="466">466</option>';
+            Linhadenibus_options_str  += '<option value="512">512</option>';
+            Linhadenibus_options_str  += '<option value="528">528</option>';
+            Linhadenibus_options_str  += '<option value="528A">528A</option>';
+            Linhadenibus_options_str  += '<option value="531">531</option>';
+            Linhadenibus_options_str  += '<option value="611">611</option>';
+            Linhadenibus_options_str  += '<option value="713">713</option>';
+            Linhadenibus_options_str  += '<option value="721">721</option>';
+            Linhadenibus_options_str  += '<option value="722">722</option>';
+            Linhadenibus_options_str  += '<option value="734">734</option>';
+            Linhadenibus_options_str  += '<option value="735">735</option>';
+            Linhadenibus_options_str  += '<option value="736">736</option>';
+            Linhadenibus_options_str  += '<option value="739">739</option>';
+            Linhadenibus_options_str  += '<option value="UEM">UEM</option>';
+            sel_Linhadenibus.innerHTML = Linhadenibus_options_str;
+            div_Linhadenibus.appendChild(sel_Linhadenibus);
+            var lab_Linhadenibus = document.createElement('div');
+            lab_Linhadenibus.innerHTML = 'Linha de ônibus';
+            lab_Linhadenibus.className = 'filterlabel';
+            div_Linhadenibus.appendChild(lab_Linhadenibus);
+            var reset_Linhadenibus = document.createElement('div');
+            reset_Linhadenibus.innerHTML = 'clear filter';
+            reset_Linhadenibus.className = 'filterlabel';
+            reset_Linhadenibus.onclick = function() {
+                var options = document.getElementById("sel_Linhadenibus").options;
                 for (var i=0; i < options.length; i++) {
                     options[i].selected = false;
                 }
                 filterFunc();
             };
-            div_Linhas.appendChild(reset_Linhas);
+            div_Linhadenibus.appendChild(reset_Linhadenibus);
         </script>
     </body>
 </html>
