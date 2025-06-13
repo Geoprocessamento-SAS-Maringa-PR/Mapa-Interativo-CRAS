@@ -11,8 +11,6 @@
         <link rel="stylesheet" href="css/L.Control.Locate.min.css">
         <link rel="stylesheet" href="css/qgis2web.css">
         <link rel="stylesheet" href="css/fontawesome-all.min.css">
-        <link rel="stylesheet" href="css/filter.css">
-<link rel="stylesheet" href="css/nouislider.min.css">
         <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
         <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
@@ -41,34 +39,32 @@
         <script src="js/labels.js"></script>
         <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
         <script src="js/leaflet-measure.js"></script>
-        <script src="js/tailDT.js"></script>
-<script src="js/nouislider.min.js"></script>
-<script src="js/wNumb.js"></script>
         <script src="data/Limitemunicipal_1.js"></script>
         <script src="data/CRASreadeabrangencia01042024_2.js"></script>
         <script src="data/CRASreadeabrangencia_3.js"></script>
         <script src="data/CRASreadeabrangencia_4.js"></script>
-        <script src="data/CRASreadeabrangencia07122024_5.js"></script>
-        <script src="data/CRASreadeabrangencia_6.js"></script>
-        <script src="data/Setorescensitrios_7.js"></script>
-        <script src="data/Bairros_8.js"></script>
-        <script src="data/Pontosdenibus_9.js"></script>
-        <script src="data/Linhadenibus_10.js"></script>
-        <script src="data/RedeEducao_11.js"></script>
-        <script src="data/RedeEsporte_12.js"></script>
-        <script src="data/RedeSade_13.js"></script>
-        <script src="data/Outrosservios_14.js"></script>
-        <script src="data/EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15.js"></script>
-        <script src="data/RestaurantePopular_16.js"></script>
-        <script src="data/InclusoProdutiva_17.js"></script>
-        <script src="data/HabilitaoeReabilitaoPessoacomDeficincia_18.js"></script>
-        <script src="data/Acolhimentoinstitucional_19.js"></script>
-        <script src="data/SCFV_20.js"></script>
-        <script src="data/ConselhoTutelar_21.js"></script>
-        <script src="data/CentroDia_22.js"></script>
-        <script src="data/CentroPOP_23.js"></script>
-        <script src="data/CREAS_24.js"></script>
-        <script src="data/CRAS_25.js"></script>
+        <script src="data/Bairros_5.js"></script>
+        <script src="data/CRASreadeabrangencia07122024_6.js"></script>
+        <script src="data/CRASreadeabrangencia_7.js"></script>
+        <script src="data/Setorescensitrios_8.js"></script>
+        <script src="data/Bairros_9.js"></script>
+        <script src="data/Pontodenibusarquivo_de_sada_10.js"></script>
+        <script src="data/Linhadenibus_11.js"></script>
+        <script src="data/RedeEducao_12.js"></script>
+        <script src="data/RedeEsporte_13.js"></script>
+        <script src="data/RedeSade_14.js"></script>
+        <script src="data/Outrosservios_15.js"></script>
+        <script src="data/EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_16.js"></script>
+        <script src="data/RestaurantePopular_17.js"></script>
+        <script src="data/InclusoProdutiva_18.js"></script>
+        <script src="data/HabilitaoeReabilitaoPessoacomDeficincia_19.js"></script>
+        <script src="data/Acolhimentoinstitucional_20.js"></script>
+        <script src="data/SCFV_21.js"></script>
+        <script src="data/ConselhoTutelar_22.js"></script>
+        <script src="data/CentroDia_23.js"></script>
+        <script src="data/CentroPOP_24.js"></script>
+        <script src="data/CREAS_25.js"></script>
+        <script src="data/CRAS_26.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -212,7 +208,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(225,225,225,0.0)',
-                interactive: false,
+                interactive: true,
             }
         }
         map.createPane('pane_Limitemunicipal_1');
@@ -220,7 +216,7 @@
         map.getPane('pane_Limitemunicipal_1').style['mix-blend-mode'] = 'normal';
         var layer_Limitemunicipal_1 = new L.geoJson(json_Limitemunicipal_1, {
             attribution: '',
-            interactive: false,
+            interactive: true,
             dataVar: 'json_Limitemunicipal_1',
             layerName: 'layer_Limitemunicipal_1',
             pane: 'pane_Limitemunicipal_1',
@@ -1010,7 +1006,97 @@
             style: style_CRASreadeabrangencia_4_0,
         });
         bounds_group.addLayer(layer_CRASreadeabrangencia_4);
-        function pop_CRASreadeabrangencia07122024_5(feature, layer) {
+        function pop_Bairros_5(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (var i in e.target._eventParents) {
+                        if (typeof e.target._eventParents[i].resetStyle === 'function') {
+                            e.target._eventParents[i].resetStyle(e.target);
+                        }
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">CRAS de referência:</th>\
+                        <td>' + (feature.properties['CRAS de referência:'] !== null ? autolinker.link(feature.properties['CRAS de referência:'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bairro:</th>\
+                        <td>' + (feature.properties['Bairro:'] !== null ? autolinker.link(feature.properties['Bairro:'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Zona:</th>\
+                        <td>' + (feature.properties['Zona:'] !== null ? autolinker.link(feature.properties['Zona:'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Famílias cadastradas:</th>\
+                        <td>' + (feature.properties['Famílias cadastradas:'] !== null ? autolinker.link(feature.properties['Famílias cadastradas:'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pessoas cadastradas:</th>\
+                        <td>' + (feature.properties['Pessoas cadastradas:'] !== null ? autolinker.link(feature.properties['Pessoas cadastradas:'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Famílias PBF cadastradas:</th>\
+                        <td>' + (feature.properties['Famílias PBF cadastradas:'] !== null ? autolinker.link(feature.properties['Famílias PBF cadastradas:'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">BPC - IDOSO:</th>\
+                        <td>' + (feature.properties['BPC - IDOSO:'] !== null ? autolinker.link(feature.properties['BPC - IDOSO:'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">BPC - PCD:</th>\
+                        <td>' + (feature.properties['BPC - PCD:'] !== null ? autolinker.link(feature.properties['BPC - PCD:'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Famílias cadastradas na faixa de renda per capita de R$0 a R$218,00:</th>\
+                        <td>' + (feature.properties['Famílias cadastradas na faixa de renda per capita de R$0 a R$218,00:'] !== null ? autolinker.link(feature.properties['Famílias cadastradas na faixa de renda per capita de R$0 a R$218,00:'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Famílias cadastradas na faixa de renda per capita de R$218,00 a R$706,00:</th>\
+                        <td>' + (feature.properties['Famílias cadastradas na faixa de renda per capita de R$218,00 a R$706,00:'] !== null ? autolinker.link(feature.properties['Famílias cadastradas na faixa de renda per capita de R$218,00 a R$706,00:'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pessoas cadastradas - acima de 60 anos:</th>\
+                        <td>' + (feature.properties['Pessoas cadastradas - acima de 60 anos: (Indivíduos acima de 60 anos:)'] !== null ? autolinker.link(feature.properties['Pessoas cadastradas - acima de 60 anos: (Indivíduos acima de 60 anos:)'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_Bairros_5_0() {
+            return {
+                pane: 'pane_Bairros_5',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Bairros_5');
+        map.getPane('pane_Bairros_5').style.zIndex = 405;
+        map.getPane('pane_Bairros_5').style['mix-blend-mode'] = 'normal';
+        var layer_Bairros_5 = new L.geoJson(json_Bairros_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Bairros_5',
+            layerName: 'layer_Bairros_5',
+            pane: 'pane_Bairros_5',
+            onEachFeature: pop_Bairros_5,
+            style: style_Bairros_5_0,
+        });
+        bounds_group.addLayer(layer_Bairros_5);
+        function pop_CRASreadeabrangencia07122024_6(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -1073,11 +1159,11 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_CRASreadeabrangencia07122024_5_0(feature) {
+        function style_CRASreadeabrangencia07122024_6_0(feature) {
             switch(String(feature.properties['CRAS'])) {
                 case 'Alvorada':
                     return {
-                pane: 'pane_CRASreadeabrangencia07122024_5',
+                pane: 'pane_CRASreadeabrangencia07122024_6',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1092,7 +1178,7 @@
                     break;
                 case 'Branca Vieira':
                     return {
-                pane: 'pane_CRASreadeabrangencia07122024_5',
+                pane: 'pane_CRASreadeabrangencia07122024_6',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1107,7 +1193,7 @@
                     break;
                 case 'Floriano':
                     return {
-                pane: 'pane_CRASreadeabrangencia07122024_5',
+                pane: 'pane_CRASreadeabrangencia07122024_6',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1122,7 +1208,7 @@
                     break;
                 case 'Iguatemi':
                     return {
-                pane: 'pane_CRASreadeabrangencia07122024_5',
+                pane: 'pane_CRASreadeabrangencia07122024_6',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1137,7 +1223,7 @@
                     break;
                 case 'Itaipu':
                     return {
-                pane: 'pane_CRASreadeabrangencia07122024_5',
+                pane: 'pane_CRASreadeabrangencia07122024_6',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1152,7 +1238,7 @@
                     break;
                 case 'Mandacaru':
                     return {
-                pane: 'pane_CRASreadeabrangencia07122024_5',
+                pane: 'pane_CRASreadeabrangencia07122024_6',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1167,7 +1253,7 @@
                     break;
                 case 'Morangueira':
                     return {
-                pane: 'pane_CRASreadeabrangencia07122024_5',
+                pane: 'pane_CRASreadeabrangencia07122024_6',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1182,7 +1268,7 @@
                     break;
                 case 'Ney Braga':
                     return {
-                pane: 'pane_CRASreadeabrangencia07122024_5',
+                pane: 'pane_CRASreadeabrangencia07122024_6',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1197,7 +1283,7 @@
                     break;
                 case 'Requião':
                     return {
-                pane: 'pane_CRASreadeabrangencia07122024_5',
+                pane: 'pane_CRASreadeabrangencia07122024_6',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1212,7 +1298,7 @@
                     break;
                 case 'Santa Clara':
                     return {
-                pane: 'pane_CRASreadeabrangencia07122024_5',
+                pane: 'pane_CRASreadeabrangencia07122024_6',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1227,7 +1313,7 @@
                     break;
                 case 'Santa Felicidade':
                     return {
-                pane: 'pane_CRASreadeabrangencia07122024_5',
+                pane: 'pane_CRASreadeabrangencia07122024_6',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1242,7 +1328,7 @@
                     break;
                 case 'São Judas Tadeu':
                     return {
-                pane: 'pane_CRASreadeabrangencia07122024_5',
+                pane: 'pane_CRASreadeabrangencia07122024_6',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1257,7 +1343,7 @@
                     break;
                 case 'Centro POP':
                     return {
-                pane: 'pane_CRASreadeabrangencia07122024_5',
+                pane: 'pane_CRASreadeabrangencia07122024_6',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1272,20 +1358,20 @@
                     break;
             }
         }
-        map.createPane('pane_CRASreadeabrangencia07122024_5');
-        map.getPane('pane_CRASreadeabrangencia07122024_5').style.zIndex = 405;
-        map.getPane('pane_CRASreadeabrangencia07122024_5').style['mix-blend-mode'] = 'normal';
-        var layer_CRASreadeabrangencia07122024_5 = new L.geoJson(json_CRASreadeabrangencia07122024_5, {
+        map.createPane('pane_CRASreadeabrangencia07122024_6');
+        map.getPane('pane_CRASreadeabrangencia07122024_6').style.zIndex = 406;
+        map.getPane('pane_CRASreadeabrangencia07122024_6').style['mix-blend-mode'] = 'normal';
+        var layer_CRASreadeabrangencia07122024_6 = new L.geoJson(json_CRASreadeabrangencia07122024_6, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_CRASreadeabrangencia07122024_5',
-            layerName: 'layer_CRASreadeabrangencia07122024_5',
-            pane: 'pane_CRASreadeabrangencia07122024_5',
-            onEachFeature: pop_CRASreadeabrangencia07122024_5,
-            style: style_CRASreadeabrangencia07122024_5_0,
+            dataVar: 'json_CRASreadeabrangencia07122024_6',
+            layerName: 'layer_CRASreadeabrangencia07122024_6',
+            pane: 'pane_CRASreadeabrangencia07122024_6',
+            onEachFeature: pop_CRASreadeabrangencia07122024_6,
+            style: style_CRASreadeabrangencia07122024_6_0,
         });
-        bounds_group.addLayer(layer_CRASreadeabrangencia07122024_5);
-        function pop_CRASreadeabrangencia_6(feature, layer) {
+        bounds_group.addLayer(layer_CRASreadeabrangencia07122024_6);
+        function pop_CRASreadeabrangencia_7(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -1345,11 +1431,11 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_CRASreadeabrangencia_6_0(feature) {
+        function style_CRASreadeabrangencia_7_0(feature) {
             switch(String(feature.properties['Unidade:'])) {
                 case 'Alvorada':
                     return {
-                pane: 'pane_CRASreadeabrangencia_6',
+                pane: 'pane_CRASreadeabrangencia_7',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1364,7 +1450,7 @@
                     break;
                 case 'Área rural':
                     return {
-                pane: 'pane_CRASreadeabrangencia_6',
+                pane: 'pane_CRASreadeabrangencia_7',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1377,7 +1463,7 @@
                     break;
                 case 'Branca Vieira':
                     return {
-                pane: 'pane_CRASreadeabrangencia_6',
+                pane: 'pane_CRASreadeabrangencia_7',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1392,7 +1478,7 @@
                     break;
                 case 'Centro POP':
                     return {
-                pane: 'pane_CRASreadeabrangencia_6',
+                pane: 'pane_CRASreadeabrangencia_7',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1407,7 +1493,7 @@
                     break;
                 case 'Iguatemi':
                     return {
-                pane: 'pane_CRASreadeabrangencia_6',
+                pane: 'pane_CRASreadeabrangencia_7',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1422,7 +1508,7 @@
                     break;
                 case 'Itaipu':
                     return {
-                pane: 'pane_CRASreadeabrangencia_6',
+                pane: 'pane_CRASreadeabrangencia_7',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1437,7 +1523,7 @@
                     break;
                 case 'Itaipu - Unidade Floriano':
                     return {
-                pane: 'pane_CRASreadeabrangencia_6',
+                pane: 'pane_CRASreadeabrangencia_7',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1452,7 +1538,7 @@
                     break;
                 case 'Mandacaru':
                     return {
-                pane: 'pane_CRASreadeabrangencia_6',
+                pane: 'pane_CRASreadeabrangencia_7',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1467,7 +1553,7 @@
                     break;
                 case 'Mandacaru - Unidade São Judas':
                     return {
-                pane: 'pane_CRASreadeabrangencia_6',
+                pane: 'pane_CRASreadeabrangencia_7',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1482,7 +1568,7 @@
                     break;
                 case 'Morangueira':
                     return {
-                pane: 'pane_CRASreadeabrangencia_6',
+                pane: 'pane_CRASreadeabrangencia_7',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1497,7 +1583,7 @@
                     break;
                 case 'Ney Braga':
                     return {
-                pane: 'pane_CRASreadeabrangencia_6',
+                pane: 'pane_CRASreadeabrangencia_7',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1512,7 +1598,7 @@
                     break;
                 case 'Requião':
                     return {
-                pane: 'pane_CRASreadeabrangencia_6',
+                pane: 'pane_CRASreadeabrangencia_7',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1527,7 +1613,7 @@
                     break;
                 case 'Santa Clara':
                     return {
-                pane: 'pane_CRASreadeabrangencia_6',
+                pane: 'pane_CRASreadeabrangencia_7',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1542,7 +1628,7 @@
                     break;
                 case 'Santa Felicidade':
                     return {
-                pane: 'pane_CRASreadeabrangencia_6',
+                pane: 'pane_CRASreadeabrangencia_7',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8549019607843137)',
                 dashArray: '',
@@ -1557,21 +1643,21 @@
                     break;
             }
         }
-        map.createPane('pane_CRASreadeabrangencia_6');
-        map.getPane('pane_CRASreadeabrangencia_6').style.zIndex = 406;
-        map.getPane('pane_CRASreadeabrangencia_6').style['mix-blend-mode'] = 'normal';
-        var layer_CRASreadeabrangencia_6 = new L.geoJson(json_CRASreadeabrangencia_6, {
+        map.createPane('pane_CRASreadeabrangencia_7');
+        map.getPane('pane_CRASreadeabrangencia_7').style.zIndex = 407;
+        map.getPane('pane_CRASreadeabrangencia_7').style['mix-blend-mode'] = 'normal';
+        var layer_CRASreadeabrangencia_7 = new L.geoJson(json_CRASreadeabrangencia_7, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_CRASreadeabrangencia_6',
-            layerName: 'layer_CRASreadeabrangencia_6',
-            pane: 'pane_CRASreadeabrangencia_6',
-            onEachFeature: pop_CRASreadeabrangencia_6,
-            style: style_CRASreadeabrangencia_6_0,
+            dataVar: 'json_CRASreadeabrangencia_7',
+            layerName: 'layer_CRASreadeabrangencia_7',
+            pane: 'pane_CRASreadeabrangencia_7',
+            onEachFeature: pop_CRASreadeabrangencia_7,
+            style: style_CRASreadeabrangencia_7_0,
         });
-        bounds_group.addLayer(layer_CRASreadeabrangencia_6);
-        map.addLayer(layer_CRASreadeabrangencia_6);
-        function pop_Setorescensitrios_7(feature, layer) {
+        bounds_group.addLayer(layer_CRASreadeabrangencia_7);
+        map.addLayer(layer_CRASreadeabrangencia_7);
+        function pop_Setorescensitrios_8(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -1615,9 +1701,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Setorescensitrios_7_0() {
+        function style_Setorescensitrios_8_0() {
             return {
-                pane: 'pane_Setorescensitrios_7',
+                pane: 'pane_Setorescensitrios_8',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -1628,20 +1714,20 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_Setorescensitrios_7');
-        map.getPane('pane_Setorescensitrios_7').style.zIndex = 407;
-        map.getPane('pane_Setorescensitrios_7').style['mix-blend-mode'] = 'normal';
-        var layer_Setorescensitrios_7 = new L.geoJson(json_Setorescensitrios_7, {
+        map.createPane('pane_Setorescensitrios_8');
+        map.getPane('pane_Setorescensitrios_8').style.zIndex = 408;
+        map.getPane('pane_Setorescensitrios_8').style['mix-blend-mode'] = 'normal';
+        var layer_Setorescensitrios_8 = new L.geoJson(json_Setorescensitrios_8, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Setorescensitrios_7',
-            layerName: 'layer_Setorescensitrios_7',
-            pane: 'pane_Setorescensitrios_7',
-            onEachFeature: pop_Setorescensitrios_7,
-            style: style_Setorescensitrios_7_0,
+            dataVar: 'json_Setorescensitrios_8',
+            layerName: 'layer_Setorescensitrios_8',
+            pane: 'pane_Setorescensitrios_8',
+            onEachFeature: pop_Setorescensitrios_8,
+            style: style_Setorescensitrios_8_0,
         });
-        bounds_group.addLayer(layer_Setorescensitrios_7);
-        function pop_Bairros_8(feature, layer) {
+        bounds_group.addLayer(layer_Setorescensitrios_8);
+        function pop_Bairros_9(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -1709,9 +1795,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Bairros_8_0() {
+        function style_Bairros_9_0() {
             return {
-                pane: 'pane_Bairros_8',
+                pane: 'pane_Bairros_9',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -1722,20 +1808,20 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_Bairros_8');
-        map.getPane('pane_Bairros_8').style.zIndex = 408;
-        map.getPane('pane_Bairros_8').style['mix-blend-mode'] = 'normal';
-        var layer_Bairros_8 = new L.geoJson(json_Bairros_8, {
+        map.createPane('pane_Bairros_9');
+        map.getPane('pane_Bairros_9').style.zIndex = 409;
+        map.getPane('pane_Bairros_9').style['mix-blend-mode'] = 'normal';
+        var layer_Bairros_9 = new L.geoJson(json_Bairros_9, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Bairros_8',
-            layerName: 'layer_Bairros_8',
-            pane: 'pane_Bairros_8',
-            onEachFeature: pop_Bairros_8,
-            style: style_Bairros_8_0,
+            dataVar: 'json_Bairros_9',
+            layerName: 'layer_Bairros_9',
+            pane: 'pane_Bairros_9',
+            onEachFeature: pop_Bairros_9,
+            style: style_Bairros_9_0,
         });
-        bounds_group.addLayer(layer_Bairros_8);
-        function pop_Pontosdenibus_9(feature, layer) {
+        bounds_group.addLayer(layer_Bairros_9);
+        function pop_Pontodenibusarquivo_de_sada_10(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -1759,9 +1845,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Pontosdenibus_9_0() {
+        function style_Pontodenibusarquivo_de_sada_10_0() {
             return {
-                pane: 'pane_Pontosdenibus_9',
+                pane: 'pane_Pontodenibusarquivo_de_sada_10',
                 radius: 2.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -1775,26 +1861,26 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_Pontosdenibus_9');
-        map.getPane('pane_Pontosdenibus_9').style.zIndex = 409;
-        map.getPane('pane_Pontosdenibus_9').style['mix-blend-mode'] = 'normal';
-        var layer_Pontosdenibus_9 = new L.geoJson(json_Pontosdenibus_9, {
+        map.createPane('pane_Pontodenibusarquivo_de_sada_10');
+        map.getPane('pane_Pontodenibusarquivo_de_sada_10').style.zIndex = 410;
+        map.getPane('pane_Pontodenibusarquivo_de_sada_10').style['mix-blend-mode'] = 'normal';
+        var layer_Pontodenibusarquivo_de_sada_10 = new L.geoJson(json_Pontodenibusarquivo_de_sada_10, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Pontosdenibus_9',
-            layerName: 'layer_Pontosdenibus_9',
-            pane: 'pane_Pontosdenibus_9',
-            onEachFeature: pop_Pontosdenibus_9,
+            dataVar: 'json_Pontodenibusarquivo_de_sada_10',
+            layerName: 'layer_Pontodenibusarquivo_de_sada_10',
+            pane: 'pane_Pontodenibusarquivo_de_sada_10',
+            onEachFeature: pop_Pontodenibusarquivo_de_sada_10,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_Pontosdenibus_9_0(feature));
+                return L.circleMarker(latlng, style_Pontodenibusarquivo_de_sada_10_0(feature));
             },
         });
-        bounds_group.addLayer(layer_Pontosdenibus_9);
-        function pop_Linhadenibus_10(feature, layer) {
+        bounds_group.addLayer(layer_Pontodenibusarquivo_de_sada_10);
+        function pop_Linhadenibus_11(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -1822,9 +1908,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Linhadenibus_10_0() {
+        function style_Linhadenibus_11_0() {
             return {
-                pane: 'pane_Linhadenibus_10',
+                pane: 'pane_Linhadenibus_11',
                 opacity: 1,
                 color: 'rgba(43,39,36,1.0)',
                 dashArray: '',
@@ -1835,20 +1921,20 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_Linhadenibus_10');
-        map.getPane('pane_Linhadenibus_10').style.zIndex = 410;
-        map.getPane('pane_Linhadenibus_10').style['mix-blend-mode'] = 'normal';
-        var layer_Linhadenibus_10 = new L.geoJson(json_Linhadenibus_10, {
+        map.createPane('pane_Linhadenibus_11');
+        map.getPane('pane_Linhadenibus_11').style.zIndex = 411;
+        map.getPane('pane_Linhadenibus_11').style['mix-blend-mode'] = 'normal';
+        var layer_Linhadenibus_11 = new L.geoJson(json_Linhadenibus_11, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Linhadenibus_10',
-            layerName: 'layer_Linhadenibus_10',
-            pane: 'pane_Linhadenibus_10',
-            onEachFeature: pop_Linhadenibus_10,
-            style: style_Linhadenibus_10_0,
+            dataVar: 'json_Linhadenibus_11',
+            layerName: 'layer_Linhadenibus_11',
+            pane: 'pane_Linhadenibus_11',
+            onEachFeature: pop_Linhadenibus_11,
+            style: style_Linhadenibus_11_0,
         });
-        bounds_group.addLayer(layer_Linhadenibus_10);
-        function pop_RedeEducao_11(feature, layer) {
+        bounds_group.addLayer(layer_Linhadenibus_11);
+        function pop_RedeEducao_12(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -1888,38 +1974,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_RedeEducao_11_0() {
+        function style_RedeEducao_12_0() {
             return {
-                pane: 'pane_RedeEducao_11',
+                pane: 'pane_RedeEducao_12',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/RedeEducao_11.svg',
+            iconUrl: 'markers/RedeEducao_12.svg',
             iconSize: [16.72, 16.72]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_RedeEducao_11');
-        map.getPane('pane_RedeEducao_11').style.zIndex = 411;
-        map.getPane('pane_RedeEducao_11').style['mix-blend-mode'] = 'normal';
-        var layer_RedeEducao_11 = new L.geoJson(json_RedeEducao_11, {
+        map.createPane('pane_RedeEducao_12');
+        map.getPane('pane_RedeEducao_12').style.zIndex = 412;
+        map.getPane('pane_RedeEducao_12').style['mix-blend-mode'] = 'normal';
+        var layer_RedeEducao_12 = new L.geoJson(json_RedeEducao_12, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_RedeEducao_11',
-            layerName: 'layer_RedeEducao_11',
-            pane: 'pane_RedeEducao_11',
-            onEachFeature: pop_RedeEducao_11,
+            dataVar: 'json_RedeEducao_12',
+            layerName: 'layer_RedeEducao_12',
+            pane: 'pane_RedeEducao_12',
+            onEachFeature: pop_RedeEducao_12,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_RedeEducao_11_0(feature));
+                return L.marker(latlng, style_RedeEducao_12_0(feature));
             },
         });
-        bounds_group.addLayer(layer_RedeEducao_11);
-        function pop_RedeEsporte_12(feature, layer) {
+        bounds_group.addLayer(layer_RedeEducao_12);
+        function pop_RedeEsporte_13(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -1959,38 +2045,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_RedeEsporte_12_0() {
+        function style_RedeEsporte_13_0() {
             return {
-                pane: 'pane_RedeEsporte_12',
+                pane: 'pane_RedeEsporte_13',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/RedeEsporte_12.svg',
+            iconUrl: 'markers/RedeEsporte_13.svg',
             iconSize: [15.959999999999999, 15.959999999999999]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_RedeEsporte_12');
-        map.getPane('pane_RedeEsporte_12').style.zIndex = 412;
-        map.getPane('pane_RedeEsporte_12').style['mix-blend-mode'] = 'normal';
-        var layer_RedeEsporte_12 = new L.geoJson(json_RedeEsporte_12, {
+        map.createPane('pane_RedeEsporte_13');
+        map.getPane('pane_RedeEsporte_13').style.zIndex = 413;
+        map.getPane('pane_RedeEsporte_13').style['mix-blend-mode'] = 'normal';
+        var layer_RedeEsporte_13 = new L.geoJson(json_RedeEsporte_13, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_RedeEsporte_12',
-            layerName: 'layer_RedeEsporte_12',
-            pane: 'pane_RedeEsporte_12',
-            onEachFeature: pop_RedeEsporte_12,
+            dataVar: 'json_RedeEsporte_13',
+            layerName: 'layer_RedeEsporte_13',
+            pane: 'pane_RedeEsporte_13',
+            onEachFeature: pop_RedeEsporte_13,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_RedeEsporte_12_0(feature));
+                return L.marker(latlng, style_RedeEsporte_13_0(feature));
             },
         });
-        bounds_group.addLayer(layer_RedeEsporte_12);
-        function pop_RedeSade_13(feature, layer) {
+        bounds_group.addLayer(layer_RedeEsporte_13);
+        function pop_RedeSade_14(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -2030,38 +2116,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_RedeSade_13_0() {
+        function style_RedeSade_14_0() {
             return {
-                pane: 'pane_RedeSade_13',
+                pane: 'pane_RedeSade_14',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/RedeSade_13.svg',
+            iconUrl: 'markers/RedeSade_14.svg',
             iconSize: [22.799999999999997, 22.799999999999997]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_RedeSade_13');
-        map.getPane('pane_RedeSade_13').style.zIndex = 413;
-        map.getPane('pane_RedeSade_13').style['mix-blend-mode'] = 'normal';
-        var layer_RedeSade_13 = new L.geoJson(json_RedeSade_13, {
+        map.createPane('pane_RedeSade_14');
+        map.getPane('pane_RedeSade_14').style.zIndex = 414;
+        map.getPane('pane_RedeSade_14').style['mix-blend-mode'] = 'normal';
+        var layer_RedeSade_14 = new L.geoJson(json_RedeSade_14, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_RedeSade_13',
-            layerName: 'layer_RedeSade_13',
-            pane: 'pane_RedeSade_13',
-            onEachFeature: pop_RedeSade_13,
+            dataVar: 'json_RedeSade_14',
+            layerName: 'layer_RedeSade_14',
+            pane: 'pane_RedeSade_14',
+            onEachFeature: pop_RedeSade_14,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_RedeSade_13_0(feature));
+                return L.marker(latlng, style_RedeSade_14_0(feature));
             },
         });
-        bounds_group.addLayer(layer_RedeSade_13);
-        function pop_Outrosservios_14(feature, layer) {
+        bounds_group.addLayer(layer_RedeSade_14);
+        function pop_Outrosservios_15(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -2109,38 +2195,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Outrosservios_14_0() {
+        function style_Outrosservios_15_0() {
             return {
-                pane: 'pane_Outrosservios_14',
+                pane: 'pane_Outrosservios_15',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/Outrosservios_14.svg',
+            iconUrl: 'markers/Outrosservios_15.svg',
             iconSize: [10.639999999999999, 10.639999999999999]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_Outrosservios_14');
-        map.getPane('pane_Outrosservios_14').style.zIndex = 414;
-        map.getPane('pane_Outrosservios_14').style['mix-blend-mode'] = 'normal';
-        var layer_Outrosservios_14 = new L.geoJson(json_Outrosservios_14, {
+        map.createPane('pane_Outrosservios_15');
+        map.getPane('pane_Outrosservios_15').style.zIndex = 415;
+        map.getPane('pane_Outrosservios_15').style['mix-blend-mode'] = 'normal';
+        var layer_Outrosservios_15 = new L.geoJson(json_Outrosservios_15, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Outrosservios_14',
-            layerName: 'layer_Outrosservios_14',
-            pane: 'pane_Outrosservios_14',
-            onEachFeature: pop_Outrosservios_14,
+            dataVar: 'json_Outrosservios_15',
+            layerName: 'layer_Outrosservios_15',
+            pane: 'pane_Outrosservios_15',
+            onEachFeature: pop_Outrosservios_15,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_Outrosservios_14_0(feature));
+                return L.marker(latlng, style_Outrosservios_15_0(feature));
             },
         });
-        bounds_group.addLayer(layer_Outrosservios_14);
-        function pop_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15(feature, layer) {
+        bounds_group.addLayer(layer_Outrosservios_15);
+        function pop_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_16(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -2188,38 +2274,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15_0() {
+        function style_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_16_0() {
             return {
-                pane: 'pane_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15',
+                pane: 'pane_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_16',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15.svg',
+            iconUrl: 'markers/EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_16.svg',
             iconSize: [16.72, 16.72]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15');
-        map.getPane('pane_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15').style.zIndex = 415;
-        map.getPane('pane_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15').style['mix-blend-mode'] = 'normal';
-        var layer_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15 = new L.geoJson(json_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15, {
+        map.createPane('pane_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_16');
+        map.getPane('pane_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_16').style.zIndex = 416;
+        map.getPane('pane_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_16').style['mix-blend-mode'] = 'normal';
+        var layer_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_16 = new L.geoJson(json_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_16, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15',
-            layerName: 'layer_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15',
-            pane: 'pane_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15',
-            onEachFeature: pop_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15,
+            dataVar: 'json_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_16',
+            layerName: 'layer_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_16',
+            pane: 'pane_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_16',
+            onEachFeature: pop_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_16,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15_0(feature));
+                return L.marker(latlng, style_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_16_0(feature));
             },
         });
-        bounds_group.addLayer(layer_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15);
-        function pop_RestaurantePopular_16(feature, layer) {
+        bounds_group.addLayer(layer_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_16);
+        function pop_RestaurantePopular_17(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -2267,38 +2353,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_RestaurantePopular_16_0() {
+        function style_RestaurantePopular_17_0() {
             return {
-                pane: 'pane_RestaurantePopular_16',
+                pane: 'pane_RestaurantePopular_17',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/RestaurantePopular_16.svg',
+            iconUrl: 'markers/RestaurantePopular_17.svg',
             iconSize: [22.799999999999997, 22.799999999999997]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_RestaurantePopular_16');
-        map.getPane('pane_RestaurantePopular_16').style.zIndex = 416;
-        map.getPane('pane_RestaurantePopular_16').style['mix-blend-mode'] = 'normal';
-        var layer_RestaurantePopular_16 = new L.geoJson(json_RestaurantePopular_16, {
+        map.createPane('pane_RestaurantePopular_17');
+        map.getPane('pane_RestaurantePopular_17').style.zIndex = 417;
+        map.getPane('pane_RestaurantePopular_17').style['mix-blend-mode'] = 'normal';
+        var layer_RestaurantePopular_17 = new L.geoJson(json_RestaurantePopular_17, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_RestaurantePopular_16',
-            layerName: 'layer_RestaurantePopular_16',
-            pane: 'pane_RestaurantePopular_16',
-            onEachFeature: pop_RestaurantePopular_16,
+            dataVar: 'json_RestaurantePopular_17',
+            layerName: 'layer_RestaurantePopular_17',
+            pane: 'pane_RestaurantePopular_17',
+            onEachFeature: pop_RestaurantePopular_17,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_RestaurantePopular_16_0(feature));
+                return L.marker(latlng, style_RestaurantePopular_17_0(feature));
             },
         });
-        bounds_group.addLayer(layer_RestaurantePopular_16);
-        function pop_InclusoProdutiva_17(feature, layer) {
+        bounds_group.addLayer(layer_RestaurantePopular_17);
+        function pop_InclusoProdutiva_18(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -2346,38 +2432,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_InclusoProdutiva_17_0() {
+        function style_InclusoProdutiva_18_0() {
             return {
-                pane: 'pane_InclusoProdutiva_17',
+                pane: 'pane_InclusoProdutiva_18',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/InclusoProdutiva_17.svg',
+            iconUrl: 'markers/InclusoProdutiva_18.svg',
             iconSize: [22.04, 22.04]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_InclusoProdutiva_17');
-        map.getPane('pane_InclusoProdutiva_17').style.zIndex = 417;
-        map.getPane('pane_InclusoProdutiva_17').style['mix-blend-mode'] = 'normal';
-        var layer_InclusoProdutiva_17 = new L.geoJson(json_InclusoProdutiva_17, {
+        map.createPane('pane_InclusoProdutiva_18');
+        map.getPane('pane_InclusoProdutiva_18').style.zIndex = 418;
+        map.getPane('pane_InclusoProdutiva_18').style['mix-blend-mode'] = 'normal';
+        var layer_InclusoProdutiva_18 = new L.geoJson(json_InclusoProdutiva_18, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_InclusoProdutiva_17',
-            layerName: 'layer_InclusoProdutiva_17',
-            pane: 'pane_InclusoProdutiva_17',
-            onEachFeature: pop_InclusoProdutiva_17,
+            dataVar: 'json_InclusoProdutiva_18',
+            layerName: 'layer_InclusoProdutiva_18',
+            pane: 'pane_InclusoProdutiva_18',
+            onEachFeature: pop_InclusoProdutiva_18,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_InclusoProdutiva_17_0(feature));
+                return L.marker(latlng, style_InclusoProdutiva_18_0(feature));
             },
         });
-        bounds_group.addLayer(layer_InclusoProdutiva_17);
-        function pop_HabilitaoeReabilitaoPessoacomDeficincia_18(feature, layer) {
+        bounds_group.addLayer(layer_InclusoProdutiva_18);
+        function pop_HabilitaoeReabilitaoPessoacomDeficincia_19(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -2425,38 +2511,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_HabilitaoeReabilitaoPessoacomDeficincia_18_0() {
+        function style_HabilitaoeReabilitaoPessoacomDeficincia_19_0() {
             return {
-                pane: 'pane_HabilitaoeReabilitaoPessoacomDeficincia_18',
+                pane: 'pane_HabilitaoeReabilitaoPessoacomDeficincia_19',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/HabilitaoeReabilitaoPessoacomDeficincia_18.svg',
+            iconUrl: 'markers/HabilitaoeReabilitaoPessoacomDeficincia_19.svg',
             iconSize: [18.24, 18.24]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_HabilitaoeReabilitaoPessoacomDeficincia_18');
-        map.getPane('pane_HabilitaoeReabilitaoPessoacomDeficincia_18').style.zIndex = 418;
-        map.getPane('pane_HabilitaoeReabilitaoPessoacomDeficincia_18').style['mix-blend-mode'] = 'normal';
-        var layer_HabilitaoeReabilitaoPessoacomDeficincia_18 = new L.geoJson(json_HabilitaoeReabilitaoPessoacomDeficincia_18, {
+        map.createPane('pane_HabilitaoeReabilitaoPessoacomDeficincia_19');
+        map.getPane('pane_HabilitaoeReabilitaoPessoacomDeficincia_19').style.zIndex = 419;
+        map.getPane('pane_HabilitaoeReabilitaoPessoacomDeficincia_19').style['mix-blend-mode'] = 'normal';
+        var layer_HabilitaoeReabilitaoPessoacomDeficincia_19 = new L.geoJson(json_HabilitaoeReabilitaoPessoacomDeficincia_19, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_HabilitaoeReabilitaoPessoacomDeficincia_18',
-            layerName: 'layer_HabilitaoeReabilitaoPessoacomDeficincia_18',
-            pane: 'pane_HabilitaoeReabilitaoPessoacomDeficincia_18',
-            onEachFeature: pop_HabilitaoeReabilitaoPessoacomDeficincia_18,
+            dataVar: 'json_HabilitaoeReabilitaoPessoacomDeficincia_19',
+            layerName: 'layer_HabilitaoeReabilitaoPessoacomDeficincia_19',
+            pane: 'pane_HabilitaoeReabilitaoPessoacomDeficincia_19',
+            onEachFeature: pop_HabilitaoeReabilitaoPessoacomDeficincia_19,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_HabilitaoeReabilitaoPessoacomDeficincia_18_0(feature));
+                return L.marker(latlng, style_HabilitaoeReabilitaoPessoacomDeficincia_19_0(feature));
             },
         });
-        bounds_group.addLayer(layer_HabilitaoeReabilitaoPessoacomDeficincia_18);
-        function pop_Acolhimentoinstitucional_19(feature, layer) {
+        bounds_group.addLayer(layer_HabilitaoeReabilitaoPessoacomDeficincia_19);
+        function pop_Acolhimentoinstitucional_20(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -2504,38 +2590,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Acolhimentoinstitucional_19_0() {
+        function style_Acolhimentoinstitucional_20_0() {
             return {
-                pane: 'pane_Acolhimentoinstitucional_19',
+                pane: 'pane_Acolhimentoinstitucional_20',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/Acolhimentoinstitucional_19.svg',
+            iconUrl: 'markers/Acolhimentoinstitucional_20.svg',
             iconSize: [17.479999999999997, 17.479999999999997]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_Acolhimentoinstitucional_19');
-        map.getPane('pane_Acolhimentoinstitucional_19').style.zIndex = 419;
-        map.getPane('pane_Acolhimentoinstitucional_19').style['mix-blend-mode'] = 'normal';
-        var layer_Acolhimentoinstitucional_19 = new L.geoJson(json_Acolhimentoinstitucional_19, {
+        map.createPane('pane_Acolhimentoinstitucional_20');
+        map.getPane('pane_Acolhimentoinstitucional_20').style.zIndex = 420;
+        map.getPane('pane_Acolhimentoinstitucional_20').style['mix-blend-mode'] = 'normal';
+        var layer_Acolhimentoinstitucional_20 = new L.geoJson(json_Acolhimentoinstitucional_20, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Acolhimentoinstitucional_19',
-            layerName: 'layer_Acolhimentoinstitucional_19',
-            pane: 'pane_Acolhimentoinstitucional_19',
-            onEachFeature: pop_Acolhimentoinstitucional_19,
+            dataVar: 'json_Acolhimentoinstitucional_20',
+            layerName: 'layer_Acolhimentoinstitucional_20',
+            pane: 'pane_Acolhimentoinstitucional_20',
+            onEachFeature: pop_Acolhimentoinstitucional_20,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_Acolhimentoinstitucional_19_0(feature));
+                return L.marker(latlng, style_Acolhimentoinstitucional_20_0(feature));
             },
         });
-        bounds_group.addLayer(layer_Acolhimentoinstitucional_19);
-        function pop_SCFV_20(feature, layer) {
+        bounds_group.addLayer(layer_Acolhimentoinstitucional_20);
+        function pop_SCFV_21(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -2583,38 +2669,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_SCFV_20_0() {
+        function style_SCFV_21_0() {
             return {
-                pane: 'pane_SCFV_20',
+                pane: 'pane_SCFV_21',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/SCFV_20.svg',
+            iconUrl: 'markers/SCFV_21.svg',
             iconSize: [19.755364, 19.755364]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_SCFV_20');
-        map.getPane('pane_SCFV_20').style.zIndex = 420;
-        map.getPane('pane_SCFV_20').style['mix-blend-mode'] = 'normal';
-        var layer_SCFV_20 = new L.geoJson(json_SCFV_20, {
+        map.createPane('pane_SCFV_21');
+        map.getPane('pane_SCFV_21').style.zIndex = 421;
+        map.getPane('pane_SCFV_21').style['mix-blend-mode'] = 'normal';
+        var layer_SCFV_21 = new L.geoJson(json_SCFV_21, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_SCFV_20',
-            layerName: 'layer_SCFV_20',
-            pane: 'pane_SCFV_20',
-            onEachFeature: pop_SCFV_20,
+            dataVar: 'json_SCFV_21',
+            layerName: 'layer_SCFV_21',
+            pane: 'pane_SCFV_21',
+            onEachFeature: pop_SCFV_21,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_SCFV_20_0(feature));
+                return L.marker(latlng, style_SCFV_21_0(feature));
             },
         });
-        bounds_group.addLayer(layer_SCFV_20);
-        function pop_ConselhoTutelar_21(feature, layer) {
+        bounds_group.addLayer(layer_SCFV_21);
+        function pop_ConselhoTutelar_22(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -2662,38 +2748,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_ConselhoTutelar_21_0() {
+        function style_ConselhoTutelar_22_0() {
             return {
-                pane: 'pane_ConselhoTutelar_21',
+                pane: 'pane_ConselhoTutelar_22',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/ConselhoTutelar_21.svg',
+            iconUrl: 'markers/ConselhoTutelar_22.svg',
             iconSize: [17.479999999999997, 17.479999999999997]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_ConselhoTutelar_21');
-        map.getPane('pane_ConselhoTutelar_21').style.zIndex = 421;
-        map.getPane('pane_ConselhoTutelar_21').style['mix-blend-mode'] = 'normal';
-        var layer_ConselhoTutelar_21 = new L.geoJson(json_ConselhoTutelar_21, {
+        map.createPane('pane_ConselhoTutelar_22');
+        map.getPane('pane_ConselhoTutelar_22').style.zIndex = 422;
+        map.getPane('pane_ConselhoTutelar_22').style['mix-blend-mode'] = 'normal';
+        var layer_ConselhoTutelar_22 = new L.geoJson(json_ConselhoTutelar_22, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_ConselhoTutelar_21',
-            layerName: 'layer_ConselhoTutelar_21',
-            pane: 'pane_ConselhoTutelar_21',
-            onEachFeature: pop_ConselhoTutelar_21,
+            dataVar: 'json_ConselhoTutelar_22',
+            layerName: 'layer_ConselhoTutelar_22',
+            pane: 'pane_ConselhoTutelar_22',
+            onEachFeature: pop_ConselhoTutelar_22,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_ConselhoTutelar_21_0(feature));
+                return L.marker(latlng, style_ConselhoTutelar_22_0(feature));
             },
         });
-        bounds_group.addLayer(layer_ConselhoTutelar_21);
-        function pop_CentroDia_22(feature, layer) {
+        bounds_group.addLayer(layer_ConselhoTutelar_22);
+        function pop_CentroDia_23(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -2741,38 +2827,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_CentroDia_22_0() {
+        function style_CentroDia_23_0() {
             return {
-                pane: 'pane_CentroDia_22',
+                pane: 'pane_CentroDia_23',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/CentroDia_22.svg',
+            iconUrl: 'markers/CentroDia_23.svg',
             iconSize: [17.479999999999997, 17.479999999999997]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_CentroDia_22');
-        map.getPane('pane_CentroDia_22').style.zIndex = 422;
-        map.getPane('pane_CentroDia_22').style['mix-blend-mode'] = 'normal';
-        var layer_CentroDia_22 = new L.geoJson(json_CentroDia_22, {
+        map.createPane('pane_CentroDia_23');
+        map.getPane('pane_CentroDia_23').style.zIndex = 423;
+        map.getPane('pane_CentroDia_23').style['mix-blend-mode'] = 'normal';
+        var layer_CentroDia_23 = new L.geoJson(json_CentroDia_23, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_CentroDia_22',
-            layerName: 'layer_CentroDia_22',
-            pane: 'pane_CentroDia_22',
-            onEachFeature: pop_CentroDia_22,
+            dataVar: 'json_CentroDia_23',
+            layerName: 'layer_CentroDia_23',
+            pane: 'pane_CentroDia_23',
+            onEachFeature: pop_CentroDia_23,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_CentroDia_22_0(feature));
+                return L.marker(latlng, style_CentroDia_23_0(feature));
             },
         });
-        bounds_group.addLayer(layer_CentroDia_22);
-        function pop_CentroPOP_23(feature, layer) {
+        bounds_group.addLayer(layer_CentroDia_23);
+        function pop_CentroPOP_24(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -2820,38 +2906,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_CentroPOP_23_0() {
+        function style_CentroPOP_24_0() {
             return {
-                pane: 'pane_CentroPOP_23',
+                pane: 'pane_CentroPOP_24',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/CentroPOP_23.svg',
+            iconUrl: 'markers/CentroPOP_24.svg',
             iconSize: [17.479999999999997, 17.479999999999997]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_CentroPOP_23');
-        map.getPane('pane_CentroPOP_23').style.zIndex = 423;
-        map.getPane('pane_CentroPOP_23').style['mix-blend-mode'] = 'normal';
-        var layer_CentroPOP_23 = new L.geoJson(json_CentroPOP_23, {
+        map.createPane('pane_CentroPOP_24');
+        map.getPane('pane_CentroPOP_24').style.zIndex = 424;
+        map.getPane('pane_CentroPOP_24').style['mix-blend-mode'] = 'normal';
+        var layer_CentroPOP_24 = new L.geoJson(json_CentroPOP_24, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_CentroPOP_23',
-            layerName: 'layer_CentroPOP_23',
-            pane: 'pane_CentroPOP_23',
-            onEachFeature: pop_CentroPOP_23,
+            dataVar: 'json_CentroPOP_24',
+            layerName: 'layer_CentroPOP_24',
+            pane: 'pane_CentroPOP_24',
+            onEachFeature: pop_CentroPOP_24,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_CentroPOP_23_0(feature));
+                return L.marker(latlng, style_CentroPOP_24_0(feature));
             },
         });
-        bounds_group.addLayer(layer_CentroPOP_23);
-        function pop_CREAS_24(feature, layer) {
+        bounds_group.addLayer(layer_CentroPOP_24);
+        function pop_CREAS_25(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -2899,38 +2985,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_CREAS_24_0() {
+        function style_CREAS_25_0() {
             return {
-                pane: 'pane_CREAS_24',
+                pane: 'pane_CREAS_25',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/CREAS_24.svg',
+            iconUrl: 'markers/CREAS_25.svg',
             iconSize: [17.479999999999997, 17.479999999999997]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_CREAS_24');
-        map.getPane('pane_CREAS_24').style.zIndex = 424;
-        map.getPane('pane_CREAS_24').style['mix-blend-mode'] = 'normal';
-        var layer_CREAS_24 = new L.geoJson(json_CREAS_24, {
+        map.createPane('pane_CREAS_25');
+        map.getPane('pane_CREAS_25').style.zIndex = 425;
+        map.getPane('pane_CREAS_25').style['mix-blend-mode'] = 'normal';
+        var layer_CREAS_25 = new L.geoJson(json_CREAS_25, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_CREAS_24',
-            layerName: 'layer_CREAS_24',
-            pane: 'pane_CREAS_24',
-            onEachFeature: pop_CREAS_24,
+            dataVar: 'json_CREAS_25',
+            layerName: 'layer_CREAS_25',
+            pane: 'pane_CREAS_25',
+            onEachFeature: pop_CREAS_25,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_CREAS_24_0(feature));
+                return L.marker(latlng, style_CREAS_25_0(feature));
             },
         });
-        bounds_group.addLayer(layer_CREAS_24);
-        function pop_CRAS_25(feature, layer) {
+        bounds_group.addLayer(layer_CREAS_25);
+        function pop_CRAS_26(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -2974,42 +3060,42 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_CRAS_25_0() {
+        function style_CRAS_26_0() {
             return {
-                pane: 'pane_CRAS_25',
+                pane: 'pane_CRAS_26',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/CRAS_25.svg',
+            iconUrl: 'markers/CRAS_26.svg',
             iconSize: [17.479999999999997, 17.479999999999997]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_CRAS_25');
-        map.getPane('pane_CRAS_25').style.zIndex = 425;
-        map.getPane('pane_CRAS_25').style['mix-blend-mode'] = 'normal';
-        var layer_CRAS_25 = new L.geoJson(json_CRAS_25, {
+        map.createPane('pane_CRAS_26');
+        map.getPane('pane_CRAS_26').style.zIndex = 426;
+        map.getPane('pane_CRAS_26').style['mix-blend-mode'] = 'normal';
+        var layer_CRAS_26 = new L.geoJson(json_CRAS_26, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_CRAS_25',
-            layerName: 'layer_CRAS_25',
-            pane: 'pane_CRAS_25',
-            onEachFeature: pop_CRAS_25,
+            dataVar: 'json_CRAS_26',
+            layerName: 'layer_CRAS_26',
+            pane: 'pane_CRAS_26',
+            onEachFeature: pop_CRAS_26,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_CRAS_25_0(feature));
+                return L.marker(latlng, style_CRAS_26_0(feature));
             },
         });
-        bounds_group.addLayer(layer_CRAS_25);
-        map.addLayer(layer_CRAS_25);
-        map.createPane('pane_Transparncia_26');
-        map.getPane('pane_Transparncia_26').style.zIndex = 426;
-        var layer_Transparncia_26 = L.tileLayer('https://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}@2x.png', {
-            pane: 'pane_Transparncia_26',
+        bounds_group.addLayer(layer_CRAS_26);
+        map.addLayer(layer_CRAS_26);
+        map.createPane('pane_Transparncia_27');
+        map.getPane('pane_Transparncia_27').style.zIndex = 427;
+        var layer_Transparncia_27 = L.tileLayer('https://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}@2x.png', {
+            pane: 'pane_Transparncia_27',
             opacity: 0.34,
             attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</a>',
             minZoom: 11,
@@ -3017,8 +3103,8 @@
             minNativeZoom: 0,
             maxNativeZoom: 20
         });
-        layer_Transparncia_26;
-        map.addLayer(layer_Transparncia_26);
+        layer_Transparncia_27;
+        map.addLayer(layer_Transparncia_27);
         var osmGeocoder = new L.Control.Geocoder({
             collapsed: true,
             position: 'topleft',
@@ -3031,34 +3117,35 @@
         .title += 'Search for a place';
         var baseMaps = {};
         var overlaysTree = [
-            {label: "Transparência", layer: layer_Transparncia_26},
+            {label: "Transparência", layer: layer_Transparncia_27},
         {label: '<b>Rede - SUAS</b>', selectAllCheckbox: true, children: [
-            {label: '<img src="legend/CRAS_25.png" /> CRAS', layer: layer_CRAS_25},
-            {label: '<img src="legend/CREAS_24.png" /> CREAS', layer: layer_CREAS_24},
-            {label: '<img src="legend/CentroPOP_23.png" /> Centro POP', layer: layer_CentroPOP_23},
-            {label: '<img src="legend/CentroDia_22.png" /> Centro Dia', layer: layer_CentroDia_22},
-            {label: '<img src="legend/ConselhoTutelar_21.png" /> Conselho Tutelar', layer: layer_ConselhoTutelar_21},
-            {label: '<img src="legend/SCFV_20.png" /> SCFV', layer: layer_SCFV_20},
-            {label: '<img src="legend/Acolhimentoinstitucional_19.png" /> Acolhimento institucional', layer: layer_Acolhimentoinstitucional_19},
-            {label: '<img src="legend/HabilitaoeReabilitaoPessoacomDeficincia_18.png" /> Habilitação e Reabilitação à Pessoa com Deficiência', layer: layer_HabilitaoeReabilitaoPessoacomDeficincia_18},
-            {label: '<img src="legend/InclusoProdutiva_17.png" /> Inclusão Produtiva', layer: layer_InclusoProdutiva_17},
-            {label: '<img src="legend/RestaurantePopular_16.png" /> Restaurante Popular', layer: layer_RestaurantePopular_16},
-            {label: '<img src="legend/EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15.png" /> Entidades de Assessoramento, Defesa e Garantia de Direitos', layer: layer_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_15},
-            {label: '<img src="legend/Outrosservios_14.png" /> Outros serviços', layer: layer_Outrosservios_14},]},
+            {label: '<img src="legend/CRAS_26.png" /> CRAS', layer: layer_CRAS_26},
+            {label: '<img src="legend/CREAS_25.png" /> CREAS', layer: layer_CREAS_25},
+            {label: '<img src="legend/CentroPOP_24.png" /> Centro POP', layer: layer_CentroPOP_24},
+            {label: '<img src="legend/CentroDia_23.png" /> Centro Dia', layer: layer_CentroDia_23},
+            {label: '<img src="legend/ConselhoTutelar_22.png" /> Conselho Tutelar', layer: layer_ConselhoTutelar_22},
+            {label: '<img src="legend/SCFV_21.png" /> SCFV', layer: layer_SCFV_21},
+            {label: '<img src="legend/Acolhimentoinstitucional_20.png" /> Acolhimento institucional', layer: layer_Acolhimentoinstitucional_20},
+            {label: '<img src="legend/HabilitaoeReabilitaoPessoacomDeficincia_19.png" /> Habilitação e Reabilitação à Pessoa com Deficiência', layer: layer_HabilitaoeReabilitaoPessoacomDeficincia_19},
+            {label: '<img src="legend/InclusoProdutiva_18.png" /> Inclusão Produtiva', layer: layer_InclusoProdutiva_18},
+            {label: '<img src="legend/RestaurantePopular_17.png" /> Restaurante Popular', layer: layer_RestaurantePopular_17},
+            {label: '<img src="legend/EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_16.png" /> Entidades de Assessoramento, Defesa e Garantia de Direitos', layer: layer_EntidadesdeAssessoramentoDefesaeGarantiadeDireitos_16},
+            {label: '<img src="legend/Outrosservios_15.png" /> Outros serviços', layer: layer_Outrosservios_15},]},
         {label: '<b>Outras redes</b>', selectAllCheckbox: true, children: [
-            {label: '<img src="legend/RedeSade_13.png" /> Rede - Saúde', layer: layer_RedeSade_13},
-            {label: '<img src="legend/RedeEsporte_12.png" /> Rede - Esporte', layer: layer_RedeEsporte_12},
-            {label: '<img src="legend/RedeEducao_11.png" /> Rede - Educação', layer: layer_RedeEducao_11},]},
+            {label: '<img src="legend/RedeSade_14.png" /> Rede - Saúde', layer: layer_RedeSade_14},
+            {label: '<img src="legend/RedeEsporte_13.png" /> Rede - Esporte', layer: layer_RedeEsporte_13},
+            {label: '<img src="legend/RedeEducao_12.png" /> Rede - Educação', layer: layer_RedeEducao_12},]},
         {label: '<b>Ônibus - Linhas e Pontos</b>', selectAllCheckbox: true, children: [
-            {label: '<img src="legend/Linhadenibus_10.png" /> Linha de Ônibus', layer: layer_Linhadenibus_10},
-            {label: '<img src="legend/Pontosdenibus_9.png" /> Pontos de Ônibus', layer: layer_Pontosdenibus_9},]},
+            {label: '<img src="legend/Linhadenibus_11.png" /> Linha de Ônibus', layer: layer_Linhadenibus_11},
+            {label: '<img src="legend/Pontodenibusarquivo_de_sada_10.png" /> Ponto de Ônibus — arquivo_de_sada', layer: layer_Pontodenibusarquivo_de_sada_10},]},
         {label: '<b>Áreas de abrangência</b>', selectAllCheckbox: true, children: [
-            {label: '<img src="legend/Bairros_8.png" /> Bairros', layer: layer_Bairros_8},
-            {label: '<img src="legend/Setorescensitrios_7.png" /> Setores censitários', layer: layer_Setorescensitrios_7},
-            {label: 'CRAS - Área de abrangencia<br /><table><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_Alvorada0.png" /></td><td>Alvorada</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_Árearural1.png" /></td><td>Área rural</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_BrancaVieira2.png" /></td><td>Branca Vieira</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_CentroPOP3.png" /></td><td>Centro POP</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_Iguatemi4.png" /></td><td>Iguatemi</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_Itaipu5.png" /></td><td>Itaipu</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_ItaipuUnidadeFloriano6.png" /></td><td>Itaipu - Unidade Floriano</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_Mandacaru7.png" /></td><td>Mandacaru</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_MandacaruUnidadeSãoJudas8.png" /></td><td>Mandacaru - Unidade São Judas</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_Morangueira9.png" /></td><td>Morangueira</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_NeyBraga10.png" /></td><td>Ney Braga</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_Requião11.png" /></td><td>Requião</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_SantaClara12.png" /></td><td>Santa Clara</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_6_SantaFelicidade13.png" /></td><td>Santa Felicidade</td></tr></table>', layer: layer_CRASreadeabrangencia_6},]},
+            {label: '<img src="legend/Bairros_9.png" /> Bairros', layer: layer_Bairros_9},
+            {label: '<img src="legend/Setorescensitrios_8.png" /> Setores censitários', layer: layer_Setorescensitrios_8},
+            {label: 'CRAS - Área de abrangencia<br /><table><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_7_Alvorada0.png" /></td><td>Alvorada</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_7_Árearural1.png" /></td><td>Área rural</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_7_BrancaVieira2.png" /></td><td>Branca Vieira</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_7_CentroPOP3.png" /></td><td>Centro POP</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_7_Iguatemi4.png" /></td><td>Iguatemi</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_7_Itaipu5.png" /></td><td>Itaipu</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_7_ItaipuUnidadeFloriano6.png" /></td><td>Itaipu - Unidade Floriano</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_7_Mandacaru7.png" /></td><td>Mandacaru</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_7_MandacaruUnidadeSãoJudas8.png" /></td><td>Mandacaru - Unidade São Judas</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_7_Morangueira9.png" /></td><td>Morangueira</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_7_NeyBraga10.png" /></td><td>Ney Braga</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_7_Requião11.png" /></td><td>Requião</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_7_SantaClara12.png" /></td><td>Santa Clara</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_7_SantaFelicidade13.png" /></td><td>Santa Felicidade</td></tr></table>', layer: layer_CRASreadeabrangencia_7},]},
         {label: '<b>RELCAD (07-12-2024)</b>', selectAllCheckbox: true, children: [
-            {label: 'CRAS - Área de abrangencia (07-12-2024)<br /><table><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia07122024_5_Alvorada0.png" /></td><td>Alvorada</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia07122024_5_BrancaVieira1.png" /></td><td>Branca Vieira</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia07122024_5_Floriano2.png" /></td><td>Floriano</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia07122024_5_Iguatemi3.png" /></td><td>Iguatemi</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia07122024_5_Itaipu4.png" /></td><td>Itaipu</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia07122024_5_Mandacaru5.png" /></td><td>Mandacaru</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia07122024_5_Morangueira6.png" /></td><td>Morangueira</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia07122024_5_NeyBraga7.png" /></td><td>Ney Braga</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia07122024_5_Requião8.png" /></td><td>Requião</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia07122024_5_SantaClara9.png" /></td><td>Santa Clara</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia07122024_5_SantaFelicidade10.png" /></td><td>Santa Felicidade</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia07122024_5_SãoJudasTadeu11.png" /></td><td>São Judas Tadeu</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia07122024_5_CentroPOP12.png" /></td><td>Centro POP</td></tr></table>', layer: layer_CRASreadeabrangencia07122024_5},]},
+            {label: 'CRAS - Área de abrangencia (07-12-2024)<br /><table><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia07122024_6_Alvorada0.png" /></td><td>Alvorada</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia07122024_6_BrancaVieira1.png" /></td><td>Branca Vieira</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia07122024_6_Floriano2.png" /></td><td>Floriano</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia07122024_6_Iguatemi3.png" /></td><td>Iguatemi</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia07122024_6_Itaipu4.png" /></td><td>Itaipu</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia07122024_6_Mandacaru5.png" /></td><td>Mandacaru</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia07122024_6_Morangueira6.png" /></td><td>Morangueira</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia07122024_6_NeyBraga7.png" /></td><td>Ney Braga</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia07122024_6_Requião8.png" /></td><td>Requião</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia07122024_6_SantaClara9.png" /></td><td>Santa Clara</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia07122024_6_SantaFelicidade10.png" /></td><td>Santa Felicidade</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia07122024_6_SãoJudasTadeu11.png" /></td><td>São Judas Tadeu</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia07122024_6_CentroPOP12.png" /></td><td>Centro POP</td></tr></table>', layer: layer_CRASreadeabrangencia07122024_6},]},
         {label: '<b>RELCAD (29/09/2024)</b>', selectAllCheckbox: true, children: [
+            {label: '<img src="legend/Bairros_5.png" /> Bairros', layer: layer_Bairros_5},
             {label: 'CRAS - Área de abrangencia<br /><table><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_4_Alvorada0.png" /></td><td>Alvorada</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_4_BrancaVieira1.png" /></td><td>Branca Vieira</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_4_Floriano2.png" /></td><td>Floriano</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_4_Iguatemi3.png" /></td><td>Iguatemi</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_4_Itaipu4.png" /></td><td>Itaipu</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_4_Mandacaru5.png" /></td><td>Mandacaru</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_4_Morangueira6.png" /></td><td>Morangueira</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_4_NeyBraga7.png" /></td><td>Ney Braga</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_4_Requião8.png" /></td><td>Requião</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_4_SantaClara9.png" /></td><td>Santa Clara</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_4_SantaFelicidade10.png" /></td><td>Santa Felicidade</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_4_SãoJudasTadeu11.png" /></td><td>São Judas Tadeu</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_4_CentroPOP12.png" /></td><td>Centro POP</td></tr></table>', layer: layer_CRASreadeabrangencia_4},]},
         {label: '<b>RELCAD (03/06/2024)</b>', selectAllCheckbox: true, children: [
             {label: 'CRAS - Área de abrangencia<br /><table><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_3_Alvorada0.png" /></td><td>Alvorada</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_3_BrancaVieira1.png" /></td><td>Branca Vieira</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_3_Floriano2.png" /></td><td>Floriano</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_3_Iguatemi3.png" /></td><td>Iguatemi</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_3_Itaipu4.png" /></td><td>Itaipu</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_3_Mandacaru5.png" /></td><td>Mandacaru</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_3_Morangueira6.png" /></td><td>Morangueira</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_3_NeyBraga7.png" /></td><td>Ney Braga</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_3_Requião8.png" /></td><td>Requião</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_3_SantaClara9.png" /></td><td>Santa Clara</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_3_SantaFelicidade10.png" /></td><td>Santa Felicidade</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_3_SãoJudasTadeu11.png" /></td><td>São Judas Tadeu</td></tr><tr><td style="text-align: center;"><img src="legend/CRASreadeabrangencia_3_CentroPOP12.png" /></td><td>Centro POP</td></tr></table>', layer: layer_CRASreadeabrangencia_3},]},
@@ -3077,485 +3164,6 @@
         });
         lay.addTo(map);
         setBounds();
-        var mapDiv = document.getElementById('map');
-        var row = document.createElement('div');
-        row.className="row";
-        row.id="all";
-        row.style.height = "100%";
-        var col1 = document.createElement('div');
-        col1.className="col9";
-        col1.id = "mapWindow";
-        col1.style.height = "99%";
-        col1.style.width = "80%";
-        col1.style.display = "inline-block";
-        var col2 = document.createElement('div');
-        col2.className="col3";
-        col2.id = "menu";
-        col2.style.display = "inline-block";
-        mapDiv.parentNode.insertBefore(row, mapDiv);
-        document.getElementById("all").appendChild(col1);
-        document.getElementById("all").appendChild(col2);
-        col1.appendChild(mapDiv)
-        var Filters = {"Famílias cadastradas:": "real","Famílias cadastradas na faixa de renda per capita de R$0 a R$218,00:": "real","CRAS de referência:": "str","Linha de ônibus": "str","Ponto de Ônibus": "str"};
-        function filterFunc() {
-          map.eachLayer(function(lyr){
-          if ("options" in lyr && "dataVar" in lyr["options"]){
-            features = this[lyr["options"]["dataVar"]].features.slice(0);
-            try{
-              for (key in Filters){
-                keyS = key.replace(/[^a-zA-Z0-9_]/g, "")
-                if (Filters[key] == "str" || Filters[key] == "bool"){
-                  var selection = [];
-                  var options = document.getElementById("sel_" + keyS).options
-                  for (var i=0; i < options.length; i++) {
-                    if (options[i].selected) selection.push(options[i].value);
-                  }
-                    try{
-                      if (key in features[0].properties){
-                        for (i = features.length - 1;
-                          i >= 0; --i){
-                          if (selection.indexOf(
-                          features[i].properties[key])<0
-                          && selection.length>0) {
-                          features.splice(i,1);
-                          }
-                        }
-                      }
-                    } catch(err){
-                  }
-                }
-                if (Filters[key] == "int"){
-                  sliderVals =  document.getElementById(
-                    "div_" + keyS).noUiSlider.get();
-                  try{
-                    if (key in features[0].properties){
-                    for (i = features.length - 1; i >= 0; --i){
-                      if (parseInt(features[i].properties[key])
-                          < sliderVals[0]
-                          || parseInt(features[i].properties[key])
-                          > sliderVals[1]){
-                            features.splice(i,1);
-                          }
-                        }
-                      }
-                    } catch(err){
-                    }
-                  }
-                if (Filters[key] == "real"){
-                  sliderVals =  document.getElementById(
-                    "div_" + keyS).noUiSlider.get();
-                  try{
-                    if (key in features[0].properties){
-                    for (i = features.length - 1; i >= 0; --i){
-                      if (features[i].properties[key]
-                          < sliderVals[0]
-                          || features[i].properties[key]
-                          > sliderVals[1]){
-                            features.splice(i,1);
-                          }
-                        }
-                      }
-                    } catch(err){
-                    }
-                  }
-                if (Filters[key] == "date"
-                  || Filters[key] == "datetime"
-                  || Filters[key] == "time"){
-                  try{
-                    if (key in features[0].properties){
-                      HTMLkey = key.replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g, '');
-                      startdate = document.getElementById("dat_" +
-                        HTMLkey + "_date1").value.replace(" ", "T");
-                      enddate = document.getElementById("dat_" +
-                        HTMLkey + "_date2").value.replace(" ", "T");
-                      for (i = features.length - 1; i >= 0; --i){
-                        if (features[i].properties[key] < startdate
-                          || features[i].properties[key] > enddate){
-                          features.splice(i,1);
-                        }
-                      }
-                    }
-                  } catch(err){
-                  }
-                }
-              }
-            } catch(err){
-            }
-          this[lyr["options"]["layerName"]].clearLayers();
-          this[lyr["options"]["layerName"]].addData(features);
-          }
-          })
-        }
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_Famliascadastradas = document.createElement("div");
-            div_Famliascadastradas.id = "div_Famliascadastradas";
-            div_Famliascadastradas.className = "slider";
-            document.getElementById("menu").appendChild(div_Famliascadastradas);
-            var lab_Famliascadastradas = document.createElement('div');
-            lab_Famliascadastradas.innerHTML  = 'Famílias cadastradas:: <span id="val_Famliascadastradas"></span>';
-            lab_Famliascadastradas.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_Famliascadastradas);
-            var reset_Famliascadastradas = document.createElement('div');
-            reset_Famliascadastradas.innerHTML = 'clear filter';
-            reset_Famliascadastradas.className = 'filterlabel';
-            lab_Famliascadastradas.className = 'filterlabel';
-            reset_Famliascadastradas.onclick = function() {
-                sel_Famliascadastradas.noUiSlider.reset();
-            };
-            document.getElementById("menu").appendChild(reset_Famliascadastradas);
-            var sel_Famliascadastradas = document.getElementById('div_Famliascadastradas');
-            noUiSlider.create(sel_Famliascadastradas, {
-                connect: true,
-                start: [-1.0, 6602.0],
-                range: {
-                min: -1.0,
-                max: 6602.0
-                }
-            });
-            sel_Famliascadastradas.noUiSlider.on('update', function (values) {
-            val_Famliascadastradas = document.getElementById('val_Famliascadastradas');
-            val_Famliascadastradas.innerHTML = values.join(' - ');
-                filterFunc()
-            });
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_FamliascadastradasnafaixaderendapercapitadeR0aR21800 = document.createElement("div");
-            div_FamliascadastradasnafaixaderendapercapitadeR0aR21800.id = "div_FamliascadastradasnafaixaderendapercapitadeR0aR21800";
-            div_FamliascadastradasnafaixaderendapercapitadeR0aR21800.className = "slider";
-            document.getElementById("menu").appendChild(div_FamliascadastradasnafaixaderendapercapitadeR0aR21800);
-            var lab_FamliascadastradasnafaixaderendapercapitadeR0aR21800 = document.createElement('div');
-            lab_FamliascadastradasnafaixaderendapercapitadeR0aR21800.innerHTML  = 'Famílias cadastradas na faixa de renda per capita de R$0 a R$218,00:: <span id="val_FamliascadastradasnafaixaderendapercapitadeR0aR21800"></span>';
-            lab_FamliascadastradasnafaixaderendapercapitadeR0aR21800.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_FamliascadastradasnafaixaderendapercapitadeR0aR21800);
-            var reset_FamliascadastradasnafaixaderendapercapitadeR0aR21800 = document.createElement('div');
-            reset_FamliascadastradasnafaixaderendapercapitadeR0aR21800.innerHTML = 'clear filter';
-            reset_FamliascadastradasnafaixaderendapercapitadeR0aR21800.className = 'filterlabel';
-            lab_FamliascadastradasnafaixaderendapercapitadeR0aR21800.className = 'filterlabel';
-            reset_FamliascadastradasnafaixaderendapercapitadeR0aR21800.onclick = function() {
-                sel_FamliascadastradasnafaixaderendapercapitadeR0aR21800.noUiSlider.reset();
-            };
-            document.getElementById("menu").appendChild(reset_FamliascadastradasnafaixaderendapercapitadeR0aR21800);
-            var sel_FamliascadastradasnafaixaderendapercapitadeR0aR21800 = document.getElementById('div_FamliascadastradasnafaixaderendapercapitadeR0aR21800');
-            noUiSlider.create(sel_FamliascadastradasnafaixaderendapercapitadeR0aR21800, {
-                connect: true,
-                start: [-1.0, 1540.0],
-                range: {
-                min: -1.0,
-                max: 1540.0
-                }
-            });
-            sel_FamliascadastradasnafaixaderendapercapitadeR0aR21800.noUiSlider.on('update', function (values) {
-            val_FamliascadastradasnafaixaderendapercapitadeR0aR21800 = document.getElementById('val_FamliascadastradasnafaixaderendapercapitadeR0aR21800');
-            val_FamliascadastradasnafaixaderendapercapitadeR0aR21800.innerHTML = values.join(' - ');
-                filterFunc()
-            });
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_CRASdereferncia = document.createElement('div');
-            div_CRASdereferncia.id = "div_CRASdereferncia";
-            div_CRASdereferncia.className= "filterselect";
-            document.getElementById("menu").appendChild(div_CRASdereferncia);
-            sel_CRASdereferncia = document.createElement('select');
-            sel_CRASdereferncia.multiple = true;
-            sel_CRASdereferncia.size = 10;
-            sel_CRASdereferncia.id = "sel_CRASdereferncia";
-            var CRASdereferncia_options_str = "<option value='' unselected></option>";
-            sel_CRASdereferncia.onchange = function(){filterFunc()};
-            CRASdereferncia_options_str  += '<option value="NULL">NULL</option>';
-            CRASdereferncia_options_str  += '<option value="Alvorada">Alvorada</option>';
-            CRASdereferncia_options_str  += '<option value="Branca Vieira">Branca Vieira</option>';
-            CRASdereferncia_options_str  += '<option value="Iguatemi">Iguatemi</option>';
-            CRASdereferncia_options_str  += '<option value="Itaipu">Itaipu</option>';
-            CRASdereferncia_options_str  += '<option value="Mandacaru">Mandacaru</option>';
-            CRASdereferncia_options_str  += '<option value="Morangueira">Morangueira</option>';
-            CRASdereferncia_options_str  += '<option value="Ney Braga">Ney Braga</option>';
-            CRASdereferncia_options_str  += '<option value="Requião">Requião</option>';
-            CRASdereferncia_options_str  += '<option value="Santa Clara">Santa Clara</option>';
-            CRASdereferncia_options_str  += '<option value="Santa Felicidade">Santa Felicidade</option>';
-            CRASdereferncia_options_str  += '<option value="Unidade Atendimento Floriano (CRAS Itaipú)">Unidade Atendimento Floriano (CRAS Itaipú)</option>';
-            CRASdereferncia_options_str  += '<option value="Unidade Atendimento São Judas Tadeu(CRAS Alvorada">Unidade Atendimento São Judas Tadeu(CRAS Alvorada</option>';
-            sel_CRASdereferncia.innerHTML = CRASdereferncia_options_str;
-            div_CRASdereferncia.appendChild(sel_CRASdereferncia);
-            var lab_CRASdereferncia = document.createElement('div');
-            lab_CRASdereferncia.innerHTML = 'CRAS de referência:';
-            lab_CRASdereferncia.className = 'filterlabel';
-            div_CRASdereferncia.appendChild(lab_CRASdereferncia);
-            var reset_CRASdereferncia = document.createElement('div');
-            reset_CRASdereferncia.innerHTML = 'clear filter';
-            reset_CRASdereferncia.className = 'filterlabel';
-            reset_CRASdereferncia.onclick = function() {
-                var options = document.getElementById("sel_CRASdereferncia").options;
-                for (var i=0; i < options.length; i++) {
-                    options[i].selected = false;
-                }
-                filterFunc();
-            };
-            div_CRASdereferncia.appendChild(reset_CRASdereferncia);
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_Linhadenibus = document.createElement('div');
-            div_Linhadenibus.id = "div_Linhadenibus";
-            div_Linhadenibus.className= "filterselect";
-            document.getElementById("menu").appendChild(div_Linhadenibus);
-            sel_Linhadenibus = document.createElement('select');
-            sel_Linhadenibus.multiple = true;
-            sel_Linhadenibus.size = 10;
-            sel_Linhadenibus.id = "sel_Linhadenibus";
-            var Linhadenibus_options_str = "<option value='' unselected></option>";
-            sel_Linhadenibus.onchange = function(){filterFunc()};
-            Linhadenibus_options_str  += '<option value="007">007</option>';
-            Linhadenibus_options_str  += '<option value="008">008</option>';
-            Linhadenibus_options_str  += '<option value="009">009</option>';
-            Linhadenibus_options_str  += '<option value="010">010</option>';
-            Linhadenibus_options_str  += '<option value="011">011</option>';
-            Linhadenibus_options_str  += '<option value="020">020</option>';
-            Linhadenibus_options_str  += '<option value="021">021</option>';
-            Linhadenibus_options_str  += '<option value="022">022</option>';
-            Linhadenibus_options_str  += '<option value="023">023</option>';
-            Linhadenibus_options_str  += '<option value="026">026</option>';
-            Linhadenibus_options_str  += '<option value="040">040</option>';
-            Linhadenibus_options_str  += '<option value="041">041</option>';
-            Linhadenibus_options_str  += '<option value="131">131</option>';
-            Linhadenibus_options_str  += '<option value="137">137</option>';
-            Linhadenibus_options_str  += '<option value="138">138</option>';
-            Linhadenibus_options_str  += '<option value="139">139</option>';
-            Linhadenibus_options_str  += '<option value="141">141</option>';
-            Linhadenibus_options_str  += '<option value="152">152</option>';
-            Linhadenibus_options_str  += '<option value="162">162</option>';
-            Linhadenibus_options_str  += '<option value="169">169</option>';
-            Linhadenibus_options_str  += '<option value="175">175</option>';
-            Linhadenibus_options_str  += '<option value="177">177</option>';
-            Linhadenibus_options_str  += '<option value="178">178</option>';
-            Linhadenibus_options_str  += '<option value="179">179</option>';
-            Linhadenibus_options_str  += '<option value="201">201</option>';
-            Linhadenibus_options_str  += '<option value="204">204</option>';
-            Linhadenibus_options_str  += '<option value="205">205</option>';
-            Linhadenibus_options_str  += '<option value="219">219</option>';
-            Linhadenibus_options_str  += '<option value="220">220</option>';
-            Linhadenibus_options_str  += '<option value="221">221</option>';
-            Linhadenibus_options_str  += '<option value="222">222</option>';
-            Linhadenibus_options_str  += '<option value="233">233</option>';
-            Linhadenibus_options_str  += '<option value="234">234</option>';
-            Linhadenibus_options_str  += '<option value="235">235</option>';
-            Linhadenibus_options_str  += '<option value="242">242</option>';
-            Linhadenibus_options_str  += '<option value="243">243</option>';
-            Linhadenibus_options_str  += '<option value="314">314</option>';
-            Linhadenibus_options_str  += '<option value="323">323</option>';
-            Linhadenibus_options_str  += '<option value="324">324</option>';
-            Linhadenibus_options_str  += '<option value="326">326</option>';
-            Linhadenibus_options_str  += '<option value="334">334</option>';
-            Linhadenibus_options_str  += '<option value="335">335</option>';
-            Linhadenibus_options_str  += '<option value="414">414</option>';
-            Linhadenibus_options_str  += '<option value="415">415</option>';
-            Linhadenibus_options_str  += '<option value="416">416</option>';
-            Linhadenibus_options_str  += '<option value="427">427</option>';
-            Linhadenibus_options_str  += '<option value="458">458</option>';
-            Linhadenibus_options_str  += '<option value="459">459</option>';
-            Linhadenibus_options_str  += '<option value="460">460</option>';
-            Linhadenibus_options_str  += '<option value="461">461</option>';
-            Linhadenibus_options_str  += '<option value="466">466</option>';
-            Linhadenibus_options_str  += '<option value="512">512</option>';
-            Linhadenibus_options_str  += '<option value="528">528</option>';
-            Linhadenibus_options_str  += '<option value="528A">528A</option>';
-            Linhadenibus_options_str  += '<option value="531">531</option>';
-            Linhadenibus_options_str  += '<option value="611">611</option>';
-            Linhadenibus_options_str  += '<option value="713">713</option>';
-            Linhadenibus_options_str  += '<option value="721">721</option>';
-            Linhadenibus_options_str  += '<option value="722">722</option>';
-            Linhadenibus_options_str  += '<option value="734">734</option>';
-            Linhadenibus_options_str  += '<option value="735">735</option>';
-            Linhadenibus_options_str  += '<option value="736">736</option>';
-            Linhadenibus_options_str  += '<option value="739">739</option>';
-            Linhadenibus_options_str  += '<option value="UEM">UEM</option>';
-            sel_Linhadenibus.innerHTML = Linhadenibus_options_str;
-            div_Linhadenibus.appendChild(sel_Linhadenibus);
-            var lab_Linhadenibus = document.createElement('div');
-            lab_Linhadenibus.innerHTML = 'Linha de ônibus';
-            lab_Linhadenibus.className = 'filterlabel';
-            div_Linhadenibus.appendChild(lab_Linhadenibus);
-            var reset_Linhadenibus = document.createElement('div');
-            reset_Linhadenibus.innerHTML = 'clear filter';
-            reset_Linhadenibus.className = 'filterlabel';
-            reset_Linhadenibus.onclick = function() {
-                var options = document.getElementById("sel_Linhadenibus").options;
-                for (var i=0; i < options.length; i++) {
-                    options[i].selected = false;
-                }
-                filterFunc();
-            };
-            div_Linhadenibus.appendChild(reset_Linhadenibus);
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_Pontodenibus = document.createElement('div');
-            div_Pontodenibus.id = "div_Pontodenibus";
-            div_Pontodenibus.className= "filterselect";
-            document.getElementById("menu").appendChild(div_Pontodenibus);
-            sel_Pontodenibus = document.createElement('select');
-            sel_Pontodenibus.multiple = true;
-            sel_Pontodenibus.size = 10;
-            sel_Pontodenibus.id = "sel_Pontodenibus";
-            var Pontodenibus_options_str = "<option value='' unselected></option>";
-            sel_Pontodenibus.onchange = function(){filterFunc()};
-            Pontodenibus_options_str  += '<option value="007">007</option>';
-            Pontodenibus_options_str  += '<option value="008">008</option>';
-            Pontodenibus_options_str  += '<option value="008, 011, 020, 131, 137, 138, 139, 141, 152, 177, 179, 204, 205, 512">008, 011, 020, 131, 137, 138, 139, 141, 152, 177, 179, 204, 205, 512</option>';
-            Pontodenibus_options_str  += '<option value="009">009</option>';
-            Pontodenibus_options_str  += '<option value="009, 011, 021, 131, 137, 138, 139, 141, 152, 177, 179, 204, 205, 512">009, 011, 021, 131, 137, 138, 139, 141, 152, 177, 179, 204, 205, 512</option>';
-            Pontodenibus_options_str  += '<option value="010">010</option>';
-            Pontodenibus_options_str  += '<option value="010, 011, 021, 026, 131, 137, 138, 139, 141, 152, 162, 177, 179, 204, 205, 233, 324, 461, 512, 721, 734, 736, 739, UEM">010, 011, 021, 026, 131, 137, 138, 139, 141, 152, 162, 177, 179, 204, 205, 233, 324, 461, 512, 721, 734, 736, 739, UEM</option>';
-            Pontodenibus_options_str  += '<option value="010, 020, 131, 137, 139, 152, 233, 323, 461, 611, 734, 735, 736, 739, UEM">010, 020, 131, 137, 139, 152, 233, 323, 461, 611, 734, 735, 736, 739, UEM</option>';
-            Pontodenibus_options_str  += '<option value="011, 026, 131, 137, 138, 139, 141, 152, 162, 177, 179, 204, 205, 512">011, 026, 131, 137, 138, 139, 141, 152, 162, 177, 179, 204, 205, 512</option>';
-            Pontodenibus_options_str  += '<option value="011, 026, 131, 137, 138, 141, 152, 162, 177, 179, 204, 205, 233, 512, 721, 736">011, 026, 131, 137, 138, 141, 152, 162, 177, 179, 204, 205, 233, 512, 721, 736</option>';
-            Pontodenibus_options_str  += '<option value="020">020</option>';
-            Pontodenibus_options_str  += '<option value="020, 022, 222, 234, 235, 242, 243, 314, 323, 334, 335, 416">020, 022, 222, 234, 235, 242, 243, 314, 323, 334, 335, 416</option>';
-            Pontodenibus_options_str  += '<option value="021">021</option>';
-            Pontodenibus_options_str  += '<option value="022">022</option>';
-            Pontodenibus_options_str  += '<option value="023">023</option>';
-            Pontodenibus_options_str  += '<option value="026">026</option>';
-            Pontodenibus_options_str  += '<option value="040">040</option>';
-            Pontodenibus_options_str  += '<option value="040, 041, 177, 178, 201, 219, 221, 222, 324, 326, 459, 460, 461, 466, 512, 528, 528A, 531, 713, 721, 722">040, 041, 177, 178, 201, 219, 221, 222, 324, 326, 459, 460, 461, 466, 512, 528, 528A, 531, 713, 721, 722</option>';
-            Pontodenibus_options_str  += '<option value="040, 177, 178, 201, 221, 459, 460, 461, 466, 512, 528, 528A, 531, 713, 721, 722">040, 177, 178, 201, 221, 459, 460, 461, 466, 512, 528, 528A, 531, 713, 721, 722</option>';
-            Pontodenibus_options_str  += '<option value="041">041</option>';
-            Pontodenibus_options_str  += '<option value="10">10</option>';
-            Pontodenibus_options_str  += '<option value="11">11</option>';
-            Pontodenibus_options_str  += '<option value="131">131</option>';
-            Pontodenibus_options_str  += '<option value="137">137</option>';
-            Pontodenibus_options_str  += '<option value="138">138</option>';
-            Pontodenibus_options_str  += '<option value="139">139</option>';
-            Pontodenibus_options_str  += '<option value="141">141</option>';
-            Pontodenibus_options_str  += '<option value="152">152</option>';
-            Pontodenibus_options_str  += '<option value="162">162</option>';
-            Pontodenibus_options_str  += '<option value="169">169</option>';
-            Pontodenibus_options_str  += '<option value="175">175</option>';
-            Pontodenibus_options_str  += '<option value="177">177</option>';
-            Pontodenibus_options_str  += '<option value="178">178</option>';
-            Pontodenibus_options_str  += '<option value="179">179</option>';
-            Pontodenibus_options_str  += '<option value="20">20</option>';
-            Pontodenibus_options_str  += '<option value="201">201</option>';
-            Pontodenibus_options_str  += '<option value="204">204</option>';
-            Pontodenibus_options_str  += '<option value="205">205</option>';
-            Pontodenibus_options_str  += '<option value="21">21</option>';
-            Pontodenibus_options_str  += '<option value="219">219</option>';
-            Pontodenibus_options_str  += '<option value="22">22</option>';
-            Pontodenibus_options_str  += '<option value="220">220</option>';
-            Pontodenibus_options_str  += '<option value="221">221</option>';
-            Pontodenibus_options_str  += '<option value="222">222</option>';
-            Pontodenibus_options_str  += '<option value="23">23</option>';
-            Pontodenibus_options_str  += '<option value="233">233</option>';
-            Pontodenibus_options_str  += '<option value="234">234</option>';
-            Pontodenibus_options_str  += '<option value="235">235</option>';
-            Pontodenibus_options_str  += '<option value="242">242</option>';
-            Pontodenibus_options_str  += '<option value="243">243</option>';
-            Pontodenibus_options_str  += '<option value="254A">254A</option>';
-            Pontodenibus_options_str  += '<option value="254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254M, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 801, 802, 901, 903, 905">254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254M, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 801, 802, 901, 903, 905</option>';
-            Pontodenibus_options_str  += '<option value="254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254M, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 801, 802, 901, 903, 905, 021, 022, 169, 175, 222, 234, 235, 242, 243, 314, 323, 334, 335, 416, 528">254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254M, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 801, 802, 901, 903, 905, 021, 022, 169, 175, 222, 234, 235, 242, 243, 314, 323, 334, 335, 416, 528</option>';
-            Pontodenibus_options_str  += '<option value="254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254M, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 801, 802, 901, 905, 021, 022, 169, 175, 222, 234, 235, 242, 243, 314, 323, 334, 335, 416, 528">254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254M, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 801, 802, 901, 905, 021, 022, 169, 175, 222, 234, 235, 242, 243, 314, 323, 334, 335, 416, 528</option>';
-            Pontodenibus_options_str  += '<option value="254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254M, 254N, 254SJ, 254SP, 254U, 254V, 254VZ, 801, 802, 902, 903, 905, 020, 022, 175, 222, 234, 235, 242, 243, 314, 323, 334, 335, 416, 528">254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254M, 254N, 254SJ, 254SP, 254U, 254V, 254VZ, 801, 802, 902, 903, 905, 020, 022, 175, 222, 234, 235, 242, 243, 314, 323, 334, 335, 416, 528</option>';
-            Pontodenibus_options_str  += '<option value="254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254M, 254N, 254SJ, 254SP, 254U, 254V, 254VZ, 801, 802, 902, 903, 905, 020, 022, 222, 234, 235, 242, 243, 314, 323, 334, 416">254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254M, 254N, 254SJ, 254SP, 254U, 254V, 254VZ, 801, 802, 902, 903, 905, 020, 022, 222, 234, 235, 242, 243, 314, 323, 334, 416</option>';
-            Pontodenibus_options_str  += '<option value="254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 009, 021, 022, 222, 234, 235, 242, 243, 314, 528">254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 009, 021, 022, 222, 234, 235, 242, 243, 314, 528</option>';
-            Pontodenibus_options_str  += '<option value="254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 009, 021, 022, 222, 234, 235, 243, 528">254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 009, 021, 022, 222, 234, 235, 243, 528</option>';
-            Pontodenibus_options_str  += '<option value="254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254SJ, 254SP, 254U, 254V, 254VZ, 008, 020, 022, 222, 234, 235, 242, 243, 314, 528">254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254SJ, 254SP, 254U, 254V, 254VZ, 008, 020, 022, 222, 234, 235, 242, 243, 314, 528</option>';
-            Pontodenibus_options_str  += '<option value="254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254SJ, 254SP, 254U, 254V, 254VZ, 008, 020, 022, 222, 234, 235, 243, 528">254A, 254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254SJ, 254SP, 254U, 254V, 254VZ, 008, 020, 022, 222, 234, 235, 243, 528</option>';
-            Pontodenibus_options_str  += '<option value="254A, 254CT, 254I, 254IT, 254J, 254L, 254M, 254N, 254SJ, 254SP, 254U, 254V, 254VZ, 175, 528">254A, 254CT, 254I, 254IT, 254J, 254L, 254M, 254N, 254SJ, 254SP, 254U, 254V, 254VZ, 175, 528</option>';
-            Pontodenibus_options_str  += '<option value="254CT">254CT</option>';
-            Pontodenibus_options_str  += '<option value="254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 023">254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 023</option>';
-            Pontodenibus_options_str  += '<option value="254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 4AO, 023, 243">254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254O, 254SJ, 254SP, 254U, 254V, 254VZ, 480SD, 4AO, 023, 243</option>';
-            Pontodenibus_options_str  += '<option value="254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254O, 254SJ, 254U, 254V, 254VZ, 480SD, 4AO">254CT, 254E, 254I, 254IT, 254J, 254L, 254N, 254O, 254SJ, 254U, 254V, 254VZ, 480SD, 4AO</option>';
-            Pontodenibus_options_str  += '<option value="254CT, 254E, 254IT, 254J, 254L, 254N, 254O, 254SJ, 254V, 254VZ, 480SD, 4AO">254CT, 254E, 254IT, 254J, 254L, 254N, 254O, 254SJ, 254V, 254VZ, 480SD, 4AO</option>';
-            Pontodenibus_options_str  += '<option value="254E">254E</option>';
-            Pontodenibus_options_str  += '<option value="254I">254I</option>';
-            Pontodenibus_options_str  += '<option value="254IT">254IT</option>';
-            Pontodenibus_options_str  += '<option value="254J">254J</option>';
-            Pontodenibus_options_str  += '<option value="254L">254L</option>';
-            Pontodenibus_options_str  += '<option value="254M">254M</option>';
-            Pontodenibus_options_str  += '<option value="254N">254N</option>';
-            Pontodenibus_options_str  += '<option value="254O">254O</option>';
-            Pontodenibus_options_str  += '<option value="254SA">254SA</option>';
-            Pontodenibus_options_str  += '<option value="254SJ">254SJ</option>';
-            Pontodenibus_options_str  += '<option value="254SP">254SP</option>';
-            Pontodenibus_options_str  += '<option value="254U">254U</option>';
-            Pontodenibus_options_str  += '<option value="254V">254V</option>';
-            Pontodenibus_options_str  += '<option value="254VZ">254VZ</option>';
-            Pontodenibus_options_str  += '<option value="26">26</option>';
-            Pontodenibus_options_str  += '<option value="314">314</option>';
-            Pontodenibus_options_str  += '<option value="323">323</option>';
-            Pontodenibus_options_str  += '<option value="324">324</option>';
-            Pontodenibus_options_str  += '<option value="326">326</option>';
-            Pontodenibus_options_str  += '<option value="334">334</option>';
-            Pontodenibus_options_str  += '<option value="335">335</option>';
-            Pontodenibus_options_str  += '<option value="40">40</option>';
-            Pontodenibus_options_str  += '<option value="41">41</option>';
-            Pontodenibus_options_str  += '<option value="414">414</option>';
-            Pontodenibus_options_str  += '<option value="415">415</option>';
-            Pontodenibus_options_str  += '<option value="416">416</option>';
-            Pontodenibus_options_str  += '<option value="427">427</option>';
-            Pontodenibus_options_str  += '<option value="458">458</option>';
-            Pontodenibus_options_str  += '<option value="459">459</option>';
-            Pontodenibus_options_str  += '<option value="460">460</option>';
-            Pontodenibus_options_str  += '<option value="461">461</option>';
-            Pontodenibus_options_str  += '<option value="466">466</option>';
-            Pontodenibus_options_str  += '<option value="480SD">480SD</option>';
-            Pontodenibus_options_str  += '<option value="4AO">4AO</option>';
-            Pontodenibus_options_str  += '<option value="512">512</option>';
-            Pontodenibus_options_str  += '<option value="528">528</option>';
-            Pontodenibus_options_str  += '<option value="528A">528A</option>';
-            Pontodenibus_options_str  += '<option value="531">531</option>';
-            Pontodenibus_options_str  += '<option value="611">611</option>';
-            Pontodenibus_options_str  += '<option value="7">7</option>';
-            Pontodenibus_options_str  += '<option value="713">713</option>';
-            Pontodenibus_options_str  += '<option value="721">721</option>';
-            Pontodenibus_options_str  += '<option value="722">722</option>';
-            Pontodenibus_options_str  += '<option value="731">731</option>';
-            Pontodenibus_options_str  += '<option value="734">734</option>';
-            Pontodenibus_options_str  += '<option value="735">735</option>';
-            Pontodenibus_options_str  += '<option value="736">736</option>';
-            Pontodenibus_options_str  += '<option value="739">739</option>';
-            Pontodenibus_options_str  += '<option value="8">8</option>';
-            Pontodenibus_options_str  += '<option value="801">801</option>';
-            Pontodenibus_options_str  += '<option value="801, 802, 901, 902, 903, 905, 906, 008, 009, 040, 177, 178, 461, 512, 528, 528A, 531">801, 802, 901, 902, 903, 905, 906, 008, 009, 040, 177, 178, 461, 512, 528, 528A, 531</option>';
-            Pontodenibus_options_str  += '<option value="801, 802, 901, 902, 903, 905, 906, 009, 177, 178, 221, 460, 461, 512, 528, 528A, 531">801, 802, 901, 902, 903, 905, 906, 009, 177, 178, 221, 460, 461, 512, 528, 528A, 531</option>';
-            Pontodenibus_options_str  += '<option value="801, 802, 901, 902, 903, 905, 906, 009, 177, 178, 461, 512, 528, 528A, 531">801, 802, 901, 902, 903, 905, 906, 009, 177, 178, 461, 512, 528, 528A, 531</option>';
-            Pontodenibus_options_str  += '<option value="801, 802, 901, 902, 903, 905, 906, 040, 041, 177, 178, 201, 219, 221, 222, 458, 460, 461, 466, 512, 528, 528A, 531, 713, 722, 735">801, 802, 901, 902, 903, 905, 906, 040, 041, 177, 178, 201, 219, 221, 222, 458, 460, 461, 466, 512, 528, 528A, 531, 713, 722, 735</option>';
-            Pontodenibus_options_str  += '<option value="801, 802, 901, 902, 903, 905, 906, 040, 041, 177, 178, 201, 221, 458, 460, 461, 466, 512, 528, 528A, 531, 713, 722, 735">801, 802, 901, 902, 903, 905, 906, 040, 041, 177, 178, 201, 221, 458, 460, 461, 466, 512, 528, 528A, 531, 713, 722, 735</option>';
-            Pontodenibus_options_str  += '<option value="801, 802, 901, 902, 903, 905, 906, 177, 178, 201, 512, 528, 528A, 531">801, 802, 901, 902, 903, 905, 906, 177, 178, 201, 512, 528, 528A, 531</option>';
-            Pontodenibus_options_str  += '<option value="801, 802, 901, 902, 903, 905, 906, 907, 008, 177, 178, 221, 460, 461, 512, 528, 528A, 531">801, 802, 901, 902, 903, 905, 906, 907, 008, 177, 178, 221, 460, 461, 512, 528, 528A, 531</option>';
-            Pontodenibus_options_str  += '<option value="801, 802, 901, 902, 903, 905, 906, 907, 008, 177, 178, 461, 512, 528, 528A, 531">801, 802, 901, 902, 903, 905, 906, 907, 008, 177, 178, 461, 512, 528, 528A, 531</option>';
-            Pontodenibus_options_str  += '<option value="801, 802, 901, 902, 903, 905, 906, 907, 177, 178, 201, 512, 528, 528A, 531">801, 802, 901, 902, 903, 905, 906, 907, 177, 178, 201, 512, 528, 528A, 531</option>';
-            Pontodenibus_options_str  += '<option value="801, 802, 901, 902, 903, 905, 907, 177, 178, 201, 512, 528, 528A, 531">801, 802, 901, 902, 903, 905, 907, 177, 178, 201, 512, 528, 528A, 531</option>';
-            Pontodenibus_options_str  += '<option value="801, 802, 901, 903, 905, 021, 169, 175, 222, 234, 235, 242, 243, 323, 334, 335, 416, 528">801, 802, 901, 903, 905, 021, 169, 175, 222, 234, 235, 242, 243, 323, 334, 335, 416, 528</option>';
-            Pontodenibus_options_str  += '<option value="801, 802, 901, 903, 905, 040, 041, 177, 201, 460, 461, 466, 512, 528, 528A, 531">801, 802, 901, 903, 905, 040, 041, 177, 201, 460, 461, 466, 512, 528, 528A, 531</option>';
-            Pontodenibus_options_str  += '<option value="802">802</option>';
-            Pontodenibus_options_str  += '<option value="9">9</option>';
-            Pontodenibus_options_str  += '<option value="901">901</option>';
-            Pontodenibus_options_str  += '<option value="901, 040, 177, 178, 201, 221, 459, 460, 461, 466, 512, 528, 528A, 531, 713, 721, 722">901, 040, 177, 178, 201, 221, 459, 460, 461, 466, 512, 528, 528A, 531, 713, 721, 722</option>';
-            Pontodenibus_options_str  += '<option value="902">902</option>';
-            Pontodenibus_options_str  += '<option value="902, 040, 041, 177, 178, 201, 219, 221, 222, 324, 326, 459, 460, 461, 466, 512, 528, 528A, 531, 713, 721, 722">902, 040, 041, 177, 178, 201, 219, 221, 222, 324, 326, 459, 460, 461, 466, 512, 528, 528A, 531, 713, 721, 722</option>';
-            Pontodenibus_options_str  += '<option value="903">903</option>';
-            Pontodenibus_options_str  += '<option value="905">905</option>';
-            Pontodenibus_options_str  += '<option value="905, 040, 177, 178, 221, 458, 460, 461, 466, 512, 528, 531, 713, 722, 735">905, 040, 177, 178, 221, 458, 460, 461, 466, 512, 528, 531, 713, 722, 735</option>';
-            Pontodenibus_options_str  += '<option value="905, 177, 178, 221, 458, 460, 461, 466, 512, 528, 531, 713, 722, 735">905, 177, 178, 221, 458, 460, 461, 466, 512, 528, 531, 713, 722, 735</option>';
-            Pontodenibus_options_str  += '<option value="905, 177, 178, 221, 459, 460, 461, 466, 512, 528, 528A, 531, 713, 721, 722">905, 177, 178, 221, 459, 460, 461, 466, 512, 528, 528A, 531, 713, 721, 722</option>';
-            Pontodenibus_options_str  += '<option value="906">906</option>';
-            Pontodenibus_options_str  += '<option value="907">907</option>';
-            Pontodenibus_options_str  += '<option value="UEM">UEM</option>';
-            sel_Pontodenibus.innerHTML = Pontodenibus_options_str;
-            div_Pontodenibus.appendChild(sel_Pontodenibus);
-            var lab_Pontodenibus = document.createElement('div');
-            lab_Pontodenibus.innerHTML = 'Ponto de Ônibus';
-            lab_Pontodenibus.className = 'filterlabel';
-            div_Pontodenibus.appendChild(lab_Pontodenibus);
-            var reset_Pontodenibus = document.createElement('div');
-            reset_Pontodenibus.innerHTML = 'clear filter';
-            reset_Pontodenibus.className = 'filterlabel';
-            reset_Pontodenibus.onclick = function() {
-                var options = document.getElementById("sel_Pontodenibus").options;
-                for (var i=0; i < options.length; i++) {
-                    options[i].selected = false;
-                }
-                filterFunc();
-            };
-            div_Pontodenibus.appendChild(reset_Pontodenibus);
         </script>
     </body>
 </html>
